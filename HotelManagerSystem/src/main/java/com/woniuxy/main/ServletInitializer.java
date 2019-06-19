@@ -6,15 +6,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-/*@ComponentScan({
+@ComponentScan({
 	"com.woniuxy.controller",
-	"com.woniuxy.service.impl",
+	"com.woniuxy.service",
 	"com.woniuxy.configuration"
-	})*/
+	})
 // 常常扫描Controller DAO Service
-//@ComponentScan("com.woniuxy.filter")
-//@ServletComponentScan
-//常常扫描Servlet、Filter、Listener
+
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
