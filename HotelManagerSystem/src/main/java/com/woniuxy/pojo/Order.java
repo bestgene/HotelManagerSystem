@@ -8,6 +8,8 @@ import java.util.List;
 public class Order implements Serializable{
 	//订单号
 	private Integer order_id;
+	//订单编号（手动生成唯一）
+	private String reserve_idnumber;
 	//该订单的用户具体信息
 	private UserInfo userInfo;
 	//订单编号
