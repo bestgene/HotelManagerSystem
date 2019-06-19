@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,7 @@ public class UserServieImpl implements UserService {
 
 	@Override
 	public List<User> allUser() {
+		System.out.println(userDAO.allUser());
 		return userDAO.allUser();
 	}
 
@@ -41,5 +43,6 @@ public class UserServieImpl implements UserService {
 	public User findUserByUid(Integer uid) {
 		return userDAO.findUserByUid(uid);
 	}
+	
 
 }
