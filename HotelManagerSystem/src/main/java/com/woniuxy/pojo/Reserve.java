@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 public class Reserve implements Serializable {
     //预定信息id
     private Integer reserve_id;
+    //预定信息编号
+    private String reserve_idnumber;
     //用户信息
     private UserInfo userInfo;
     //预定样式（房间类型）
@@ -38,6 +40,7 @@ public class Reserve implements Serializable {
     public String toString() {
         return "Reserve{" +
                 "reserve_id=" + reserve_id +
+                ", reserve_idnumber='" + reserve_idnumber + '\'' +
                 ", userInfo=" + userInfo +
                 ", houseType=" + houseType +
                 ", reserve_checkintime='" + reserve_checkintime + '\'' +
@@ -59,6 +62,14 @@ public class Reserve implements Serializable {
 
     public void setReserve_id(Integer reserve_id) {
         this.reserve_id = reserve_id;
+    }
+
+    public String getReserve_idnumber() {
+        return reserve_idnumber;
+    }
+
+    public void setReserve_idnumber(String reserve_idnumber) {
+        this.reserve_idnumber = reserve_idnumber;
     }
 
     public UserInfo getUserInfo() {

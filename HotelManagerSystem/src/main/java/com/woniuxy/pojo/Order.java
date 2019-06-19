@@ -3,10 +3,13 @@ package com.woniuxy.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Order implements Serializable{
 	//订单号
 	private Integer order_id;
+	//订单编号（手动生成唯一）
+	private String reserve_idnumber;
 	//该订单的用户具体信息
 	private UserInfo userInfo;
 	//订单编号
@@ -23,7 +26,17 @@ public class Order implements Serializable{
 	private BigDecimal order_totalpay;
 	//订单的押金
 	private Integer order_deposit;
+	//订单项
+	private List<Item> items;
 	private Integer flag;
+	
+	
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
 	public Integer getOrder_id() {
 		return order_id;
 	}
