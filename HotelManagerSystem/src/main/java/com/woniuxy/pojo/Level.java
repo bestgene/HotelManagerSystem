@@ -9,6 +9,8 @@ public class Level implements Serializable{
 	private String level_name;
 	private BigDecimal  level_discount;
 	private Integer flag;
+
+
 	public Integer getLevel_id() {
 		return level_id;
 	}

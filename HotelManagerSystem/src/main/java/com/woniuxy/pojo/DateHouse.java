@@ -8,9 +8,13 @@ public class DateHouse implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	//主键id
 	private Integer dh_id;
+	//房间id
 	private Integer house_id;
+	//房间类型id
 	private Integer house_type_id;
+	//日期
 	private String dh_day;
 	private Integer flag;
 	public DateHouse(Integer dh_id, Integer house_id, Integer house_type_id, String dh_day, Integer flag) {
