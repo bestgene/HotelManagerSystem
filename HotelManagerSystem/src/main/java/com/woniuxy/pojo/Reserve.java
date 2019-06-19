@@ -14,7 +14,7 @@ public class Reserve implements Serializable {
     //用户信息
     private UserInfo userInfo;
     //预定样式（房间类型）
-    private House house;
+    private HouseType houseType;
     //预定入住时间
     private String reserve_checkintime;
     //预定退房时间
@@ -42,7 +42,7 @@ public class Reserve implements Serializable {
                 "reserve_id=" + reserve_id +
                 ", reserve_idnumber='" + reserve_idnumber + '\'' +
                 ", userInfo=" + userInfo +
-                ", house=" + house +
+                ", houseType=" + houseType +
                 ", reserve_checkintime='" + reserve_checkintime + '\'' +
                 ", reserve_checkouttime='" + reserve_checkouttime + '\'' +
                 ", reserve_arrivetime='" + reserve_arrivetime + '\'' +
@@ -80,12 +80,12 @@ public class Reserve implements Serializable {
         this.userInfo = userInfo;
     }
 
-    public House getHouse() {
-        return house;
+    public HouseType getHouseType() {
+        return houseType;
     }
 
-    public void setHouse(House house) {
-        this.house = house;
+    public void setHouseType(HouseType houseType) {
+        this.houseType = houseType;
     }
 
     public String getReserve_checkintime() {
