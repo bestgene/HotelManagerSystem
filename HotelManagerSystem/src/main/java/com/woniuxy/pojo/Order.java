@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Order implements Serializable{
 	//订单号
-	private int order_id;
+	private Integer order_id;
 	//该订单的用户具体信息
 	private UserInfo userInfo;
 	//订单编号
@@ -18,16 +18,16 @@ public class Order implements Serializable{
 	//订单状态的改变时间
 	private String order_updatetime;
 	//订单的状态
-	private int order_state;
+	private Integer order_state;
 	//该订单的总金额
 	private BigDecimal order_totalpay;
 	//订单的押金
-	private int order_deposit;
-	private int flag;
-	public int getOrder_id() {
+	private Integer order_deposit;
+	private Integer flag;
+	public Integer getOrder_id() {
 		return order_id;
 	}
-	public void setOrder_id(int order_id) {
+	public void setOrder_id(Integer order_id) {
 		this.order_id = order_id;
 	}
 	public UserInfo getUserInfo() {
@@ -60,10 +60,10 @@ public class Order implements Serializable{
 	public void setOrder_updatetime(String order_updatetime) {
 		this.order_updatetime = order_updatetime;
 	}
-	public int getOrder_state() {
+	public Integer getOrder_state() {
 		return order_state;
 	}
-	public void setOrder_state(int order_state) {
+	public void setOrder_state(Integer order_state) {
 		this.order_state = order_state;
 	}
 	public BigDecimal getOrder_totalpay() {
@@ -72,29 +72,17 @@ public class Order implements Serializable{
 	public void setOrder_totalpay(BigDecimal order_totalpay) {
 		this.order_totalpay = order_totalpay;
 	}
-	public int getOrder_deposit() {
+	public Integer getOrder_deposit() {
 		return order_deposit;
 	}
-	public void setOrder_deposit(int order_deposit) {
+	public void setOrder_deposit(Integer order_deposit) {
 		this.order_deposit = order_deposit;
 	}
-	public int getFlag() {
+	public Integer getFlag() {
 		return flag;
 	}
-	public void setFlag(int flag) {
+	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
-	@Override
-	public String toString() {
-		return "Order [order_id=" + order_id + ", order_number=" + order_number + ", order_paynumber=" + order_paynumber
-				+ ", order_createtime=" + order_createtime + ", order_updatetime=" + order_updatetime + ", order_state="
-				+ order_state + ", order_totalpay=" + order_totalpay + ", order_deposit=" + order_deposit + ", flag="
-				+ flag + "]";
-	}
 	
-	
-	
-
-
-
 }
