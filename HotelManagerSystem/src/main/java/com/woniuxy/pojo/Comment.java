@@ -7,12 +7,23 @@ public class Comment implements Serializable{
 	private Integer comment_id;
 	//用户
 	private User user;
-	//房间
+	//房间id
 	private House house;
 	//该用户所评论的具体内容
 	private String comment_content;
 	private Integer flag;
-	
+
+	@Override
+	public String toString() {
+		return "Comment{" +
+				"comment_id=" + comment_id +
+				", user=" + user +
+				", house=" + house +
+				", comment_content='" + comment_content + '\'' +
+				", flag=" + flag +
+				'}';
+	}
+
 	public Integer getComment_id() {
 		return comment_id;
 	}

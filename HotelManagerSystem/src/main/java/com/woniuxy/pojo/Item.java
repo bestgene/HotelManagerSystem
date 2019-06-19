@@ -21,6 +21,19 @@ public class Item implements Serializable{
 	private Integer flag;
 
 
+	@Override
+	public String toString() {
+		return "Item{" +
+				"item_id=" + item_id +
+				", item_checkintime='" + item_checkintime + '\'' +
+				", item_checkouttime='" + item_checkouttime + '\'' +
+				", item_checkinday=" + item_checkinday +
+				", item_deposit=" + item_deposit +
+				", house=" + house +
+				", flag=" + flag +
+				'}';
+	}
+
 	public Integer getItem_id() {
 		return item_id;
 	}

@@ -29,8 +29,25 @@ public class Order implements Serializable{
 	//订单项
 	private List<Item> items;
 	private Integer flag;
-	
-	
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"order_id=" + order_id +
+				", reserve_idnumber='" + reserve_idnumber + '\'' +
+				", userInfo=" + userInfo +
+				", order_number='" + order_number + '\'' +
+				", order_paynumber='" + order_paynumber + '\'' +
+				", order_createtime='" + order_createtime + '\'' +
+				", order_updatetime='" + order_updatetime + '\'' +
+				", order_state=" + order_state +
+				", order_totalpay=" + order_totalpay +
+				", order_deposit=" + order_deposit +
+				", items=" + items +
+				", flag=" + flag +
+				'}';
+	}
+
 	public List<Item> getItems() {
 		return items;
 	}
