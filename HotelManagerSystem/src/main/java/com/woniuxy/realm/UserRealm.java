@@ -43,7 +43,7 @@ public class UserRealm extends AuthorizingRealm{
 			return null;
 		}
 		SimpleAuthenticationInfo info = 
-				new SimpleAuthenticationInfo(user.getUid().toString(),user.getPwd(),getName());
+				new SimpleAuthenticationInfo(user.getUser_acc().toString(),user.getUser_pwd(),getName());
 		return info;
 	}
 

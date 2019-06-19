@@ -58,6 +58,7 @@ public class ShiroConfig {
 		map.put("/html/login.html", "anon");
 		map.put("/user/login", "anon");
 		map.put("/user/register", "anon");
+		map.put("/check/emailcheck", "anon");//邮件验证
 		map.put("/druid/**", "anon");
 		
 		//logout
