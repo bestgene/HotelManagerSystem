@@ -2,12 +2,6 @@ package com.woniuxy.dao;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import com.woniuxy.pojo.Order;
-
-public interface OrderDAO {
-	public List<Order> showAllOrder;
-=======
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -35,5 +29,5 @@ public interface OrderDAO {
 	
 	public boolean payOreder();
 	
->>>>>>> origin/wangyu
+
 }
