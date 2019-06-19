@@ -24,7 +24,7 @@ public interface ReserveDAO {
     @Select("select reserve_id form t_reserve where reserve_idnumber=#{reserve_idnumber}")
     public Integer findReserveIdByIdnumber(Reserve reserve);
 
-
+    //中间表charu
     @Insert("insert into t_reserve_house values(#{0},#{1})")
     public void addReserveIdAndHouseId(Integer reserve_id,Integer house_id);
 }
