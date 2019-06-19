@@ -1,6 +1,7 @@
 package com.woniuxy.pojo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 预定信息表
@@ -27,7 +28,7 @@ public class Reserve implements Serializable {
     //支付方式
     private Integer reserve_payment;
     //支付金额
-    private Double reserve_paynumber;
+    private BigDecimal reserve_paynumber;
     //客户留言
     private String reserve_message;
 
@@ -132,11 +133,11 @@ public class Reserve implements Serializable {
         this.reserve_payment = reserve_payment;
     }
 
-    public Double getReserve_paynumber() {
+    public BigDecimal getReserve_paynumber() {
         return reserve_paynumber;
     }
 
-    public void setReserve_paynumber(Double reserve_paynumber) {
+    public void setReserve_paynumber(BigDecimal reserve_paynumber) {
         this.reserve_paynumber = reserve_paynumber;
     }
 
