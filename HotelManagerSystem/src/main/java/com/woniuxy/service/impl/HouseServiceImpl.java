@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.woniuxy.dao.HouseDAO;
+import com.woniuxy.pojo.DateHouse;
 import com.woniuxy.pojo.House;
 import com.woniuxy.pojo.HouseType;
 import com.woniuxy.service.HouseService;
@@ -54,5 +55,11 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public HouseType findHouseTypeByHouseTypeId(Integer house_type_id) {
 		return houseDAO.findHouseTypeByHouseTypeId(house_type_id);
+	}
+
+
+	@Override
+	public boolean addDateHouseOperation(DateHouse dateHouse) {
+		return houseDAO.addDateHouseOperation(dateHouse);
 	}
 }

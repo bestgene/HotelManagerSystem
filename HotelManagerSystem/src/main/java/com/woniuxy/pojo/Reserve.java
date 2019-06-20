@@ -8,7 +8,11 @@ import java.util.List;
  * 预定信息表
  */
 public class Reserve implements Serializable {
-    //预定信息id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//预定信息id
     private Integer reserve_id;
     //预定信息编号
     private String reserve_idnumber;

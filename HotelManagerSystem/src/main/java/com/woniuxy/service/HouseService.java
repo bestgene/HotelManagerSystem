@@ -2,6 +2,7 @@ package com.woniuxy.service;
 
 import java.util.List;
 
+import com.woniuxy.pojo.DateHouse;
 import com.woniuxy.pojo.House;
 import com.woniuxy.pojo.HouseType;
 
@@ -16,4 +17,6 @@ public interface HouseService {
 	public List<Integer> findHidByHouseTypeIdAndTime(Integer house_type_id,String dh_day);
 	
 	public HouseType findHouseTypeByHouseTypeId(Integer house_type_id);
+	
+	public boolean addDateHouseOperation(DateHouse dateHouse);
 }
