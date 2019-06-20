@@ -114,16 +114,15 @@ public class ReserveController {
     }
 
     /**
-     * 预定状态管理
+     * 修改预定信息管理
      * @param reserve
      * @return
      */
-    @RequestMapping("/qcyd")
+    @RequestMapping("/xgyd")
     @ResponseBody
     public String alertReserve(Reserve reserve){
-
-
-        return "";
+        reserveService.updateReserveState(reserve);
+        return "修改测试";
 
     }
 

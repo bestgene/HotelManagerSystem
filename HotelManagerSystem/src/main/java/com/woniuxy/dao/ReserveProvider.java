@@ -77,9 +77,36 @@ public class ReserveProvider {
     public String update(Reserve reserve){
         SQL sql = new SQL().UPDATE(table);
         if (reserve.getUserInfo().getUser_info_id()!=null&&reserve.getUserInfo().getUser_info_id()>0){
-            sql.SET("user_info_id=");
+            sql.SET("user_info_id="+reserve.getUserInfo().getUser_info_id());
         }
-
+        if (reserve.getReserve_checkintime()!=null&&reserve.getReserve_checkintime().length()>0){
+            sql.SET("reserve_checkintime='"+reserve.getReserve_checkintime()+"'");
+        }
+        if (reserve.getReserve_checkouttime()!=null&&reserve.getReserve_checkouttime().length()>0){
+            sql.SET("reserve_checkouttime='"+reserve.getReserve_checkouttime()+"'");
+        }
+        if (reserve.getReserve_arrivetime()!=null && reserve.getReserve_arrivetime().length()>0 ){
+            sql.SET("reserve_arrivetime='"+reserve.getReserve_arrivetime()+"'");
+        }
+        if (reserve.getReserve_canceltime()!=null&&reserve.getReserve_canceltime().length()>0){
+            sql.SET("reserve_canceltime='"+reserve.getReserve_canceltime()+"'");
+        }
+        if (reserve.getReserve_isauto() != null){
+            sql.SET("reserve_isauto="+reserve.getReserve_isauto());
+        }
+        if (reserve.getReserve_deposit() !=null){
+            sql.SET("reserve_deposit="+reserve.getReserve_deposit());
+        }
+        if (reserve.getReserve_payment() !=null){
+            sql.SET("reserve_payment="+reserve.getReserve_payment());
+        }
+        if (reserve.getReserve_paynumber() !=null){
+            sql.SET("reserve_paynumber="+reserve.getReserve_paynumber());
+        }
+        if (reserve.getReserve_message() != null && reserve.getReserve_message().length()>0){
+            sql.SET("reserve_message='"+reserve.getReserve_message()+"'");
+        }
+        sql.SET("flag=0");
 
         return sql.toString();
     }

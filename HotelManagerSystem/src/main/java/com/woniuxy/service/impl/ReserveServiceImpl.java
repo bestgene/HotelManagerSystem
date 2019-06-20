@@ -90,5 +90,10 @@ public class ReserveServiceImpl implements ReserveService {
         reserveDAO.updateReserveState(reserve);
     }
 
+    @Override
+    public void updateReserve(Reserve reserve) {
+        reserveDAO.updateReserve(reserve);
+    }
+
 
 }
