@@ -1,5 +1,6 @@
 package com.woniuxy.main;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 //@ComponentScan("com.woniuxy.filter")
 //@ServletComponentScan
 //常常扫描Servlet、Filter、Listener
+@MapperScan("com.woniuxy.dao")
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
