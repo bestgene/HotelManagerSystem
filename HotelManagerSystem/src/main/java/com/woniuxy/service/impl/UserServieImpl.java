@@ -14,10 +14,9 @@ import com.woniuxy.service.UserService;
 @Service("userService")
 @Transactional		//添加失败
 public class UserServieImpl implements UserService {
+	
 	@Resource
 	private UserDAO userDAO;
-	
-	
 
 	public UserDAO getUserDAO() {
 		return userDAO;
@@ -38,8 +37,11 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
-	public User findUserByUid(Integer uid) {
-		return userDAO.findUserByUid(uid);
+	public User findUserByUid(User user) {
+		// 通过用户user_acc查询用户
+		return userDAO.findUserByUid(user);
 	}
+
+	
 
 }

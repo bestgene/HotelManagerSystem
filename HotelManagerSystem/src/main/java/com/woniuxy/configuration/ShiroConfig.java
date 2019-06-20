@@ -47,9 +47,9 @@ public class ShiroConfig {
 		//配置安全管理器
 		bean.setSecurityManager(securityManager);
 		//配置登录页面
-		bean.setLoginUrl("/html/login.html");
+		bean.setLoginUrl("html/login.html");
 		//配置无权限页面
-		bean.setUnauthorizedUrl("/html/error.html");
+		bean.setUnauthorizedUrl("html/login.html");
 		//设置过滤器链
 		Map<String, String>map = new HashMap<>();
 		

@@ -11,6 +11,15 @@ public class User implements Serializable{
 	private String user_img;  //头像
 	private Integer role_id;  //角色id（外键）
 	private Integer flag;
+	private String Email;  //邮箱
+	
+	
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -47,7 +56,11 @@ public class User implements Serializable{
 	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
-	public User(Integer user_id, String user_acc, String user_pwd, String user_img, Integer role_id, Integer flag) {
+
+	
+	
+	public User(Integer user_id, String user_acc, String user_pwd, String user_img, Integer role_id, Integer flag,
+			String email) {
 		super();
 		this.user_id = user_id;
 		this.user_acc = user_acc;
@@ -55,12 +68,14 @@ public class User implements Serializable{
 		this.user_img = user_img;
 		this.role_id = role_id;
 		this.flag = flag;
+		Email = email;
 	}
 	public User(){}
 	@Override
 	public String toString() {
 		return "User [user_id=" + user_id + ", user_acc=" + user_acc + ", user_pwd=" + user_pwd + ", user_img="
-				+ user_img + ", role_id=" + role_id + ", flag=" + flag + "]";
+				+ user_img + ", role_id=" + role_id + ", flag=" + flag + ", Email=" + Email + "]";
 	}
+	
 	
 }
