@@ -1,3 +1,4 @@
+/*
 package com.woniuxy.configuration;
 
 import java.util.HashMap;
@@ -11,8 +12,9 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 
 import com.woniuxy.realm.UserRealm;
+import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 	
 	@Bean
@@ -69,3 +71,4 @@ public class ShiroConfig {
 		return bean;
 	}
 }
+*/
