@@ -17,16 +17,19 @@ public interface OrderDAO {
 	@Select({"<script>",
 		"select * from t_order",
 		"<where>",
-			"<if test='user_info_id!=null'>",
-			"user_info_id=#{user_info_id}",
-			"<if test='order_createtime!=null'>",
+			"<if test='userInfo!=null and userInfo.length()!=0'>",
+			"user_info_id=#{userInfo.user_info_id}",
+			"</if>",
+			"<if test='order_createtime!=null and order_createtime.length()!=0'>",
 			"and order_createtime=#{order_createtime}",
-			"<if test='order_state!=null'>",
+			"</if>",
+			"<if test='order_state!=null and order_state.length()!=0'>",
 			"and order_state=#{order_state}",
-			"</where>",
-			"</srcipt>"	
+			"</if>",
+		"</where>",
+	"</script>"	
 	})
-	public List<Order> showAllOrder();
+	public List<Order> showAllOrder(Order order);
 	
 	//创建订单
 	@Insert("insert into t_order(user_info_id,order_number,order_createtime,order_totalpay,order_deposit) "
