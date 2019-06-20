@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+
 //扫描Controller Service
 @ComponentScan({
 	"com.woniuxy.controller",
@@ -15,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 	})
 //扫描dao
 @MapperScan("com.woniuxy.dao")
-
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
