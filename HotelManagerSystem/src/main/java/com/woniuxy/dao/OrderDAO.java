@@ -4,8 +4,13 @@ package com.woniuxy.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.mapping.FetchType;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Many;
 
 import com.woniuxy.pojo.Order;
 
@@ -14,6 +19,20 @@ public interface OrderDAO {
 	 * 动态SQL：可以根据uid、订单创建时间、订单状态分别查询所有订单
 	 * 若什么查询条件都没输入，则查询所有订单
 	 */
+	@Results({
+		@Result(id=true,column="order_id",property="order_id"),
+		@Result(column="user_info_id",property="userInfo",
+		one=@One(select="aa")),
+		@Result(column="order_number",property="order_number"),
+		@Result(column="order_paynumber",property="order_paynumber"),
+		@Result(column="order_createtime",property="order_createtime"),
+		@Result(column="order_updatetime",property="order_updatetime"),
+		@Result(column="order_state",property="order_state"),
+		@Result(column="order_totalpay",property="order_totalpay"),
+		@Result(column="order_deposit",property="order_deposit"),
+		@Result(column="order_id",property="items",many=@Many(select="bb")),
+		@Result(column="flag",property="flag")
+	})
 	@Select({"<script>",
 		"select * from t_order",
 		"<where>",
