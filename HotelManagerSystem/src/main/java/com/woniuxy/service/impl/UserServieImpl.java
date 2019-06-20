@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.dao.UserDAO;
 import com.woniuxy.pojo.User;
+import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.service.UserService;
 
 @Service("userService")
@@ -38,8 +39,19 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
-	public User findUserByUid(Integer uid) {
-		return userDAO.findUserByUid(uid);
+	public User findUserByAcc(String user_acc) {
+		return userDAO.findUserByAcc(user_acc);
+	}
+
+	@Override
+	public UserInfo getInfoByUid(Integer user_id) {
+		return userDAO.getInfoByUid(user_id);
+	}
+
+	@Override
+	public void updateInfo(UserInfo userInfo) {
+		userDAO.updateInfo(userInfo);
+		
 	}
 
 }

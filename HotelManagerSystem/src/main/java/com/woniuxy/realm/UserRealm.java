@@ -36,8 +36,8 @@ public class UserRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		System.out.println("正在认证");
 		//获取账号
-		Integer uid = Integer.parseInt((String)token.getPrincipal());
-		User user = userService.findUserByUid(uid);
+		String user_acc = (String)token.getPrincipal();
+		User user = userService.findUserByAcc(user_acc);
 		System.out.println(user);
 		if (user == null){
 			return null;
