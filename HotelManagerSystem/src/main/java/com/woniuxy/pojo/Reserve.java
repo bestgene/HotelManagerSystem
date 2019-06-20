@@ -2,6 +2,7 @@ package com.woniuxy.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 预定信息表
@@ -11,10 +12,12 @@ public class Reserve implements Serializable {
     private Integer reserve_id;
     //预定信息编号
     private String reserve_idnumber;
+    //操作预定的用户账户id
+    private Integer user_id;
     //用户信息
     private UserInfo userInfo;
-    //预定样式（房间类型）
-    private HouseType houseType;
+    //预定房间
+    private List<House> houses;
     //预定入住时间
     private String reserve_checkintime;
     //预定退房时间
@@ -41,8 +44,9 @@ public class Reserve implements Serializable {
         return "Reserve{" +
                 "reserve_id=" + reserve_id +
                 ", reserve_idnumber='" + reserve_idnumber + '\'' +
+                ", user_id=" + user_id +
                 ", userInfo=" + userInfo +
-                ", houseType=" + houseType +
+                ", houses=" + houses +
                 ", reserve_checkintime='" + reserve_checkintime + '\'' +
                 ", reserve_checkouttime='" + reserve_checkouttime + '\'' +
                 ", reserve_arrivetime='" + reserve_arrivetime + '\'' +
@@ -72,6 +76,14 @@ public class Reserve implements Serializable {
         this.reserve_idnumber = reserve_idnumber;
     }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
     public UserInfo getUserInfo() {
         return userInfo;
     }
@@ -80,12 +92,12 @@ public class Reserve implements Serializable {
         this.userInfo = userInfo;
     }
 
-    public HouseType getHouseType() {
-        return houseType;
+    public List<House> getHouses() {
+        return houses;
     }
 
-    public void setHouseType(HouseType houseType) {
-        this.houseType = houseType;
+    public void setHouses(List<House> houses) {
+        this.houses = houses;
     }
 
     public String getReserve_checkintime() {

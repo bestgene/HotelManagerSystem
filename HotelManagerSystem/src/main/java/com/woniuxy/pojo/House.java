@@ -1,5 +1,7 @@
 package com.woniuxy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 public class House implements Serializable{
