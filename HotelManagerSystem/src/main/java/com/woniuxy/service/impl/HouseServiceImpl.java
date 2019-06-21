@@ -36,7 +36,7 @@ public class HouseServiceImpl implements HouseService {
 
 	@Override
 	public List<Integer> findHidByHouseTypeIdAndTime(Integer house_type_id, String dh_day) {
-		return houseDAO.findHidByHouseTypeIdAndTime(house_type_id, dh_day);
+		return houseDAO.findHidByHouseTypeIdAndTime(house_type_id,dh_day);
 	}
 
 

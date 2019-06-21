@@ -16,6 +16,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +43,36 @@ public class HouseController {
 	public void setHouseService(HouseService houseService) {
 		this.houseService = houseService;
 	}
+	
+	@PostMapping("/test/{startTime}/{endTime}")
+	@ResponseBody
+	public Map<Integer, List<House>> get(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) throws ParseException{
+		Map<Integer, List<House>> allAvailableRooms = allAvailableRooms(startTime, endTime);
+		return allAvailableRooms;
+	}
 
-
-	@PostMapping("/alltype/{startTime}/{endTime}")
+	@PostMapping("/allSingleType/{startTime}/{endTime}/{house_type_id}")
+	@ResponseBody
+	/*
+	 * 展示房间类型信息
+	 * startTime 	入住时间
+	 * endTime		离开时间
+	 */
+	public Map<String,Object> allSingleHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("house_type_id") Integer house_type_id) throws ParseException{
+		Map<String,Object> all = new Hashtable<>();
+		List<House> allAvailableTypeRooms = allAvailableTypeRooms(startTime,endTime,house_type_id);
+		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
+		houseType.setNum(allAvailableTypeRooms.size());
+		all.put("houseType",houseType);
+		List<String> date = new ArrayList<String>();
+		date.add(startTime);
+		date.add(endTime);
+		all.put("date",date);
+		all.put("houses",allAvailableTypeRooms);
+		return all;
+	}
+	
+	@PostMapping("/allHouseType/{startTime}/{endTime}")
 	@ResponseBody
 	/*
 	 * 展示房间类型信息
@@ -53,14 +81,8 @@ public class HouseController {
 	 */
 	public Map<String,Object> allHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) throws ParseException{
 		Map<String,Object> all = new Hashtable<>();
-		Map<Integer,List<House>> allAvailableRooms = allAvailableRooms(startTime,endTime);
-		List<HouseType> allhouses = houseService.houseType();
-		for (HouseType houseType : allhouses) {
-			Integer key = houseType.getHouse_type_id();
-			int num = allAvailableRooms.get(key).size();
-			houseType.setNum(num);
-		}
-		all.put("houses",allhouses);
+		Map<Integer, List<House>> allAvailableRooms = allAvailableRooms(startTime, endTime);
+		all.put("allHouses",allAvailableRooms);
 		List<String> date = new ArrayList<String>();
 		date.add(startTime);
 		date.add(endTime);
@@ -104,6 +126,8 @@ public class HouseController {
 		return model;
 		
 	}
+	
+	
 /*---------------------------------------工具类----------------------------------------	*/
 	//查询所有可用的房间
 	public Map<Integer,List<House>> allAvailableRooms(String startTime,String endTime) throws ParseException{
@@ -112,34 +136,42 @@ public class HouseController {
 		List<HouseType> houseType = houseService.houseType();
 		for (int t = 0;t<houseType.size();t++){
 			//根据房间类型id 查找 t_house 表 查找当没有人住房的时候各个类型的房间有多少间
-			List<House> allHouses = houseService.allHouseType(houseType.get(t).getHouse_type_id());
-			Set<House> allCheckHouse = new HashSet<>();
-			//每一天入住的时间
-			List<String> allDay = allDay(startTime,endTime);
-			for (String currentDay : allDay) {
-				//对于各类型每天所有已入住房间的 house_id
-				List<Integer> temp = houseService.findHidByHouseTypeIdAndTime(houseType.get(t).getHouse_type_id(),currentDay);
-				for (Integer hid : temp) {
-					House single = houseService.findHouseByHouseId(hid);
-					allCheckHouse.add(single);
-				}
-			}
-			for (int m=0;m<allHouses.size();m++){
-				House house = allHouses.get(m);
-				Iterator<House> iterator = allCheckHouse.iterator();
-				while (iterator.hasNext()){
-					House next = iterator.next();
-					if (next.getHouse_id()==house.getHouse_id()){
-						allHouses.remove(m);
-					}
-				}
-			}
+			List<House> allHouses = allAvailableTypeRooms(startTime,endTime,houseType.get(t).getHouse_type_id());
 			all.put(houseType.get(t).getHouse_type_id(), allHouses);
 		}
 		return all;
 	}
 	
-	
+	//根据入住时间和离开时间和房间类型查询该类型下所有可入住房间
+	public List<House> allAvailableTypeRooms(String startTime,String endTime,Integer house_type_id) throws ParseException{
+		//根据房间类型id 查找 t_house 表 查找当没有人住房的时候各个类型的房间有多少间
+		List<House> allHouses = houseService.allHouseType(house_type_id);
+		Set<House> allCheckHouse = new HashSet<>();
+		//每一天入住的时间
+		List<String> allDay = allDay(startTime,endTime);
+		for (String currentDay : allDay) {
+			//对于各类型每天所有已入住房间的 house_id
+			List<Integer> temp = houseService.findHidByHouseTypeIdAndTime(house_type_id,currentDay);
+			System.out.println("----------------"+temp);
+			for (Integer hid : temp) {
+				House single = houseService.findHouseByHouseId(hid);
+				allCheckHouse.add(single);
+			}
+		}
+		
+		for (int m=0;m<allHouses.size();m++){
+			House house = allHouses.get(m);
+			Iterator<House> iterator = allCheckHouse.iterator();
+			while (iterator.hasNext()){
+				House next = iterator.next();
+				if (next.getHouse_id()==house.getHouse_id()){
+					allHouses.remove(m);
+				}
+			}
+		}
+		return allHouses;
+		
+	}
 	// 已知 一个集合 Collection 从集合中查找	n个不同的对象;
 	public List<House> findDifferObj(List<House> all,Integer n){
 		List<House> result = new ArrayList<House>();

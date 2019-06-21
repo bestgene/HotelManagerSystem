@@ -20,17 +20,7 @@ public class HouseType implements Serializable{
 	//软删除
 	private Integer num;
 	//相同类型的房间数量
-	public HouseType(Integer house_type_id, String house_type_name, BigDecimal house_type_price, String house_type_img,
-			Integer flag, Integer num) {
-		this.house_type_id = house_type_id;
-		this.house_type_name = house_type_name;
-		this.house_type_price = house_type_price;
-		this.house_type_img = house_type_img;
-		this.flag = flag;
-		this.num = num;
-	}
-	public HouseType() {
-	}
+	private String house_type_msg;
 	public Integer getHouse_type_id() {
 		return house_type_id;
 	}
@@ -67,11 +57,30 @@ public class HouseType implements Serializable{
 	public void setNum(Integer num) {
 		this.num = num;
 	}
+	public String getHouse_type_msg() {
+		return house_type_msg;
+	}
+	public void setHouse_type_msg(String house_type_msg) {
+		this.house_type_msg = house_type_msg;
+	}
+	public HouseType(Integer house_type_id, String house_type_name, BigDecimal house_type_price, String house_type_img,
+			Integer flag, Integer num, String house_type_msg) {
+		super();
+		this.house_type_id = house_type_id;
+		this.house_type_name = house_type_name;
+		this.house_type_price = house_type_price;
+		this.house_type_img = house_type_img;
+		this.flag = flag;
+		this.num = num;
+		this.house_type_msg = house_type_msg;
+	}
+	public HouseType() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "HouseType [house_type_id=" + house_type_id + ", house_type_name=" + house_type_name
 				+ ", house_type_price=" + house_type_price + ", house_type_img=" + house_type_img + ", flag=" + flag
-				+ ", num=" + num + "]";
+				+ ", num=" + num + ", house_type_msg=" + house_type_msg + "]";
 	}
-	
 }

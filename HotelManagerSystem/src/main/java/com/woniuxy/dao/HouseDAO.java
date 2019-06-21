@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -39,8 +40,8 @@ public interface HouseDAO {
 	@Select("select * from t_house_type")
 	public List<HouseType> houseType();
 	//通过房间类型id及订房时间确定房间id
-	@Select("select house_id from t_date_house where house_type_id=#{0} and dh_day = #{1}")
-	public List<Integer> findHidByHouseTypeIdAndTime(Integer house_type_id,String dh_day);
+	@Select("select house_id from t_date_house where house_type_id=#{house_type_id} and dh_day = #{dh_day}")
+	public List<Integer> findHidByHouseTypeIdAndTime(@Param("house_type_id") Integer house_type_id,@Param("dh_day")String dh_day);
 	//插入 入住操作信息
 	@Insert("insert into t_date_house values(#{house_id},#{house_id},#{house_type_id},#{dh_day})")
 	public boolean addDateHouseOperation(DateHouse dateHouse);
