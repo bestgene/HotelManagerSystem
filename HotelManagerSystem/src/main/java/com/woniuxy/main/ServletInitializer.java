@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 //扫描Controller Service
 @ComponentScan({
 	"com.woniuxy.controller",
-	"com.woniuxy.service",
+	"com.woniuxy.service.impl",
 	"com.woniuxy.configuration"
 	})
-//扫描dao
+
 @MapperScan("com.woniuxy.dao")
 public class ServletInitializer extends SpringBootServletInitializer {
 
