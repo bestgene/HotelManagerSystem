@@ -28,7 +28,7 @@ public class ReserveController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public String add(Reserve reserve, HttpServletRequest request){
+    public String addReserve(Reserve reserve, HttpServletRequest request){
         //1.从前端获取Reserve对象，预定时间段、房间由别人给我
 
         //2.获取session中保存的User对象的id赋值给Reserve对象，指出操作人
@@ -44,7 +44,7 @@ public class ReserveController {
         //4.新增预定信息
         reserveService.addReserve(reserve);
         //5.获取刚刚插入后生成的id
-        Reserve newreserve = reserveService.findReserveIdByIdnumber(reserve);
+        Reserve newreserve = reserveService.queryReserve(reserve);
         //6.中间表数据添加
         for (int i = 0;i<reserve.getHouses().size();i++){
             reserveService.addReserveIdAndHouseId(newreserve,reserve.getHouses().get(i));
@@ -61,8 +61,8 @@ public class ReserveController {
      */
     @RequestMapping("/htquery")
     @ResponseBody
-    public List<Reserve> queryAllByUserInfoHt(Reserve reserve){
-        List<Reserve> reserves = reserveService.selectReserveByUserInfoOrUser(reserve);
+    public List<Reserve> htquery(Reserve reserve){
+        List<Reserve> reserves = reserveService.queryListReserve(reserve);
         return reserves;
     }
 
@@ -75,10 +75,10 @@ public class ReserveController {
      */
     @RequestMapping("/qtquery")
     @ResponseBody
-    public List<Reserve> queryAllByUserInfoQt(Reserve reserve){
+    public List<Reserve>  qtquery(Reserve reserve){
         //获取当前登录用户id
         reserve.setUser_id(1);
-        List<Reserve> reserves = reserveService.selectReserveByUserInfoOrUser(reserve);
+        List<Reserve> reserves = reserveService.queryListReserve(reserve);
         return reserves;
     }
 

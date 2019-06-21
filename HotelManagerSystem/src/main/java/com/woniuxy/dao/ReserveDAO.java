@@ -11,7 +11,10 @@ import java.util.List;
 
 public interface ReserveDAO {
 
-
+    /**
+     * 新增预定信息
+     * @param reserve
+     */
     @Insert("insert into t_reserve(reserve_idnumber,user_id,user_info_id," +
             "reserve_checkintime,reserve_checkouttime,reserve_arrivetime," +
             "reserve_canceltime,reserve_isauto,reserve_deposit,reserve_payment," +
@@ -23,11 +26,19 @@ public interface ReserveDAO {
             "#{reserve_paynumber},#{reserve_message})")
     public void addReserve(Reserve reserve);
 
-
+    /**
+     * 查询指定预定信息
+     * @param reserve
+     * @return
+     */
     @SelectProvider(type = ReserveProvider.class,method = "queryReserve")
-    public Reserve findReserveIdByIdnumber(Reserve reserve);
+    public Reserve queryReserve(Reserve reserve);
 
-
+    /**
+     * 中间表添加值
+     * @param reserve
+     * @param house
+     */
     @Insert("insert into t_reserve_house values(#{reserve.reserve_id},#{house.house_id})")
     public void addReserveIdAndHouseId(Reserve reserve,House house);
 
@@ -63,11 +74,14 @@ public interface ReserveDAO {
                 ))
     })
     @SelectProvider(type = ReserveProvider.class,method = "queryListReserve")
-    public List<Reserve> selectReserveByUserInfoOrUser(Reserve reserve);
+    public List<Reserve> queryListReserve(Reserve reserve);
 
 
-
-
+    /**
+     * 根据预定信息id查询对应房间
+     * @param reserve_id
+     * @return
+     */
     @Select("select t_house.house_id,house_name,house_state,house_type_id,flag " +
             "from t_house,t_reserve_house where " +
             "t_house.house_id=t_reserve_house.house_id " +
@@ -75,11 +89,18 @@ public interface ReserveDAO {
     public List<House> selectHousesByReserveId(Integer reserve_id);
 
 
-
+    /**
+     * 根据预定信息id修改预定信息状态
+     * @param reserve
+     */
     @Update("update t_reserve set flag=#{flag} where reserve_id=#{reserve_id}")
     public void updateReserveState(Reserve reserve);
 
 
+    /**
+     * 动态修改预定信息表
+     * @param reserve
+     */
     @UpdateProvider(type = ReserveProvider.class,method = "update")
     public void updateReserve(Reserve reserve);
 

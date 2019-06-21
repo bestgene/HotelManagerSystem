@@ -35,8 +35,8 @@ public class ReserveServiceImpl implements ReserveService {
      * @return
      */
     @Override
-    public Reserve findReserveIdByIdnumber(Reserve reserve) {
-        return reserveDAO.findReserveIdByIdnumber(reserve);
+    public Reserve queryReserve(Reserve reserve) {
+        return reserveDAO.queryReserve(reserve);
     }
 
     /**
@@ -59,8 +59,8 @@ public class ReserveServiceImpl implements ReserveService {
      * @return
      */
     @Override
-    public List<Reserve> selectReserveByUserInfoOrUser(Reserve reserve) {
-        return reserveDAO.selectReserveByUserInfoOrUser(reserve);
+    public List<Reserve> queryListReserve(Reserve reserve) {
+        return reserveDAO.queryListReserve(reserve);
     }
 
     /**
