@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<title>会员注册</title>
+<link rel="stylesheet" type="text/css" href="assets/css/indexs.css">
+<script src="assets/js/jquery.min.js"></script>
+
+</head>
+<body>
+
+	<a href="http://www.coding52.com" class=""><img
+		src="face-user/img/guanggao.png" height="110px" width="180px" /></a>
+
+	<h1>
+		<div class="desc">欢迎注册蔻丁大酒店会员</div>
+	</h1>
+	<section>
+		<form action="">
+			<div class="register-box">
+				<label for="username" class="username_label">用 户 名 <input
+					maxlength="20" type="text" placeholder="您的用户名和登录名" id="uname">
+				</label>
+
+			</div>
+
+			<div class="register-box">
+				<label for="username" class="other_label">设 置 密 码 <input
+					maxlength="20" type="password" id="pwd" placeholder="建议至少使用两种字符组合">
+				</label>
+				<div class="tips"></div>
+			</div>
+			<div class="register-box">
+				<label for="username" class="other_label"> 确 认 密 码 <input
+					maxlength="20" type="password" id="pwd" placeholder="请再次输入密码">
+				</label>
+				<div class="tips"></div>
+			</div>
+			<div class="register-box">
+				<label for="username" class="other_label"> <span>中国
+						0086∨</span> <input type="text" maxlength="20" placeholder="建议使用常用手机"
+					id="phone">
+				</label>
+
+			</div>
+			<div class="tips"></div>
+			<!--描述：身份证号-->
+			<div class="register-box">
+				<label for="username" class="idcard">身份证号 <input
+					maxlength="20" type="text" placeholder="您的身份证件" id="idcade">
+				</label>
+			</div>
+			<div class="tips"></div>
+			<!--描述：存钱-->
+			<div class="register-box">
+				<label for="username" class="money">充值 <input maxlength="20"
+					type="text" placeholder="充值大于零的金额" id="cunqian">
+				</label>
+			</div>
+			<div class="tips"></div>
+
+			<div class="register-box">
+				<label for="username" class="other_label">验 证 码 <input
+					maxlength="20" type="text" placeholder="请输入验证码">
+				</label> <span id="code"></span>
+				<div class="tips"></div>
+			</div>
+			<!-- <div class="arguement">
+				<input type="checkbox" id="xieyi"> 阅读并同意 <a
+					href="jiudian.html">《酒店声明》</a> <a href="yinsi.html">《隐私政策》</a>
+				<div class="tips"></div>
+			</div> -->
+			<div class="submit_btn">
+				<button type="button" id="submit_btn" onclick="zhuce1()"
+					value="立即注册">立即注册</button>
+			</div>
+		</form>
+	</section>
+
+	<script type="text/javascript">
+	var result01;
+	var result02;
+	var result03;
+	var result04;
+	var result05;
+	var result06;
+	var result07;
+	var result08;
+	var result09;
+	
+	
+	
+	//验证码刷新
+	function code() {
+		var str = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPLKJHGFDSAZXCVBNM";
+		var str1 = 0;
+		for (var i = 0; i < 4; i++) {
+			debugger;
+			str1 += str.charAt(Math.floor(Math.random() * 62))
+		}
+		str1 = str1.substring(1)
+		$("#code").text(str1);
+	}
+	code();
+	$("#code").click(code);
+	//验证码验证比对
+	$('input')
+			.eq(6)
+			.blur(
+					function() {
+						if ($(this).val().length == 0) {
+							$(this).parent().next().next("div").text("");
+							$(this).parent().next().next("div").css(
+									"color", '#ccc');
+							result09=false;
+							return result09;
+							
+						} else if ($(this).val().toUpperCase() != $("#code")
+								.text().toUpperCase()) {
+							$(this).parent().next().next("div").text(
+									"验证码不正确");
+							$(this).parent().next().next("div").css(
+									"color", 'red');
+							alert("验证码不正确");
+							result09=false;
+							return result09;
+						} else {
+							$(this).parent().next().next("div").text("");
+							result09=true;
+							return result09;
+						}
+					});
+	//密码
+	$('input').eq(1).blur(function() {
+		if ($(this).val().length == 0) {
+			$(this).parent().next("div").text("");
+			$(this).parent().next("div").css("color", '#ccc');
+			result01=false;
+			return result01;
+			
+		} else if ($(this).val().length > 0 && $(this).val().length < 6) {
+			$(this).parent().next("div").text("长度只能在6-20个字符之间");
+			$(this).parent().next("div").css("color", 'red');
+			result01=false;
+			return result01;
+		} else {
+			$(this).parent().next("div").text("");
+			result01=true;
+			return result01;
+
+		}
+	});
+	//	确认密码
+	$('input').eq(2).blur(function() {
+		if ($(this).val().length == 0) {
+			$(this).parent().next("div").text("");
+			$(this).parent().next("div").css("color", '#ccc');
+			
+			result02=false;
+			return result02;
+		} else if ($(this).val() != $('input').eq(1).val()) {
+			$(this).parent().next("div").text("两次密码不匹配");
+			$(this).parent().next("div").css("color", 'red');
+			alert("两次密码不匹配");
+			result02=false;
+			return result02;
+			
+		} else {
+			$(this).parent().next("div").text("");
+			
+			result02=true;
+			return result02;
+		}
+	});
+	//手机号
+	$('input').eq(3).blur(function() {
+
+		if ($(this).val().length == 0) {
+			$(this).parent().next("div").text("手机号不能为空");
+			$(this).parent().next("div").css("color", '#ccc');
+			
+			
+			
+			alert("手机号不能为空");
+			result03=false;
+			return result03;
+			
+		} else {
+			var s = $(this).val();
+			zhuce2(s);
+			
+			result03=true;
+			return result03;
+		}
+	});
+	//手机号格式正则表达式
+	function zhuce2(phone) {
+
+		var phoneReg = /^1[3-578]\d{9}$/;
+		if (phoneReg.test(phone)) {
+			/* alert("手机号正确"); */
+				result04=true;
+			return true;
+		} else {
+			alert("手机号不正确");
+			result04=false ;
+			return false;
+		}
+	};
+	//身份证号
+	$('input').eq(4).blur(function() {
+		if ($(this).val().length == 0) {
+			$(this).parent().next("div").text("身份证号不能为空");
+			$(this).parent().next("div").css("color", '#ccc');
+			alert("身份证号不能为空");
+			result05=false;
+			return result05;
+		} else {
+			var idcard=$(this).val();
+			
+			idcard1(idcard);
+			result05=true;
+			return result05;
+			
+		} 
+	});
+	function idcard1(idcard) {
+		
+		var reg= /^\d{15}(\d{2}[A-Za-z0-9])?$/;
+		
+		  if(!reg.test(idcard)){//判断是否为数字类型    
+			  alert("身份证号格式不正确");
+				result06=false;
+				return result06;      
+	        }else{
+	        	result06=true;
+	        /* 	alert("身份证号格式正确"); */
+				return result06;
+	        }    
+		
+	};
+	//存钱金额
+	$('input').eq(5).blur(function() {
+		if ($(this).val().length == 0) {
+			$(this).parent().next("div").text("存钱金额不能为空");
+			$(this).parent().next("div").css("color", '#ccc');
+			alert("存钱金额不能为空");
+			result07=false;
+			return result07;
+			
+		} else {
+			var cunqian=$(this).val();
+			qian(cunqian);
+			result07=true;
+			return result07;
+		} 
+	});
+	function qian(cunqian){
+		var qian=/^[1-9]\d*$/;
+		if(!qian.test(cunqian)){//判断是否为数字类型    
+			  alert("存入数额必须为正整数");
+			  result08=false;
+				return result08;      
+	        }else{
+	        	result08=true;
+				return result08;
+	        }    
+		
+	};
+		function zhuce1() {
+			debugger;
+			var uname = $("#uname").val();
+			var pwd1 = $("#pwd").val();
+			var phone = $("#phone").val();
+			var idcade = $("#idcade").val();
+			var cunqian = $("#cunqian").val();
+			
+			var dataJson = {
+				"uname" : uname,
+				"pwd" : pwd1,
+				"idcade" : idcade,
+				"phone" : phone,
+				"cunqian" : cunqian
+
+			};
+			if(result01==true&&result02==true&&result03==true&&result04==true&&result05==true&&result06==true&&result07==true&&result08==true&&result09==true){
+			
+				$.ajax({
+                     
+					url : "zhuce",
+					data : dataJson,
+					type : "post",
+					datetype : "text",
+					
+					success : function(data) {
+						
+						/* alert(data); */
+						if (data == "-1") {
+							alert("用户已存在");
+						} else if (data == "1") {
+							
+							location.href = "main.html";
+						}
+					}
+				});
+			}else{
+				alert("注册失败");
+			}
+			
+		}
+	</script>
+</body>
+</html>
