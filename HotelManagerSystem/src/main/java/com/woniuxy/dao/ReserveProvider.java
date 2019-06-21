@@ -7,35 +7,6 @@ import org.apache.ibatis.jdbc.SQL;
 public class ReserveProvider {
     private final String table = "t_reserve";
 
-    public static boolean isnullkong(String info){
-        if (info == null || info.length()==0){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 动态查询
-     * 传入：用户手机、姓名、身份证
-     * 查询：用户信息
-     * @param userInfo
-     * @return
-     */
-    public String queryInfoId(UserInfo userInfo){
-        SQL sql = new SQL().SELECT("*").FROM("t_user_info");
-        if (!isnullkong(userInfo.getUser_info_tel())){
-            sql.WHERE("user_info_tel='"+userInfo.getUser_info_tel()+"'");
-        }
-        if (!isnullkong(userInfo.getUser_info_idcard())){
-            sql.WHERE("user_info_idcard='"+userInfo.getUser_info_idcard()+"'");
-        }
-        if (!isnullkong(userInfo.getUser_info_name())){
-            sql.WHERE("user_info_name like '%"+userInfo.getUser_info_name()+"%'");
-        }
-
-        sql.WHERE("flag=0");
-        return sql.toString();
-    }
 
     /**
      * 动态查询
@@ -55,25 +26,42 @@ public class ReserveProvider {
 
 
     /**
-     * 个人查询，或者后台根据用户信息id查询
+     * 预定查询
+     * 个人查询时，需要添加user_id属性
+     * 非个人不需要
+     * 用户信息传入参数
+     * 姓名、电话、身份证
      * @param reserve
      * @return
      */
     public String queryListReserve(Reserve reserve){
-        SQL sql = new SQL().SELECT("*").FROM(table);
+        SQL sql = new SQL().SELECT("*").FROM(table+",t_user_info ")
+                .WHERE("t_reserve.user_info_id=t_user_info.user_info_id ");
         if (reserve.getUser_id() != null && reserve.getUser_id()>0){
-            sql.WHERE("user_id='"+reserve.getUser_id()+"'");
-            return sql.toString();
+            sql.WHERE("t_reserve.user_id='"+reserve.getUser_id()+"'");
         }
         if (reserve.getUserInfo().getUser_info_id() !=null && reserve.getUserInfo().getUser_info_id()>0){
-            sql.WHERE("user_info_id='"+reserve.getUserInfo().getUser_info_id()+"'");
+            sql.WHERE("t_user_info.user_info_id='"+reserve.getUserInfo().getUser_info_id()+"'");
         }
-        sql.WHERE("flag=0");
+        if (reserve.getUserInfo().getUser_info_tel()!=null&&reserve.getUserInfo().getUser_info_tel().length()>0){
+            sql.WHERE("t_user_info.user_info_tel='"+reserve.getUserInfo().getUser_info_tel()+"'");
+        }
+        if (reserve.getUserInfo().getUser_info_idcard() != null && reserve.getUserInfo().getUser_info_idcard().length()>0){
+            sql.WHERE("t_user_info.user_info_idcard='"+reserve.getUserInfo().getUser_info_idcard()+"'");
+        }
+        if (reserve.getUserInfo().getUser_info_name()!=null&&reserve.getUserInfo().getUser_info_name().length()>0){
+            sql.WHERE("t_user_info.user_info_name like '%"+reserve.getUserInfo().getUser_info_name()+"%'");
+        }
 
+        sql.WHERE("t_reserve.flag=0");
         return sql.toString();
     }
 
-
+    /**
+     * 动态更新
+     * @param reserve
+     * @return
+     */
     public String update(Reserve reserve){
         SQL sql = new SQL().UPDATE(table);
         if (reserve.getUserInfo().getUser_info_id()!=null&&reserve.getUserInfo().getUser_info_id()>0){

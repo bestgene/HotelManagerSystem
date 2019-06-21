@@ -29,26 +29,23 @@ public class ReserveController {
     @RequestMapping("/add")
     @ResponseBody
     public String add(Reserve reserve, HttpServletRequest request){
-        //模拟前端获得的房间集合
-        List<House> houses = new ArrayList<>();
-        House house1 = new House();
-        House house2 = new House();
-        house1.setHouse_id(2);
-        houses.add(house1);
-        house2.setHouse_id(3);
-        houses.add(house2);
-        reserve.setHouses(houses);
+        //1.从前端获取Reserve对象，预定时间段、房间由别人给我
+
+        //2.获取session中保存的User对象的id赋值给Reserve对象，指出操作人
+        User user = (User) request.getSession().getAttribute("user");
+        reserve.setUser_id(user.getUid());
+        //
         /*UserInfo userInfo = (UserInfo) request.getSession().getAttribute("userInfo");*/
-        reserve.setUser_id(1);
-        //生成唯一编号
+
+        //3.生成唯一预定编号，赋值
         String idnumber = System.currentTimeMillis()+""+(new Random().nextInt(900)+100)
                 +reserve.getUserInfo().getUser_info_tel().substring(reserve.getUserInfo().getUser_info_tel().length()-4);
         reserve.setReserve_idnumber(idnumber);
-        //调用插入方法
+        //4.新增预定信息
         reserveService.addReserve(reserve);
-        //获取刚刚插入后生成的id
+        //5.获取刚刚插入后生成的id
         Reserve newreserve = reserveService.findReserveIdByIdnumber(reserve);
-        //中间表数据添加
+        //6.中间表数据添加
         for (int i = 0;i<reserve.getHouses().size();i++){
             reserveService.addReserveIdAndHouseId(newreserve,reserve.getHouses().get(i));
         }
@@ -59,43 +56,27 @@ public class ReserveController {
      *  后台管理
      *  预定查询功能
      *  根据用户手机、或者身份证、或者姓名查询预定信息
-     * @param userInfo
+     * @param reserve
      * @return
      */
     @RequestMapping("/htquery")
     @ResponseBody
-    public List<Reserve> queryAllByUserInfoHt(UserInfo userInfo){
-        List<UserInfo> userInfos = reserveService.selectUserInfoIdByNameTelIdcard(userInfo);
-        List<Reserve> reserves = new ArrayList<>();
-        if (userInfos !=null){
-            List<Reserve> selectByUserInfo = null;
-            Reserve inforeserve = new Reserve();
-            for (UserInfo info:userInfos
-            ) {
-                inforeserve.setUserInfo(userInfo);
-                selectByUserInfo = reserveService.selectReserveByUserInfoOrUser(inforeserve);
-                for (Reserve reserve:selectByUserInfo
-                ) {
-                    reserve.setUserInfo(info);
-                    reserves.add(reserve);
-                }
-            }
-        }
+    public List<Reserve> queryAllByUserInfoHt(Reserve reserve){
+        List<Reserve> reserves = reserveService.selectReserveByUserInfoOrUser(reserve);
         return reserves;
     }
-
 
     /**
      *  前台管理
      *  预定查询功能，只能查询个人
-     *
+     *  也可以根据用户账号id和输入用户信息查询
      *
      * @return
      */
     @RequestMapping("/qtquery")
     @ResponseBody
-    public List<Reserve> queryAllByUserInfoQt(){
-        Reserve reserve = new Reserve();
+    public List<Reserve> queryAllByUserInfoQt(Reserve reserve){
+        //获取当前登录用户id
         reserve.setUser_id(1);
         List<Reserve> reserves = reserveService.selectReserveByUserInfoOrUser(reserve);
         return reserves;

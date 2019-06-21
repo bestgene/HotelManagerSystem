@@ -50,8 +50,10 @@ public class ReserveServiceImpl implements ReserveService {
     }
 
 
+
+
     /**
-     * 根据用户信息id查询对应的预定信息,
+     * 根据用户信息查询对应的预定信息,
      * 或者根据用户账户id查询
      * @param
      * @return
@@ -59,16 +61,6 @@ public class ReserveServiceImpl implements ReserveService {
     @Override
     public List<Reserve> selectReserveByUserInfoOrUser(Reserve reserve) {
         return reserveDAO.selectReserveByUserInfoOrUser(reserve);
-    }
-
-    /**
-     * 根据用户手机或者身份证或者姓名查询对应的用户信息id
-     * @param userInfo
-     * @return
-     */
-    @Override
-    public List<UserInfo> selectUserInfoIdByNameTelIdcard(UserInfo userInfo) {
-        return reserveDAO.selectUserInfoIdByNameTelIdcard(userInfo);
     }
 
     /**
@@ -90,6 +82,10 @@ public class ReserveServiceImpl implements ReserveService {
         reserveDAO.updateReserveState(reserve);
     }
 
+    /**
+     * 修改预定信息
+     * @param reserve
+     */
     @Override
     public void updateReserve(Reserve reserve) {
         reserveDAO.updateReserve(reserve);

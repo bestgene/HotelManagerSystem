@@ -36,7 +36,7 @@ public class Reserve implements Serializable {
     private BigDecimal reserve_paynumber;
     //客户留言
     private String reserve_message;
-
+    //软栓除  0：预定状态  1：失效状态
     private Integer flag;
 
     @Override

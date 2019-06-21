@@ -31,10 +31,22 @@ public interface ReserveDAO {
     @Insert("insert into t_reserve_house values(#{reserve.reserve_id},#{house.house_id})")
     public void addReserveIdAndHouseId(Reserve reserve,House house);
 
-
+    /**
+     * 预定信息查询
+     * @param reserve
+     * @return
+     */
     @Results({
             @Result(id = true,column = "reserve_id",property = "reserve_id"),
             @Result(column = "reserve_idnumber",property = "reserve_idnumber"),
+            @Result(column = "user_id",property = "user_id"),
+
+            @Result(column = "user_info_id",property = "userInfo.user_info_id"),
+            @Result(column = "user_info_name",property = "userInfo.user_info_name"),
+            @Result(column = "user_info_tel",property = "userInfo.user_info_tel"),
+            @Result(column = "user_info_idcard",property = "userInfo.user_info_idcard"),
+            @Result(column = "user_info_cost",property = "userInfo.user_info_cost"),
+
             @Result(column = "reserve_checkintime",property = "reserve_checkintime"),
             @Result(column = "reserve_checkouttime",property = "reserve_checkouttime"),
             @Result(column = "reserve_arrivetime",property = "reserve_arrivetime"),
@@ -54,8 +66,7 @@ public interface ReserveDAO {
     public List<Reserve> selectReserveByUserInfoOrUser(Reserve reserve);
 
 
-    @SelectProvider(type = ReserveProvider.class,method = "queryInfoId")
-    public List<UserInfo> selectUserInfoIdByNameTelIdcard(UserInfo userInfo);
+
 
     @Select("select t_house.house_id,house_name,house_state,house_type_id,flag " +
             "from t_house,t_reserve_house where " +
