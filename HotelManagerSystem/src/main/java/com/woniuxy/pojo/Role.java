@@ -1,10 +1,18 @@
 package com.woniuxy.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Role implements Serializable{
 	private Integer role_id;
 	private String role_name;
+	private List<Perm> perms;
+	public List<Perm> getPerms() {
+		return perms;
+	}
+	public void setPerms(List<Perm> perms) {
+		this.perms = perms;
+	}
 	public Integer getRole_id() {
 		return role_id;
 	}
@@ -17,15 +25,18 @@ public class Role implements Serializable{
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
 	}
-	public Role(Integer role_id, String role_name) {
+	
+	public Role(){}
+	public Role(Integer role_id, String role_name, List<Perm> perms) {
 		super();
 		this.role_id = role_id;
 		this.role_name = role_name;
+		this.perms = perms;
 	}
-	public Role(){}
 	@Override
 	public String toString() {
-		return "Role [role_id=" + role_id + ", role_name=" + role_name + "]";
+		return "Role [role_id=" + role_id + ", role_name=" + role_name + ", perms=" + perms + "]";
 	}
+	
 	
 }

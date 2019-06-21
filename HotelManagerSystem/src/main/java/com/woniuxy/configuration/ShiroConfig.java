@@ -41,6 +41,7 @@ public class ShiroConfig {
 		map.put("/check/emailcheck", "anon");//邮件验证
 		map.put("/druid/**", "anon");
 		map.put("/sign.html", "anon"); 
+		map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
 		//logout
 		map.put("/logout", "logout");
 		// /**

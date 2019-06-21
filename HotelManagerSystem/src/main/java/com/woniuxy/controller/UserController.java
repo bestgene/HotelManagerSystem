@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -80,8 +81,10 @@ public class UserController {
 		return "info.html";
 	}
 	
+	@RequiresPermissions(value={"user:delete"})
 	@RequestMapping("/delete")
-	public String deleteUser(Integer user_id){
-		return "";
+	public String deleteUser(Integer user_id) throws Exception{
+		userService.deleteUserByUid(user_id);
+		return "test.html";
 	}
 }
