@@ -8,15 +8,14 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RestController;
 
 
 import com.woniuxy.util.WebSocketUtil;
 
-@Component
+
 @ServerEndpoint("/WebSocketController/{userName}") // 表示接受的是STOMP协议提
+@Component
 // 交的数据
 public class WebSocketController {
 	// 建立连接
