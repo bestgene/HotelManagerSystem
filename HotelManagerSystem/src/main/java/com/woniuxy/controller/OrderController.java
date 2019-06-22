@@ -49,7 +49,6 @@ public class OrderController {
 	 */
 	public ModelAndView createOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
         ModelAndView modelAndView = new ModelAndView();
-
 	    //1.创建 订单表
 		//order表赋值
 		Order order = reserveToOrderAndItem(reserve);
@@ -98,14 +97,12 @@ public class OrderController {
         if (flag){
             //成功进入支付页面
             modelAndView.setViewName("");
-            modelAndView.addObject("order");
+            modelAndView.addObject("order",order);
         }else {
-
+			//不成功不进入
         }
-
-
-
 		return modelAndView;
+
 	}
 	
 	/**
@@ -114,6 +111,8 @@ public class OrderController {
 	 * @return
 	 */
 	public String payOrder(Order order){
+
+
 		return "支付完成";
 	}
 
@@ -171,8 +170,5 @@ public class OrderController {
 		return (int) ((date2.getTime()-date1.getTime())/1000/60/60/24);
 	}
 
-	@Test
-	public void test() throws ParseException {
-		System.out.println(getday("2019-06-18 12:30","2019-06-20 12:30"));
-	}
+
 }

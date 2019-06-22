@@ -20,10 +20,11 @@ public class OrderServiceImpl implements OrderService {
 	@Resource
 	private ItemDAO itemDAO;
 
-	@Override
+
 	/**
 	 * 根据查询条件展示所有订单
 	 */
+	@Override
 	public List<Order> showAllOrder(Order order) {
 		// 先判断用户是否传入姓名，若传入了姓名，则根据姓名查询到该UserInfo
 		UserInfo userInfo = order.getUserInfo();
@@ -31,10 +32,11 @@ public class OrderServiceImpl implements OrderService {
 		return allOrder;
 	}
 
-	@Override
+
 	/**
 	 * 生成订单,并生成对应的订单项
 	 */
+	@Override
 	public boolean createOrder(Order order) {
 		//新增order
 		boolean flag = orderDAO.creatOrder(order);
@@ -48,22 +50,20 @@ public class OrderServiceImpl implements OrderService {
 				itemDAO.createItems(item);
 			}
 		}
-
 		return flag;
 	}
 
-	@Override
 	/**
 	 * 支付订单
+	 * @param order
+	 * @return
 	 */
+	@Override
 	public boolean payOrder(Order order) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
-	public Integer queryOrderId(Order order) {
-		return orderDAO.queryOrderId(order);
-	}
+
 
 }
