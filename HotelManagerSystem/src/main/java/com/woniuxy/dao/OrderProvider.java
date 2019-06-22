@@ -46,15 +46,21 @@ public class OrderProvider {
         return sql.toString();
     }
 
-    @Test
-    public void test(){
-        Order order = new Order();
-        User user = new User();
-        UserInfo userInfo =new UserInfo();
-        userInfo.setUser_info_name("小");
-        user.setUid(1);
-        order.setUser(user);
-        order.setUserInfo(userInfo);
-        System.out.println(query(order));
-    }
+    /**
+     * 动态修改
+     * @param order
+     * @return
+     */
+   public String update(Order order){
+        SQL sql = new SQL().UPDATE(order_table);
+        if (order.getUserInfo()!=null){
+            sql.SET("user_info_id="+order.getUserInfo().getUser_info_id());
+        }
+        if (order.getOrder_message()!=null&&order.getOrder_message().length()>0){
+            sql.SET("order_message='"+order.getOrder_message()+"'");
+        }
+        sql.WHERE("order_id="+order.getOrder_id());
+        sql.WHERE("flag=0");
+        return sql.toString();
+   }
 }

@@ -155,7 +155,13 @@ public class OrderController {
 	 */
 	public String xgOrder(Order order){
 		//修改用户信息的时候
+		//修改的用户信息需要去数据库中查询对应的id，没有则创建
 
+
+
+
+		//动态修改留言或者用户信息
+		orderService.updateOrder(order);
 		return "修改";
 	}
 
