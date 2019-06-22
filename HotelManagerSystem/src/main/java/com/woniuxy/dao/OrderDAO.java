@@ -49,12 +49,28 @@ public interface OrderDAO {
 	"</script>"	
 	})
 	public List<Order> showAllOrder(Order order);
-	
-	//创建订单
-	@Insert("insert into t_order(user_info_id,order_number,order_createtime,order_totalpay,order_deposit) "
-	+ "values (#{user_info_id},#{order_number},#{order_createtime},#{order_totalpay},#{order_deposit}")
+
+
+
+	/**
+	 * 创建订单
+	 * @param order
+	 * @return
+	 */
+	@Insert("insert into t_order(user_id,user_info_id,order_number,order_createtime,order_payment,order_totalpay,order_deposit,order_message) "
+	+ "values (#{user_id},#{user_info_id},#{order_number},#{order_createtime},#{order_payment},#{order_totalpay},#{order_deposit},#{order_message}")
 	public boolean creatOrder(Order order);
-	
+
+	/**
+	 * 根据唯一的订单编号  获取订单id
+	 * @param order
+	 * @return
+	 */
+	@Select("select order_id from t_order where order_number=#{order_number}")
+	public Integer queryOrderId(Order order);
+
+
+
 	//当支付完成后，更新订单项中的支付编号
 	@Update("update t_order set order_paynumber=#{1},order_state=1 where order_number=#{0}")
 	public boolean payOreder(String order_number,String order_paynumber);

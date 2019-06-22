@@ -61,4 +61,9 @@ public class OrderServiceImpl implements OrderService {
 		return false;
 	}
 
+	@Override
+	public Integer queryOrderId(Order order) {
+		return orderDAO.queryOrderId(order);
+	}
+
 }

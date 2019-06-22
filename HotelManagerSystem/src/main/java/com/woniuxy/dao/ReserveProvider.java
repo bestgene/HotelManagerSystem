@@ -64,7 +64,7 @@ public class ReserveProvider {
      */
     public String update(Reserve reserve){
         SQL sql = new SQL().UPDATE(table);
-        if (reserve.getUserInfo().getUser_info_id()!=null&&reserve.getUserInfo().getUser_info_id()>0){
+       /* if (reserve.getUserInfo().getUser_info_id()!=null&&reserve.getUserInfo().getUser_info_id()>0){
             sql.SET("user_info_id="+reserve.getUserInfo().getUser_info_id());
         }
         if (reserve.getReserve_checkintime()!=null&&reserve.getReserve_checkintime().length()>0){
@@ -94,7 +94,7 @@ public class ReserveProvider {
         if (reserve.getReserve_message() != null && reserve.getReserve_message().length()>0){
             sql.SET("reserve_message='"+reserve.getReserve_message()+"'");
         }
-        sql.SET("flag=0");
+        sql.SET("flag=0");*/
 
         return sql.toString();
     }

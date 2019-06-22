@@ -15,7 +15,6 @@ public class Reserve implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	//预定信息id
-
     private Integer reserve_id;
     //预定信息编号
     private String reserve_idnumber;
@@ -23,7 +22,7 @@ public class Reserve implements Serializable {
     private Integer user_id;
     //用户信息
     private UserInfo userInfo;
-    //预定房间
+    //房间信息
     private List<House> houses;
     //预定入住时间
     private String reserve_checkintime;
@@ -35,36 +34,14 @@ public class Reserve implements Serializable {
     private String reserve_canceltime;
     //是否自动取消预定
     private Integer reserve_isauto;
-    //预定押金
-    private Integer reserve_deposit;
     //支付方式
     private Integer reserve_payment;
-    //支付金额
-    private BigDecimal reserve_paynumber;
+
     //客户留言
     private String reserve_message;
-    //软栓除  0：预定状态  1：失效状态
-    private Integer flag;
 
-    @Override
-    public String toString() {
-        return "Reserve{" +
-                "reserve_id=" + reserve_id +
-                ", reserve_idnumber='" + reserve_idnumber + '\'' +
-                ", user_id=" + user_id +
-                ", userInfo=" + userInfo +
-                ", houses=" + houses +
-                ", reserve_checkintime='" + reserve_checkintime + '\'' +
-                ", reserve_checkouttime='" + reserve_checkouttime + '\'' +
-                ", reserve_arrivetime='" + reserve_arrivetime + '\'' +
-                ", reserve_canceltime='" + reserve_canceltime + '\'' +
-                ", reserve_isauto=" + reserve_isauto +
-                ", reserve_deposit=" + reserve_deposit +
-                ", reserve_payment=" + reserve_payment +
-                ", reserve_paynumber=" + reserve_paynumber +
-                ", reserve_message='" + reserve_message + '\'' +
-                ", flag=" + flag +
-                '}';
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getReserve_id() {
@@ -97,14 +74,6 @@ public class Reserve implements Serializable {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
-    }
-
-    public List<House> getHouses() {
-        return houses;
-    }
-
-    public void setHouses(List<House> houses) {
-        this.houses = houses;
     }
 
     public String getReserve_checkintime() {
@@ -147,13 +116,7 @@ public class Reserve implements Serializable {
         this.reserve_isauto = reserve_isauto;
     }
 
-    public Integer getReserve_deposit() {
-        return reserve_deposit;
-    }
 
-    public void setReserve_deposit(Integer reserve_deposit) {
-        this.reserve_deposit = reserve_deposit;
-    }
 
     public Integer getReserve_payment() {
         return reserve_payment;
@@ -163,13 +126,7 @@ public class Reserve implements Serializable {
         this.reserve_payment = reserve_payment;
     }
 
-    public BigDecimal getReserve_paynumber() {
-        return reserve_paynumber;
-    }
 
-    public void setReserve_paynumber(BigDecimal reserve_paynumber) {
-        this.reserve_paynumber = reserve_paynumber;
-    }
 
     public String getReserve_message() {
         return reserve_message;
@@ -179,11 +136,11 @@ public class Reserve implements Serializable {
         this.reserve_message = reserve_message;
     }
 
-    public Integer getFlag() {
-        return flag;
+    public List<House> getHouses() {
+        return houses;
     }
 
-    public void setFlag(Integer flag) {
-        this.flag = flag;
+    public void setHouses(List<House> houses) {
+        this.houses = houses;
     }
 }

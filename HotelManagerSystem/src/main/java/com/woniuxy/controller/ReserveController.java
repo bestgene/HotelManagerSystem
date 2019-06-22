@@ -1,9 +1,6 @@
 package com.woniuxy.controller;
 
-import com.woniuxy.pojo.House;
-import com.woniuxy.pojo.Reserve;
-import com.woniuxy.pojo.User;
-import com.woniuxy.pojo.UserInfo;
+import com.woniuxy.pojo.*;
 import com.woniuxy.service.ReserveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -49,6 +47,8 @@ public class ReserveController {
         for (int i = 0;i<reserve.getHouses().size();i++){
             reserveService.addReserveIdAndHouseId(newreserve,reserve.getHouses().get(i));
         }
+
+
         return "新增成功";
     }
 

@@ -10,12 +10,12 @@ import com.woniuxy.pojo.Item;
 
 public interface ItemDAO {
 	/**
-	 * 创建订单项
+	 * 新增订单项
 	 * @param item
 	 * @return
 	 */
-	@Insert("insert into t_item(item_checkintime,item_checkouttime,item_checkinday,item_deposit,item_deposit)"
-			+ "values (#{item_checkintime},#{item_checkouttime},#{item_checkinday},#{item_deposit},#{item_deposit}")
+	@Insert("insert into t_item(house_id,order_id,item_checkintime,item_checkouttime,item_checkinday,item_arrivetime,item_canceltime,item_isauto)"
+			+ "values (#{house.house_id},#{order_id},#{item_checkintime},#{item_checkouttime},#{item_checkinday},#{item_arrivetime},#{item_canceltime},#{item_isauto}")
 	public boolean createItems(Item item);
 	
 	/**

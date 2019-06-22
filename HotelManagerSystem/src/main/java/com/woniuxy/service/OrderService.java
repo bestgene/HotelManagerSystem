@@ -23,4 +23,7 @@ public interface OrderService {
 	 * @return
 	 */
 	public boolean payOrder(Order order);
+
+
+	public Integer queryOrderId(Order order);
 }
