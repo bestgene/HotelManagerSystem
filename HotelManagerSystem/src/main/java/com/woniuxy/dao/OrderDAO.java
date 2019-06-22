@@ -3,14 +3,8 @@ package com.woniuxy.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
-import org.apache.ibatis.annotations.One;
-import org.apache.ibatis.annotations.Many;
 
 import com.woniuxy.pojo.Order;
 
@@ -33,21 +27,7 @@ public interface OrderDAO {
 		@Result(column="order_id",property="items",many=@Many(select="bb")),
 		@Result(column="flag",property="flag")
 	})
-	@Select({"<script>",
-		"select * from t_order",
-		"<where>",
-			"<if test='userInfo!=null and userInfo.length()!=0'>",
-			"user_info_id=#{userInfo.user_info_id}",
-			"</if>",
-			"<if test='order_createtime!=null and order_createtime.length()!=0'>",
-			"and order_createtime=#{order_createtime}",
-			"</if>",
-			"<if test='order_state!=null and order_state.length()!=0'>",
-			"and order_state=#{order_state}",
-			"</if>",
-		"</where>",
-	"</script>"	
-	})
+	@SelectProvider(type = OrderProvider.class,method = "query")
 	public List<Order> showAllOrder(Order order);
 
 
