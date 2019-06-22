@@ -26,4 +26,7 @@ public interface OrderService {
 
 
 	public Integer queryOrderId(Order order);
+
+
+
 }

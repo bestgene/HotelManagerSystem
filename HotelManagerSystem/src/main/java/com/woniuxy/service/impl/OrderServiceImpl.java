@@ -36,19 +36,19 @@ public class OrderServiceImpl implements OrderService {
 	 * 生成订单,并生成对应的订单项
 	 */
 	public boolean createOrder(Order order) {
+		//新增order
 		boolean flag = orderDAO.creatOrder(order);
-		// 若订单生成成功，继续生成订单项
-		if (flag) {
-			List<Item> items = order.getItems();
-			for (Item item : items) {
-				// 生成对应的订单项
-				flag = itemDAO.createItems(item);
-				// 并在中间表生成对应信息（订单-订单项）
-				Integer order_id = order.getOrder_id();
-				Integer item_id = item.getItem_id();
-				flag = itemDAO.createOrderItem(order_id, item_id);
+		if (flag){
+			//获取新生成的orderid
+			Integer order_id = orderDAO.queryOrderId(order);
+			// 若订单生成成功，继续生成订单项
+			for (Item item:order.getItems()
+			) {
+				item.setOrder_id(order_id);
+				itemDAO.createItems(item);
 			}
 		}
+
 		return flag;
 	}
 

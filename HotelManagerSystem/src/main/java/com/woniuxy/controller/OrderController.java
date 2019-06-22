@@ -48,7 +48,9 @@ public class OrderController {
 	 * @return
 	 */
 	public ModelAndView createOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
-		//1.创建 订单表
+        ModelAndView modelAndView = new ModelAndView();
+
+	    //1.创建 订单表
 		//order表赋值
 		Order order = reserveToOrderAndItem(reserve);
 		//获取session中的用户
@@ -63,7 +65,7 @@ public class OrderController {
 
 		//计算金额
 		//更具房间计算初步金额
-		BigDecimal totalpay = new BigDecimal(0);
+		BigDecimal totalpay = order.getOrder_totalpay();
 		//查询计费表，线上是否打折，线上打折额度,sql语句
 		Charging charging = new Charging();
 		charging.setCharging_ratio((double) 1);
@@ -91,16 +93,19 @@ public class OrderController {
 
 		System.out.println(order);
 
-		//新增order
-		orderService.createOrder(order);
+		//新增order、item
+		boolean flag = orderService.createOrder(order);
+        if (flag){
+            //成功进入支付页面
+            modelAndView.setViewName("");
+            modelAndView.addObject("order");
+        }else {
 
-		//获取新生成的orderid
-		Integer order_id = orderService.queryOrderId(order);
+        }
 
 
 
-
-		return new ModelAndView();
+		return modelAndView;
 	}
 	
 	/**
@@ -138,7 +143,7 @@ public class OrderController {
 		Integer day = getday(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime());
 		for (House house:reserve.getHouses()
 		) {
-
+            totalpay = totalpay.add(new BigDecimal(String.valueOf(house.getHouseType().getHouse_type_price())));
 			Item item = new Item();
 			item.setHouse(house);
 			item.setItem_checkintime(reserve.getReserve_checkintime());
@@ -151,6 +156,8 @@ public class OrderController {
 		}
 		//设置订单项
 		order.setItems(items);
+		//金额初步赋值
+        order.setOrder_totalpay(totalpay);
 		return order;
 	}
 
