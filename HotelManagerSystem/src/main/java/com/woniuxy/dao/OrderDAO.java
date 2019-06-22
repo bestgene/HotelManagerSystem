@@ -30,7 +30,7 @@ public interface OrderDAO {
 		@Result(column="order_state",property="order_state"),
 		@Result(column="order_totalpay",property="order_totalpay"),
 		@Result(column="order_deposit",property="order_deposit"),
-		@Result(column="order_id",property="items",many=@Many(select="bb")),
+		@Result(column="order_id",property="items",many=@Many(select="com.woniuxy.dao.ItemDAO.findItemsByOrderId")),
 		@Result(column="flag",property="flag")
 	})
 	@Select({"<script>",

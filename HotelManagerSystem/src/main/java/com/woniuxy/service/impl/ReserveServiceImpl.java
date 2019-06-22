@@ -6,6 +6,8 @@ import com.woniuxy.service.ReserveService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 import javax.annotation.Resource;
 
 @Service("reserveService")
@@ -27,4 +29,5 @@ public class ReserveServiceImpl implements ReserveService {
     public void addReserveIdAndHouseId(Integer reserve_id, Integer house_id) {
         reserveDAO.addReserveIdAndHouseId(reserve_id,house_id);
     }
+    
 }
