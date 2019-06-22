@@ -25,7 +25,26 @@ public interface OrderService {
 	public boolean payOrder(Order order);
 
 
+	/**
+	 * 通过订单编号查询订单
+	 * @param order
+	 * @return
+	 */
+	public Order queryOrderByOrderNumber(Order order);
 
 
+	/**
+	 * 删除订单
+	 * @param order
+	 * @return
+	 */
+	public boolean deleteOrder(Order order);
+
+	/**
+	 * 修改留言或者用户信息
+	 * @param order
+	 * @return
+	 */
+	public boolean updateOrder(Order order);
 
 }

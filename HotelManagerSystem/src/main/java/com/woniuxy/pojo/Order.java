@@ -14,6 +14,8 @@ public class Order implements Serializable{
 	private User user;
 	//该订单的用户具体信息
 	private UserInfo userInfo;
+	//订单项
+	private List<Item> items;
 	//订单编号
 	private String order_number;
 	//订单的支付编号
@@ -32,8 +34,6 @@ public class Order implements Serializable{
 	private String order_message;
 	//订单的状态
 	private Integer order_state;
-	//订单项
-	private List<Item> items;
 	private Integer flag;
 
 

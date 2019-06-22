@@ -2,9 +2,7 @@ package com.woniuxy.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import com.woniuxy.pojo.Item;
 
@@ -18,14 +16,7 @@ public interface ItemDAO {
 			+ "values (#{house.house_id},#{order_id},#{item_checkintime},#{item_checkouttime},#{item_checkinday},#{item_arrivetime},#{item_canceltime},#{item_isauto}")
 	public boolean createItems(Item item);
 	
-	/**
-	 * 创建订单-订单项中间表
-	 * @param order_id
-	 * @param item_id
-	 * @return
-	 */
-	@Insert("insert into t_item_order(order_id,item_id) values (#{0},#{1})")
-	public boolean createOrderItem(int order_id,int item_id);
+
 	
 	/**
 	 * 修改订单项
@@ -45,7 +36,21 @@ public interface ItemDAO {
 	 * @param OrderId
 	 * @return
 	 */
-	@Select("select item_id,item_checkouttime,item_checkintime,item_checkinday,item_deposit,house_id from t_item_order "
-			+ "inner join t_item on t_item_order.item_id=t_item.item_id where order_id=#{OrderId}")
+	@Results({
+			@Result(id = true,column = "item_id",property = "item_id"),
+			@Result(column = "order_id",property = "order_id"),
+			@Result(column = "house_id",property = "house",
+				one = @One(
+						select = "根据房间id查询房间"
+				)),
+			@Result(column = "item_checkintime",property = "item_checkintime"),
+			@Result(column = "item_checkouttime",property = "item_checkouttime"),
+			@Result(column = "item_checkinday",property = "item_checkinday"),
+			@Result(column = "item_arrivetime",property = "item_arrivetime"),
+			@Result(column = "item_canceltime",property = "item_canceltime"),
+			@Result(column = "item_isauto",property = "item_isauto"),
+			@Result(column = "flag",property = "flag")
+	})
+	@Select("select * from t_item where order_id=#{order_id}}")
 	public List<Item> findItemsByOrderId(int OrderId);
 }

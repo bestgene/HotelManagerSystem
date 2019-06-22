@@ -26,10 +26,8 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public List<Order> showAllOrder(Order order) {
-		// 先判断用户是否传入姓名，若传入了姓名，则根据姓名查询到该UserInfo
-		UserInfo userInfo = order.getUserInfo();
-		List<Order> allOrder = orderDAO.showAllOrder(order);
-		return allOrder;
+
+		return orderDAO.showAllOrder(order);
 	}
 
 
@@ -42,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
 		boolean flag = orderDAO.creatOrder(order);
 		if (flag){
 			//获取新生成的orderid
-			Integer order_id = orderDAO.queryOrderId(order);
+			Integer order_id = orderDAO.queryOrderId(order).getOrder_id();
 			// 若订单生成成功，继续生成订单项
 			for (Item item:order.getItems()
 			) {
@@ -64,6 +62,21 @@ public class OrderServiceImpl implements OrderService {
 		return false;
 	}
 
+	@Override
+	public Order queryOrderByOrderNumber(Order order) {
+		return orderDAO.queryOrderId(order);
+	}
+
+	@Override
+	public boolean deleteOrder(Order order) {
+
+		return orderDAO.deleteOrder(order);
+	}
+
+	@Override
+	public boolean updateOrder(Order order) {
+		return orderDAO.updateOrder(order);
+	}
 
 
 }

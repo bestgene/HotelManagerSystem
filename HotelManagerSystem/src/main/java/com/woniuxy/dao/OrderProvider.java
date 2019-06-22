@@ -1,7 +1,10 @@
 package com.woniuxy.dao;
 
 import com.woniuxy.pojo.Order;
+import com.woniuxy.pojo.User;
+import com.woniuxy.pojo.UserInfo;
 import org.apache.ibatis.jdbc.SQL;
+import org.junit.Test;
 
 public class OrderProvider {
 
@@ -19,23 +22,39 @@ public class OrderProvider {
      */
     public String query(Order order) {
         SQL sql = new SQL().SELECT("*").FROM(order_table+",t_user_info ")
-                .WHERE("t_order.user_info_id=t_user_info.user_info_id ");;
-        if (order.getUser().getUid() != null && order.getUser().getUid() > 0) {
-            sql.WHERE("t_order.user_id=" + order.getUser().getUid());
+                .WHERE("t_order.user_info_id=t_user_info.user_info_id ");
+        if (order.getUser()!=null) {
+            if (order.getUser().getUid() != null && order.getUser().getUid() > 0) {
+                sql.WHERE("t_order.user_id=" + order.getUser().getUid());
+            }
         }
-        if (order.getUserInfo().getUser_info_id() != null && order.getUserInfo().getUser_info_id() > 0) {
-            sql.WHERE("t_user_info.user_info_id='" + order.getUserInfo().getUser_info_id() + "'");
-        }
-        if (order.getUserInfo().getUser_info_tel() != null && order.getUserInfo().getUser_info_tel().length() > 0) {
-            sql.WHERE("t_user_info.user_info_tel='" + order.getUserInfo().getUser_info_tel() + "'");
-        }
-        if (order.getUserInfo().getUser_info_idcard() != null && order.getUserInfo().getUser_info_idcard().length() > 0) {
-            sql.WHERE("t_user_info.user_info_idcard='" + order.getUserInfo().getUser_info_idcard() + "'");
-        }
-        if (order.getUserInfo().getUser_info_name() != null && order.getUserInfo().getUser_info_name().length() > 0) {
-            sql.WHERE("t_user_info.user_info_name like '%" + order.getUserInfo().getUser_info_name() + "%'");
+        if (order.getUserInfo()!=null) {
+            if (order.getUserInfo().getUser_info_id() != null && order.getUserInfo().getUser_info_id() > 0) {
+                sql.WHERE("t_user_info.user_info_id='" + order.getUserInfo().getUser_info_id() + "'");
+            }
+            if (order.getUserInfo().getUser_info_tel() != null && order.getUserInfo().getUser_info_tel().length() > 0) {
+                sql.WHERE("t_user_info.user_info_tel='" + order.getUserInfo().getUser_info_tel() + "'");
+            }
+            if (order.getUserInfo().getUser_info_idcard() != null && order.getUserInfo().getUser_info_idcard().length() > 0) {
+                sql.WHERE("t_user_info.user_info_idcard='" + order.getUserInfo().getUser_info_idcard() + "'");
+            }
+            if (order.getUserInfo().getUser_info_name() != null && order.getUserInfo().getUser_info_name().length() > 0) {
+                sql.WHERE("t_user_info.user_info_name like '%" + order.getUserInfo().getUser_info_name() + "%'");
+            }
         }
         sql.WHERE("t_order.flag=0");
         return sql.toString();
+    }
+
+    @Test
+    public void test(){
+        Order order = new Order();
+        User user = new User();
+        UserInfo userInfo =new UserInfo();
+        userInfo.setUser_info_name("小");
+        user.setUid(1);
+        order.setUser(user);
+        order.setUserInfo(userInfo);
+        System.out.println(query(order));
     }
 }

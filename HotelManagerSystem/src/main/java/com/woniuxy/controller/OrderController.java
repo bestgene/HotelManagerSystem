@@ -37,9 +37,10 @@ public class OrderController {
 	 * @return
 	 */
 	public List<Order> showAllOrder(Order order){
-		List<Order> allOrder = orderService.showAllOrder(order);	
-		System.out.println(allOrder);
-		return allOrder;
+
+
+
+		return orderService.showAllOrder(order);
 	}
 	
 	/**
@@ -47,11 +48,16 @@ public class OrderController {
 	 * @param reserve
 	 * @return
 	 */
+	@RequestMapping("/createOrder")
 	public ModelAndView createOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
         ModelAndView modelAndView = new ModelAndView();
 	    //1.创建 订单表
 		//order表赋值
 		Order order = reserveToOrderAndItem(reserve);
+		//设置用户信息
+		//先查询输入用户信息的id，如果没有则新创建一个对应已手机号为账户的账户，以及新增一条用户信息表
+		//并且获取这个新增的用户信息id，最后给order赋值，这里应该进行注释操作，而不是直接赋值
+		order.setUserInfo(reserve.getUserInfo());
 		//获取session中的用户
 		User user = (User) request.getSession().getAttribute("user");
 		user = new User();
@@ -110,11 +116,52 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
+	@RequestMapping("/payOrder")
+	@ResponseBody
 	public String payOrder(Order order){
 
-
+		//未完成需要取消订单
 		return "支付完成";
 	}
+
+	/**
+	 * 取消预定，这里必须是已支付后可见的订单
+	 * @return
+	 */
+	public String qcOrder(Order order){
+		//先查询这个订单是否存在，并且为正常预定状态
+		order = orderService.queryOrderByOrderNumber(order);
+		//存在
+		if (order!=null&&order.getOrder_state()==1){
+			//修改订单状态为取消
+			orderService.deleteOrder(order);
+
+			//然后退钱
+
+			return "取消预定成功";
+		}else {
+			//提示取消失败
+			return "取消预定失败";
+		}
+
+	}
+
+
+	/**
+	 * 修改预定
+	 * 如果修改日期、房间，先取消，然后再生成新的订单
+	 * 可以只修改留言、用户信息
+	 * @return
+	 */
+	public String xgOrder(Order order){
+		//修改用户信息的时候
+
+		return "修改";
+	}
+
+
+
+
 
 	/**
 	 * 信息装换
@@ -123,8 +170,7 @@ public class OrderController {
 	 */
 	public Order reserveToOrderAndItem(Reserve reserve) throws ParseException {
 		Order order = new Order();
-		//设置用户信息
-		order.setUserInfo(reserve.getUserInfo());
+
 		//设置订单编号
 		String order_number = System.currentTimeMillis()+""+new Random().nextInt(9000000)+1000000;
 		order.setOrder_number(order_number);
