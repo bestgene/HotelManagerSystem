@@ -44,11 +44,15 @@ public class HouseController {
 		this.houseService = houseService;
 	}
 	
-	@PostMapping("/test/{startTime}/{endTime}")
-	@ResponseBody
-	public Map<Integer, List<House>> get(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) throws ParseException{
-		Map<Integer, List<House>> allAvailableRooms = allAvailableRooms(startTime, endTime);
-		return allAvailableRooms;
+	//前端选择时间跳转到房间选择页面
+	@PostMapping("/forward/{startTime}/{endTime}")
+	public ModelAndView get(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) throws ParseException{
+		ModelAndView model = new ModelAndView();
+		List<String> date = new ArrayList<String>();
+		date.add(startTime);
+		date.add(endTime);
+		model.addObject("date", date);
+		return model;
 	}
 
 	@PostMapping("/allSingleType/{startTime}/{endTime}/{house_type_id}")
