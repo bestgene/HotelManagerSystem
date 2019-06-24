@@ -1,5 +1,6 @@
 package com.woniuxy.controller;
 
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -203,9 +204,11 @@ public class OrderController {
 				totalpay = totalpay.multiply(new BigDecimal(charging.getOnline_ratio()));
 			}
 		}
+		
+		
 		//金额再乘以会员打折比率***********
 		//totalpay=XXXXXXX
-		totalpay = totalpay.multiply();
+		totalpay = totalpay.multiply(totalpay);
 		//全场打折 0不打折，1打折
 		if (charging.getCharging_isqc()==1){
 			totalpay = totalpay.multiply(new BigDecimal(charging.getCharging_ratio()));
