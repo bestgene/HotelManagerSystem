@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>预定标准间</title>
+		<link rel="stylesheet" href="css/booknew.css" />
+		<link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+		<script src="js/jquery.min.js"></script>
+		<script src="../layui/layui.js"></script>
+	</head>
+	<body>
+	<div id="wrapper">		<ul>
+			<li>预定信息</li>
+			<li id="roomtype" value="1">房型：标准间</li>
+			<hr />
+			<li>入住信息</li>
+			<li>
+			
+				<label>入住人姓名&nbsp;</label><input type="text" id="uname"><br>
+				<label>手机号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="tel"><br>
+	
+       
+    <div class="layui-inline">
+      <label class="layui-form-label" >日期范围</label>
+      <div class="layui-input-inline">
+        <input type="text" class="layui-input" id="test6" placeholder=" - ">
+      </div>
+    </div>
+      
+  
+    
+			<input type="button" name="" id="btn" value="提交订单" />
+			
+			</li>
+		</ul>
+		</div>
+		
+<script type="text/javascript">
+layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  laydate.render({
+		    elem: '#test6'
+		    ,range: true,
+		    min: 0,
+		  
+			done: function(value){
+		         //得到日期生成的值，如：2017-08-18
+				$("#btn").click(function () {
+					debugger;
+						var typeid=$("#roomtype").val();
+						var uname=$("#uname").val();
+						var tel=$("#tel").val();	
+						$.get(
+						"../booknews",
+						{"typeid":typeid,"uname":uname,"tel":tel,"date":value},
+						function(data) {
+							 if (data=="预定成功！") {
+								alert(data);					
+								location.href = "index.html";
+							}else {
+								alert("此类房间已经售空！");
+								location.href = "index.html";
+							} 
+							
+							
+							
+						});
+					});
+		         
+		         
+		      }
+		    
+		  });
+	});
+
+
+
+</script>
+  </body>
+</html>

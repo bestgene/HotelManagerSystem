@@ -5,9 +5,16 @@ import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class User implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer user_id;  //用户id
 	@NotBlank(message="账号不能为空")
 	private String user_acc;  //账号
@@ -83,3 +90,4 @@ public class User implements Serializable{
 	
 	
 }
+

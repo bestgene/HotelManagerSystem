@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Vip implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer vip_id;
 	private String vip_number;
 	private Integer user_id;

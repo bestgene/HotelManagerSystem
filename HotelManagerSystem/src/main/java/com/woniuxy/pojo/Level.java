@@ -1,14 +1,18 @@
 package com.woniuxy.pojo;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Level implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer level_id;
 	private Integer level_quota;
 	private String level_name;
 	private BigDecimal  level_discount;
 	private Integer flag;
+
 	public Integer getLevel_id() {
 		return level_id;
 	}

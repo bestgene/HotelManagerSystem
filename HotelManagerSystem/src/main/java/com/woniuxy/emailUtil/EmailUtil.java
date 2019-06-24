@@ -1,3 +1,4 @@
+
 package com.woniuxy.emailUtil;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -74,4 +75,5 @@ public class EmailUtil implements Runnable{
 	}
 
 }
+
 

@@ -8,8 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.dao.UserDAO;
+
+import com.woniuxy.pojo.Role;
+
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.User;
+import com.woniuxy.pojo.UserInfo;
+
+import com.woniuxy.pojo.Vip;
+import com.woniuxy.pojo.telpojo;
 import com.woniuxy.pojo.Vip;
 import com.woniuxy.pojo.telpojo;
 import com.woniuxy.service.UserService;
@@ -40,9 +47,36 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
+
+	public User findUserByAcc(String user_acc) {
+		return userDAO.findUserByAcc(user_acc);
+
+	}
+
+	@Override
+
+	public UserInfo getInfoByUid(Integer user_id) {
+		return userDAO.getInfoByUid(user_id);
+	}
+
+	@Override
+	public void updateInfo(UserInfo userInfo) {
+		userDAO.updateInfo(userInfo);
+		
+	}
+
+	@Override
+	public Role selectRoleAndPerms(Integer role_id) {
+		return userDAO.selectRoleAndPerms(role_id);
+	}
+
+	
+		
+
 	public User findUserByUid(User user) {
 		// 通过用户user_acc查询用户
 		return userDAO.findUserByUid(user);
+
 	}
 
 	@Override
@@ -80,6 +114,13 @@ public class UserServieImpl implements UserService {
 	public Level findQuatoBylevelId(Vip vip) {
 		// TODO Auto-generated method stub
 		return userDAO.findQuatoBylevelId(vip);
+	}
+
+	@Override
+	public void deleteUserByUid(Integer user_id) {
+		// TODO Auto-generated method stub
+		userDAO.deleteUserByUid(user_id);
+
 	}
 
 	
