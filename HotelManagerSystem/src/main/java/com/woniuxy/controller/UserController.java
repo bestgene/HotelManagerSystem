@@ -1,10 +1,11 @@
 package com.woniuxy.controller;
 
-import java.awt.List;
+
+
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,7 +15,6 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.woniuxy.pojo.User;
@@ -60,7 +60,7 @@ public class UserController {
 		}
 		return "test.html";
 	}
-	@RequestMapping("/getinfo")
+	@RequestMapping("/getinfo")   //获取当前用户的个人信息
 	public String getInfo(ModelMap map){
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
@@ -71,7 +71,7 @@ public class UserController {
 		return "info.html";
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/update")   //更新个人信息
 	public String updateInfo(UserInfo userInfo){
 		Subject currentUser = SecurityUtils.getSubject();
 		Session session = currentUser.getSession();
@@ -82,9 +82,16 @@ public class UserController {
 	}
 	
 	@RequiresPermissions(value={"user:delete"})
-	@RequestMapping("/delete")
+	@RequestMapping("/delete")    //管理员删除其他人账号：根据user_id
 	public String deleteUser(Integer user_id) throws Exception{
 		userService.deleteUserByUid(user_id);
 		return "test.html";
+	}
+	
+	@RequiresPermissions(value={"user:showall"})
+	@RequestMapping("showall")
+	public String showAllUser(){
+		List<User> users = userService.allUser();
+		return null;
 	}
 }
