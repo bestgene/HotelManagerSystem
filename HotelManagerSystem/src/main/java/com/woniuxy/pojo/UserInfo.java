@@ -3,7 +3,12 @@ package com.woniuxy.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class UserInfo implements Serializable {
+public class UserInfo implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer user_info_id;
 	private String user_info_name;
 	private String user_info_tel;

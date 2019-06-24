@@ -61,7 +61,7 @@ public class OrderController {
 		//获取session中的用户
 		User user = (User) request.getSession().getAttribute("user");
 		user = new User();
-		user.setUid(1);
+		user.setUser_id(1);
 		//设置操作角色
 		order.setUser(user);
 		//判断操作用户的角色
