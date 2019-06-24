@@ -70,7 +70,6 @@ public class UserRealm extends AuthorizingRealm{
 		System.out.println("正在认证");
 		//获取账号
 
-
 		String user_acc = (String)token.getPrincipal();
 		User user = userService.findUserByAcc(user_acc);
 

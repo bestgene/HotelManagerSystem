@@ -12,14 +12,15 @@ import com.woniuxy.dao.UserDAO;
 import com.woniuxy.pojo.Role;
 
 import com.woniuxy.pojo.Level;
+
 import com.woniuxy.pojo.User;
+
 import com.woniuxy.pojo.UserInfo;
 
 import com.woniuxy.pojo.Vip;
 import com.woniuxy.pojo.Telpojo;
-import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.service.UserService;
+
 
 @Service("userService")
 @Transactional		//添加失败
@@ -54,7 +55,6 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
-
 	public UserInfo getInfoByUid(Integer user_id) {
 		return userDAO.getInfoByUid(user_id);
 	}
@@ -121,8 +121,10 @@ public class UserServieImpl implements UserService {
 		// TODO Auto-generated method stub
 		userDAO.deleteUserByUid(user_id);
 
+
 	}
 
+	
 	
 
 }

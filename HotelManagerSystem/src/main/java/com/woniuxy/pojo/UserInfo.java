@@ -2,7 +2,6 @@ package com.woniuxy.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
 public class UserInfo implements Serializable{
 
 	/**
@@ -16,6 +15,7 @@ public class UserInfo implements Serializable{
 	private BigDecimal user_info_cost;
 	private Integer user_id;
 	private Integer flag;
+
 	public Integer getUser_info_id() {
 		return user_info_id;
 	}

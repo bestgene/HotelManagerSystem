@@ -17,14 +17,17 @@ import com.woniuxy.pojo.Perm;
 import com.woniuxy.pojo.Role;
 
 import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.mapping.FetchType;
+import org.springframework.stereotype.Repository;
 
+import com.woniuxy.pojo.Perm;
+import com.woniuxy.pojo.Role;
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.User;
-
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
 import com.woniuxy.pojo.Telpojo;
-
 import com.woniuxy.pojo.Vip;
 import com.woniuxy.pojo.Telpojo;
 public interface UserDAO {
@@ -62,7 +65,6 @@ public interface UserDAO {
 				)
 	})
 	public Role selectRoleAndPerms(Integer role_id);
-	
 	@Select("select * from t_user where user_acc=#{user_acc}")
 	public User findUserByUid(User user);
 	
@@ -86,5 +88,4 @@ public interface UserDAO {
 	//通过会员等级查询会员的消费额度！
 	@Select("select * from t_level where level_id=#{level_id}")
 	public Level findQuatoBylevelId(Vip vip);
-	
 }
