@@ -14,7 +14,7 @@ public class Charging implements Serializable{
 	//线上打折比例
 	private Double online_ratio;
 	//金额是否取整
-	private Integer charging_isqz;
+	private Integer charging_isqzdz;
 	private Integer flag;
 
 	@Override
@@ -25,7 +25,7 @@ public class Charging implements Serializable{
 				", charging_ratio=" + charging_ratio +
 				", online_isqc=" + online_isqc +
 				", online_ratio=" + online_ratio +
-				", charging_isqz=" + charging_isqz +
+				", charging_isqz=" + charging_isqzdz +
 				", flag=" + flag +
 				'}';
 	}
@@ -70,12 +70,12 @@ public class Charging implements Serializable{
 		this.online_ratio = online_ratio;
 	}
 
-	public Integer getCharging_isqz() {
-		return charging_isqz;
+	public Integer getCharging_isqzdz() {
+		return charging_isqzdz;
 	}
 
-	public void setCharging_isqz(Integer charging_isqz) {
-		this.charging_isqz = charging_isqz;
+	public void setCharging_isqzdz(Integer charging_isqzdz) {
+		this.charging_isqzdz = charging_isqzdz;
 	}
 
 	public Integer getFlag() {
@@ -85,4 +85,5 @@ public class Charging implements Serializable{
 	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
+
 }
