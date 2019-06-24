@@ -40,8 +40,9 @@ public class WebSocketController {
 	public void onClose(@PathParam("userName") String userName, Session session) {
 		// 将当前用户从map中移除 注销
 		WebSocketUtil.MESSAGEMAP.remove(userName);
+		String message = "用户:" + userName + "离开聊天室";		
 		// 群发消息
-		WebSocketUtil.sendMessageToAll("用户:" + userName + "离开聊天室");
+		WebSocketUtil.sendMessageToAll(message);
 		// 关闭session
 		try {
 			session.close();

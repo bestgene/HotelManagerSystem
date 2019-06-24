@@ -17,7 +17,7 @@ public interface HouseDAO {
 	@Select("select * from t_house where house_type_id = #{house_type_id} and house_state=0 and flag = 0")
 	@Results({
 		@Result(id=true,column="house_id",property="house_id"),
-		@Result(column="house_name",property="house_name"),
+		@Result(column="house_name",property="house_name"), 
 		@Result(column="house_type_id",property="houseType",
 			one = @One(select="com.woniuxy.dao.HouseDAO.findHouseTypeByHouseTypeId") 
 		),
