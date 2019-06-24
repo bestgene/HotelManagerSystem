@@ -3,7 +3,7 @@ package com.woniuxy.pojo;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class telpojo {
+public class Telpojo {
 
 	private String tel;
 	private String code;

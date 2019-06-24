@@ -5,7 +5,7 @@ import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.telpojo;
+import com.woniuxy.pojo.Telpojo;
 
 public interface UserService {
 	public List<User> allUser();
@@ -26,9 +26,9 @@ public interface UserService {
 	
 	public void register(User user);
 	
-	public telpojo findbyuseracc(telpojo telpojo);
+	public Telpojo findbyuseracc(Telpojo telpojo);
 	
-	public void telregister(telpojo telpojo);
+	public void telregister(Telpojo telpojo);
 	
 	public User findUserIdByacc(User user);
 	

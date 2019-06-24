@@ -23,10 +23,10 @@ import com.woniuxy.pojo.User;
 
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.telpojo;
+import com.woniuxy.pojo.Telpojo;
 
 import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.telpojo;
+import com.woniuxy.pojo.Telpojo;
 public interface UserDAO {
 	@Select(" select * from t_user")
 	public List<User> allUser();
@@ -70,10 +70,10 @@ public interface UserDAO {
 	public void register(User user);
 	
 	@Select("select * from t_user where user_acc=#{user_acc}")
-	public telpojo findbyuseracc(telpojo telpojo);
+	public Telpojo findbyuseracc(Telpojo telpojo);
 	
 	@Insert("insert into t_user(user_acc,user_pwd)values(#{user_acc},#{user_pwd})")
-	public void telregister(telpojo telpojo);
+	public void telregister(Telpojo telpojo);
 	
 	//通过user_acc去查找user_id
 	@Select("select * from t_user where user_acc=#{user_acc}")

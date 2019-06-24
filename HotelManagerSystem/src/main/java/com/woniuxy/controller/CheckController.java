@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.woniuxy.emailUtil.EmailUtil;
 import com.woniuxy.pojo.User;
-import com.woniuxy.pojo.telpojo;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.service.UserService;
 import com.woniuxy.testmsg.msg;
 
@@ -69,7 +69,7 @@ public class CheckController {
 	
 	@RequestMapping("/telcheck")
 	@ResponseBody
-	public String telcheck(telpojo tel,HttpServletRequest request){//短信验证
+	public String telcheck(Telpojo tel,HttpServletRequest request){//短信验证
 		System.out.println(randcode+"看看是否有验证码！");
 		
 		//对前端的数据进行测试
@@ -112,7 +112,7 @@ public class CheckController {
 	
 	@RequestMapping("/send")
 	@ResponseBody
-	public String sendcode(telpojo po,HttpServletRequest request){
+	public String sendcode(Telpojo po,HttpServletRequest request){
 		String re="";
 		System.out.println("进入到发送手机验证码！");
 		if (po.getTel()=="") {

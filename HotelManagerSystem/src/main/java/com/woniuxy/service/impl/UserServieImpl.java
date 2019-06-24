@@ -16,9 +16,9 @@ import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 
 import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.telpojo;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.telpojo;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.service.UserService;
 
 @Service("userService")
@@ -86,13 +86,13 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
-	public telpojo findbyuseracc(telpojo telpojo) {
+	public Telpojo findbyuseracc(Telpojo telpojo) {
 		
 		return userDAO.findbyuseracc(telpojo);
 	}
 
 	@Override
-	public void telregister(telpojo telpojo) {
+	public void telregister(Telpojo telpojo) {
 		
 		userDAO.telregister(telpojo);
 		
