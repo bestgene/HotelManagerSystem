@@ -1,10 +1,14 @@
 package com.woniuxy.controller;
 
 import java.awt.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.woniuxy.pojo.Level;
+import com.woniuxy.pojo.User;
+import com.woniuxy.pojo.Vip;
+import com.woniuxy.service.UserService;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -87,4 +91,47 @@ public class UserController {
 		userService.deleteUserByUid(user_id);
 		return "test.html";
 	}
-}
+	
+	//根据用户账号user_acc去查询vip的等级
+		@GetMapping("/FindlevelByUseracc")
+		public void FindlevelByUseracc(User user){
+			
+			//通过用户的姓名去除查询user_id
+			User user2= userService.findUserIdByacc(user);
+			
+			//通过user_id去查询会员等级
+			Vip vip=userService.findLevelIdByuserId(user2);
+			//通过会员等级去查询会员的折扣力度
+			Level level=userService.findQuatoBylevelId(vip);
+			System.out.println(level);
+			
+		}
+		}
+		
+		
+		//进行用户的登录操作
+		/*@GetMapping("/login")
+		@ResponseBody
+		public String login(User user){
+			System.out.println("进入登录。。。");
+			ModelAndView view=new ModelAndView();
+			String result="";
+			
+			//根据用户名去查询是否存在此用户
+		if (userService.findUserByUid(user)==null) {
+			result="不存在此账号";
+		}	
+			else {
+			if (userService.findUserByUid(user).getUser_pwd().equals(user.getUser_pwd())) {
+				result="html/index.html";
+			}	
+			else {
+				result="密码不正确";
+			}
+				
+			}
+			
+		
+			return result;
+		}
+		*/

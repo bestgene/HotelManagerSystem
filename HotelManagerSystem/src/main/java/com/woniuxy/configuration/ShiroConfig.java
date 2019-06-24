@@ -74,5 +74,38 @@ public class ShiroConfig {
 		manager.setRealm(userRealm);
 		return manager;
 	}
+<<<<<<< HEAD
+=======
+	
+	//shiro过滤器
+	@Bean
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
+		System.out.println("正在创建过滤器");
+		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
+		//配置安全管理器
+		bean.setSecurityManager(securityManager);
+		//配置登录页面
+		bean.setLoginUrl("login.html");
+		//配置无权限页面
+		bean.setUnauthorizedUrl("login.html");
+		//设置过滤器链
+		Map<String, String>map = new HashMap<>();
+		
+		//anno 任何人都能登录
+//		map.put("/index", "anon");
+		map.put("/html/login.html", "anon");
+		map.put("/User/login", "anon");
+		map.put("/check/telcheck", "anon");
+		map.put("/druid/**", "anon");
+		map.put("sign-up.html", "anon");//无权限可以访问的注册界面
+		//logout
+		map.put("/logout", "logout");
+		
+		// /**
+		//map.put("/**", "authc");
+		bean.setFilterChainDefinitionMap(map);
+		return bean;
+	}
+>>>>>>> refs/heads/wanminghui
 }
 */

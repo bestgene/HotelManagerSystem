@@ -24,7 +24,11 @@ import com.woniuxy.pojo.Role;
 import com.woniuxy.pojo.User;
 import com.woniuxy.service.UserService;
 
+
 public class UserRealm extends AuthorizingRealm{
+	
+	private User User;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -61,10 +65,14 @@ public class UserRealm extends AuthorizingRealm{
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		
+		
 		System.out.println("正在认证");
 		//获取账号
+
 		String user_acc = (String)token.getPrincipal();
 		User user = userService.findUserByAcc(user_acc);
+
 		System.out.println(user);
 		if (user == null){
 			return null;

@@ -8,18 +8,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.dao.UserDAO;
+
 import com.woniuxy.pojo.Role;
+
+import com.woniuxy.pojo.Level;
+
 import com.woniuxy.pojo.User;
+
 import com.woniuxy.pojo.UserInfo;
+
+import com.woniuxy.pojo.Vip;
+import com.woniuxy.pojo.telpojo;
+
 import com.woniuxy.service.UserService;
 
 @Service("userService")
 @Transactional		//添加失败
 public class UserServieImpl implements UserService {
+	
 	@Resource
 	private UserDAO userDAO;
-	
-	
 
 	public UserDAO getUserDAO() {
 		return userDAO;
@@ -40,6 +48,7 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
+
 	public User findUserByAcc(String user_acc) {
 		return userDAO.findUserByAcc(user_acc);
 	}
@@ -60,10 +69,58 @@ public class UserServieImpl implements UserService {
 		return userDAO.selectRoleAndPerms(role_id);
 	}
 
+	
+		
+
+	public User findUserByUid(User user) {
+		// 通过用户user_acc查询用户
+		return userDAO.findUserByUid(user);
+
+	}
+
 	@Override
-	public void deleteUserByUid(Integer user_id) {
-		userDAO.deleteUserByUid(user_id);
+	public void register(User user) {
+		userDAO.register(user);
 		
 	}
+
+	@Override
+	public telpojo findbyuseracc(telpojo telpojo) {
+		
+		return userDAO.findbyuseracc(telpojo);
+	}
+
+	@Override
+	public void telregister(telpojo telpojo) {
+		
+		userDAO.telregister(telpojo);
+		
+	}
+
+	@Override
+	public User findUserIdByacc(User user) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserIdByacc(user);
+	}
+
+	@Override
+	public Vip findLevelIdByuserId(User user) {
+		// TODO Auto-generated method stub
+		return userDAO.findLevelIdByuserId(user);
+	}
+
+	@Override
+	public Level findQuatoBylevelId(Vip vip) {
+		// TODO Auto-generated method stub
+		return userDAO.findQuatoBylevelId(vip);
+	}
+
+	@Override
+	public void deleteUserByUid(Integer user_id) {
+		// TODO Auto-generated method stub
+		userDAO.deleteUserByUid(user_id);
+	}
+
+	
 
 }
