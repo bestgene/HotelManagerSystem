@@ -3,13 +3,14 @@ package com.woniuxy.pojo;
 import java.math.BigDecimal;
 
 public class UserInfo {
-	private Integer user_info_id;
-	private String user_info_name;
-	private String user_info_tel;
-	private String user_info_idcard;
-	private BigDecimal user_info_cost;
-	private Integer user_id;
-	private Integer flag;
+	
+	private Integer user_info_id;//用户信息表id
+	private String user_info_name;//用户名称
+	private String user_info_tel;//用户电话
+	private String user_info_idcard;//用户身份证号码
+	private BigDecimal user_info_cost;//用户的消费
+	private Integer user_id;//用户id
+	private Integer flag;//软删除！
 	public Integer getUser_info_id() {
 		return user_info_id;
 	}

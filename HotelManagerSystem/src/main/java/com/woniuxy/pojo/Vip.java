@@ -9,7 +9,6 @@ public class Vip implements Serializable{
 	private Integer user_id;
 	private Integer level_id;
 	private Integer flag;
-	
 	public Integer getVip_id() {
 		return vip_id;
 	}

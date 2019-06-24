@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.woniuxy.pojo.User;
 import com.woniuxy.service.UserService;
 
+
 public class UserRealm extends AuthorizingRealm{
 	
 	private User User;

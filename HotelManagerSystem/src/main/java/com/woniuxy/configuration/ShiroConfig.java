@@ -9,10 +9,11 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 	
 	@Bean
@@ -47,24 +48,24 @@ public class ShiroConfig {
 		//配置安全管理器
 		bean.setSecurityManager(securityManager);
 		//配置登录页面
-		bean.setLoginUrl("html/login.html");
+		bean.setLoginUrl("login.html");
 		//配置无权限页面
-		bean.setUnauthorizedUrl("html/login.html");
+		bean.setUnauthorizedUrl("login.html");
 		//设置过滤器链
 		Map<String, String>map = new HashMap<>();
 		
 		//anno 任何人都能登录
 //		map.put("/index", "anon");
 		map.put("/html/login.html", "anon");
-		map.put("/user/login", "anon");
-		map.put("/user/register", "anon");
+		map.put("/User/login", "anon");
+		map.put("/check/telcheck", "anon");
 		map.put("/druid/**", "anon");
-		
+		map.put("sign-up.html", "anon");//无权限可以访问的注册界面
 		//logout
-		map.put("/user/logout", "logout");
+		map.put("/logout", "logout");
 		
 		// /**
-		map.put("/**", "authc");
+		//map.put("/**", "authc");
 		bean.setFilterChainDefinitionMap(map);
 		return bean;
 	}
