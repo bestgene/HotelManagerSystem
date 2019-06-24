@@ -94,6 +94,35 @@ public class HouseController {
 		return all;
 	}
 	
+	
+	/*
+	 * test:byys更改
+	 */
+	@PostMapping("/alltype/{startTime}/{endTime}/{type}")
+	@ResponseBody
+	public ModelAndView allHouse(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("type") Integer type) throws ParseException{
+		ModelAndView modelAndView= new ModelAndView();
+		Map<String,Object> all = new Hashtable<>();
+		Map<Integer,List<House>> allAvailableRooms = allAvailableRooms(startTime,endTime);
+		List<HouseType> allhouses = houseService.houseType();
+		for (HouseType houseType : allhouses) {
+			Integer key = houseType.getHouse_type_id();
+			int num = allAvailableRooms.get(key).size();
+			houseType.setNum(num);
+		}
+		modelAndView.addObject("houses",allhouses);
+		List<String> date = new ArrayList<String>();
+		date.add(startTime);
+		date.add(endTime);
+		modelAndView.addObject("date",date);
+		modelAndView.setViewName("face-user/house-info/housedetailinfo.html");
+		return modelAndView;
+	}
+	
+
+	
+	
+	
 	@PostMapping("/addCheckInOperation/{startTime}/{endTime}/{house_type_id}/{number}")
 	@ResponseBody
 	/*
@@ -122,6 +151,7 @@ public class HouseController {
 				houseService.addDateHouseOperation(single);
 			}
 		}
+		//房间id?
 		model.addObject("houses", findDifferObj);
 		model.addObject("start", startTime);
 		model.addObject("end", endTime);

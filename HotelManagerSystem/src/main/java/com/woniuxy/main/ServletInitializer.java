@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+
 
 @SpringBootApplication
 
@@ -14,7 +16,16 @@ import org.springframework.context.annotation.ComponentScan;
 	"com.woniuxy.service",
 	"com.woniuxy.configuration"
 	})
+
 //扫描dao
+
+@EnableWebSocket // 启用websocket
+// 常常扫描Controller DAO Service
+//@ComponentScan("com.woniuxy.filter")
+//@ServletComponentScan
+//常常扫描Servlet、Filter、Listener
+
+
 @MapperScan("com.woniuxy.dao")
 public class ServletInitializer extends SpringBootServletInitializer {
 
