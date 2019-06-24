@@ -24,8 +24,8 @@ public class OrderProvider {
         SQL sql = new SQL().SELECT("*").FROM(order_table+",t_user_info ")
                 .WHERE("t_order.user_info_id=t_user_info.user_info_id ");
         if (order.getUser()!=null) {
-            if (order.getUser().getUid() != null && order.getUser().getUid() > 0) {
-                sql.WHERE("t_order.user_id=" + order.getUser().getUid());
+            if (order.getUser().getUser_id() != null && order.getUser().getUser_id() > 0) {
+                sql.WHERE("t_order.user_id=" + order.getUser().getUser_id());
             }
         }
         if (order.getUserInfo()!=null) {
