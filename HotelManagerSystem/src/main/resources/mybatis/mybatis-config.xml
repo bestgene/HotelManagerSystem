@@ -5,7 +5,7 @@
 <configuration>
 	<!-- 设置全局变量 -->
 	<settings>
-		<!--<setting name="logImpl" value="LOG4J"/>-->
+		<setting name="logImpl" value="LOG4J"/>
 		<setting name="aggressiveLazyLoading" value="false"/>
 	</settings>
 </configuration>
