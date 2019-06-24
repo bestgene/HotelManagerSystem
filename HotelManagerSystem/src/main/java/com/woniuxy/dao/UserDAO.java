@@ -11,11 +11,13 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.mapping.FetchType;
 
+import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Perm;
 import com.woniuxy.pojo.Role;
 import com.woniuxy.pojo.RolePerm;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
+import com.woniuxy.pojo.Vip;
 
 public interface UserDAO {
 	@Select(" select * from t_user")
@@ -30,6 +32,12 @@ public interface UserDAO {
 	public UserInfo getInfoByUid(Integer user_id);
 	@Update("update t_user_info set user_info_name=#{user_info_name},user_info_tel=#{user_info_tel},user_info_idcard=#{user_info_idcard} where user_id=#{user_id}")
 	public void updateInfo(UserInfo userInfo);
+	@Select("select *from t_vip where user_id=#{user_id}") //test
+	public Vip getVipByUid(Integer user_id);
+	@Select("select *from t_level where level_id=#{level_id}")//test
+	public Level getLevelByVipId(Integer level_id);
+	@Select("select *from t_user_info where user_info_tel=#{arg0} or user_info_idcard=#{arg1}")
+	public UserInfo selectUserInfoByTelOrIdcard(String arg0,String arg1);
 	
 	@Select("select *from t_perm where role_id=#{role_id}")
 	@Results({
