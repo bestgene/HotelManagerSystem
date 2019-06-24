@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.woniuxy.pojo.*;
+import com.woniuxy.service.ChargingService;
 import com.woniuxy.service.HouseService;
 import org.junit.Test;
 import org.mockito.internal.matchers.Or;
@@ -28,10 +29,12 @@ public class OrderController {
 	
 	@Resource
 	private OrderService orderService;
-
 	@Resource
 	private HouseService houseService;
-	
+	@Resource
+	private ChargingService chargingService;
+
+
 	@RequestMapping("/showAllOrder")
 	@ResponseBody
 	/**
@@ -77,9 +80,7 @@ public class OrderController {
 		//更具房间计算初步金额
 		BigDecimal totalpay = order.getOrder_totalpay();
 		//查询计费表，线上是否打折，线上打折额度,sql语句
-		Charging charging = new Charging();
-		charging.setCharging_ratio((double) 1);
-		charging.setOnline_ratio((double) 1);
+		Charging charging = chargingService.queryCharging();
 		//0代表线上支付，1代表线下支付
 		//如果线上支付
 		if (order.getOrder_payment()==0){
@@ -98,6 +99,7 @@ public class OrderController {
 		if (charging.getCharging_isqz()==1){
 			totalpay = new BigDecimal(totalpay.setScale(0,BigDecimal.ROUND_DOWN).longValue());
 		}
+
 		//给订单表赋值,总金额=需要支付金额+押金
 		order.setOrder_totalpay(totalpay.add(new BigDecimal(order.getOrder_deposit())));
 
