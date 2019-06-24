@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.woniuxy.pojo.*;
+import com.woniuxy.service.HouseService;
 import org.junit.Test;
 import org.mockito.internal.matchers.Or;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,9 @@ public class OrderController {
 	
 	@Resource
 	private OrderService orderService;
-	
+
+	@Resource
+	private HouseService houseService;
 	
 	@RequestMapping("/showAllOrder")
 	@ResponseBody
@@ -51,6 +54,8 @@ public class OrderController {
 	@RequestMapping("/createOrder")
 	public ModelAndView createOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
         ModelAndView modelAndView = new ModelAndView();
+        //根据房间类型、选择数量、入住时间、退房时间查询数据库
+
 	    //1.创建 订单表
 		//order表赋值
 		Order order = reserveToOrderAndItem(reserve);
@@ -183,7 +188,7 @@ public class OrderController {
 		//设置订单生成时间
 		order.setOrder_createtime(System.currentTimeMillis()+"");
 		//设置押金(简单)
-		order.setOrder_deposit(reserve.getHouses().size()*50);
+//		order.setOrder_deposit(reserve.getHouses().size()*50);
 		//设置支付类型
 		order.setOrder_payment(reserve.getReserve_payment());
 		//赋值用户留言

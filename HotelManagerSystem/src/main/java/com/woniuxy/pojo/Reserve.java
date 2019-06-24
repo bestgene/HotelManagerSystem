@@ -22,9 +22,10 @@ public class Reserve implements Serializable {
     private Integer user_id;
     //用户信息
     private UserInfo userInfo;
-    //房间信息
-    private List<House> houses;
-
+    //房间类型(传id)
+    private HouseType houseType;
+    //房间数量
+    private Integer house_number;
     //预定入住时间
     private String reserve_checkintime;
     //预定退房时间
@@ -46,6 +47,7 @@ public class Reserve implements Serializable {
 
     private Integer flag;
 
+
     @Override
     public String toString() {
         return "Reserve{" +
@@ -53,7 +55,8 @@ public class Reserve implements Serializable {
                 ", reserve_idnumber='" + reserve_idnumber + '\'' +
                 ", user_id=" + user_id +
                 ", userInfo=" + userInfo +
-                ", houses=" + houses +
+                ", houseType=" + houseType +
+                ", house_number=" + house_number +
                 ", reserve_checkintime='" + reserve_checkintime + '\'' +
                 ", reserve_checkouttime='" + reserve_checkouttime + '\'' +
                 ", reserve_arrivetime='" + reserve_arrivetime + '\'' +
@@ -65,6 +68,10 @@ public class Reserve implements Serializable {
                 ", reserve_message='" + reserve_message + '\'' +
                 ", flag=" + flag +
                 '}';
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getReserve_id() {
@@ -99,12 +106,20 @@ public class Reserve implements Serializable {
         this.userInfo = userInfo;
     }
 
-    public List<House> getHouses() {
-        return houses;
+    public HouseType getHouseType() {
+        return houseType;
     }
 
-    public void setHouses(List<House> houses) {
-        this.houses = houses;
+    public void setHouseType(HouseType houseType) {
+        this.houseType = houseType;
+    }
+
+    public Integer getHouse_number() {
+        return house_number;
+    }
+
+    public void setHouse_number(Integer house_number) {
+        this.house_number = house_number;
     }
 
     public String getReserve_checkintime() {
