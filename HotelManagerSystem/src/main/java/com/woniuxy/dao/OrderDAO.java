@@ -52,8 +52,12 @@ public interface OrderDAO {
      * @param order
      * @return
      */
-    @Insert("insert into t_order(user_id,user_info_id,order_number,order_createtime,order_payment,order_totalpay,order_deposit,order_message) "
-            + "values (#{user_id},#{user_info_id},#{order_number},#{order_createtime},#{order_payment},#{order_totalpay},#{order_deposit},#{order_message}")
+    @Insert("insert into t_order(user_id,user_info_id,order_number," +
+            "order_createtime,order_payment,order_totalpay,order_deposit," +
+            "order_message,order_state,flag) "
+            + "values (#{user_id},#{user_info_id},#{order_number}," +
+            "#{order_createtime},#{order_payment},#{order_totalpay},#{order_deposit}," +
+            "#{order_message},#{order_state},#{flag})")
     public boolean creatOrder(Order order);
 
     /**
@@ -70,8 +74,12 @@ public interface OrderDAO {
     @Update("update t_order set order_paynumber=#{1},order_state=1 where order_number=#{0}")
     public boolean payOreder(String order_number, String order_paynumber);
 
-
-    @Update("update t_order set flag=1 where order_id=#{order_id} and flag=0 and order_state=1")
+    /**
+     * 取消预定
+     * @param order
+     * @return
+     */
+    @Update("update t_order set flag=0 where order_id=#{order_id} and flag=1 and order_state=1")
     public boolean deleteOrder(Order order);
 
 

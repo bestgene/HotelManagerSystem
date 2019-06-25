@@ -40,7 +40,11 @@ public class OrderProvider {
                 sql.WHERE("t_user_info.user_info_name like '%" + order.getUserInfo().getUser_info_name() + "%'");
             }
         }
-        sql.WHERE("t_order.flag=0");
+        if (order.getOrder_number()!=null&&order.getOrder_number().length()>0){
+            sql.WHERE("order_number='"+order.getOrder_number()+"'");
+        }
+        sql.WHERE("t_order.flag="+order.getFlag());
+        sql.WHERE("order.state="+order.getOrder_state());
         return sql.toString();
     }
 
