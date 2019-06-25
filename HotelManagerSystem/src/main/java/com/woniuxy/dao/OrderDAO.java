@@ -70,10 +70,20 @@ public interface OrderDAO {
     public Order queryOrderId(Order order);
 
 
-    //当支付完成后，更新订单项中的支付编号
-    @Update("update t_order set order_paynumber=#{1},order_state=1 where order_number=#{0}")
+    /**
+     * 退房结账
+     * @param order_number
+     * @param order_paynumber
+     * @return
+     */
+    @Update("update t_order set order_paynumber=#{arg1},order_state=3,flag=2 where order_number=#{arg0}")
     public boolean payOreder(String order_number, String order_paynumber);
 
+
+
+    //支付押金（只改变状态）
+    @Update("update t_order set order_state=1 where order_number=#{arg0}")
+    public boolean payDeposit(String ordernumber);
     /**
      * 取消预定
      * @param order

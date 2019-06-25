@@ -1,104 +1,92 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin index Examples</title>
-    <meta name="description" content="这是一个 index 页面">
-    <meta name="keywords" content="index">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="assets/i/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
-    <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="stylesheet" href="assets/css/app.css">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Amaze UI Admin index Examples</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed"
+	href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/jquery.min.js"></script>
+
 </head>
 
 <body data-type="generalComponents">
-    <header class="am-topbar am-topbar-inverse admin-header">
+	<header class="am-topbar am-topbar-inverse admin-header">
 		<div class="am-topbar-brand">
-			<a href="javascript:;" class="tpl-logo">
-			 <img src="assets/img/logo.png" alt="">
+			<a href="javascript:;" class="tpl-logo"> <img
+				src="assets/img/logo.png" alt="">
 			</a>
 		</div>
-		
-		
-		 <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
-             <li><a href="login.html" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
-            </ul>
-        </div>
-            
-    </header> 
+
+
+		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+			<ul
+				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+				<li><a href="login.html" class="tpl-header-list-link"><span
+						class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+			</ul>
+		</div>
+
+	</header>
 
 	<div class="tpl-page-container tpl-page-header-fixed">
 		<div class="tpl-left-nav tpl-left-nav-hover">
 			<div class="tpl-left-nav-title">酒店系统</div>
 			<div class="tpl-left-nav-list">
 				<ul class="tpl-left-nav-menu">
-					<li class="tpl-left-nav-item">
-					<a href="javascript:;" class="nav-link tpl-left-nav-link-list active"> 
-						<i class="am-icon-home"></i>
-						 <span>入住退房</span>
-						 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					<li class="tpl-left-nav-item"><a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list active"> <i
+							class="am-icon-home"></i> <span>入住退房</span> <i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="form-line.html" class="active"> 
-							<i class="am-icon-angle-right"></i> 
-							<span>入住登记</span>
-							</a> 
-							<a href="employee-see.html"> 
-							<i class="am-icon-angle-right"></i>
-							<span>退房充值</span>
-							</a>
-							</li>
+							<li><a href="form-line.html" class="active"> <i
+									class="am-icon-angle-right"></i> <span>入住登记</span>
+							</a> <a href="employee-see.html"> <i class="am-icon-angle-right"></i>
+									<span>退房充值</span>
+							</a></li>
 						</ul></li>
-					<li class="tpl-left-nav-item">
-					<a href="javascript:;" class="nav-link tpl-left-nav-link-list"> 
-					<i class="am-icon-bar-chart"></i> 
-					<span>房间管理</span>
-					<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					<li class="tpl-left-nav-item"><a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list"> <i
+							class="am-icon-bar-chart"></i> <span>房间管理</span> <i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
-					<ul class="tpl-left-nav-sub-menu">
-							<li><a href="main.html"> 
-							<i class="am-icon-angle-right"></i> 
-							<span>剩余房源</span>
-							</a> 
-							<a href="tupian.html"> 
-							<i class="am-icon-angle-right"></i>
-							<span>轮播管理</span>
-							</a>
-							<a href="uplodaImg.html"> 
-							<i class="am-icon-angle-right"></i>
-							<span>更新图片</span>
+						<ul class="tpl-left-nav-sub-menu">
+							<li><a href="main.html"> <i class="am-icon-angle-right"></i>
+									<span>剩余房源</span>
+							</a> <a href="tupian.html"> <i class="am-icon-angle-right"></i> <span>轮播管理</span>
+							</a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+									<span>更新图片</span>
 							</a></li>
 						</ul></li>
 					<li class="tpl-left-nav-item">
-						<!-- 打开状态 a 标签添加 active 即可   --> 
-						<a href="javascript:;" class="nav-link tpl-left-nav-link-list "> 
-						<i class="am-icon-table"></i> 
-						<span>会员管理</span> 
-						<!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
-						<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+						<!-- 打开状态 a 标签添加 active 即可   --> <a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list "> <i
+							class="am-icon-table"></i> <span>会员管理</span> <!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
+							<i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
-					<ul class="tpl-left-nav-sub-menu">
-							<li><a href="HuiYuanZhuCe.html"> 
-							<i class="am-icon-angle-right"></i> 
-							<span>会员注册</span>
-							</a> 
-							<a href="commentMann.html"> 
-							<i class="am-icon-angle-right"></i>
-							<span>会员评论</span>
+						<ul class="tpl-left-nav-sub-menu">
+							<li><a href="HuiYuanZhuCe.html"> <i
+									class="am-icon-angle-right"></i> <span>会员注册</span>
+							</a> <a href="commentMann.html"> <i class="am-icon-angle-right"></i>
+									<span>会员评论</span>
 							</a></li>
 						</ul>
 					</li>
 					<li class="tpl-left-nav-item"><a href="chart.html"
-						class="nav-link tpl-left-nav-link-list"> 
-						<i class="am-icon-wpforms"></i> 
-						<span>查看账目</span>
+						class="nav-link tpl-left-nav-link-list"> <i
+							class="am-icon-wpforms"></i> <span>查看账目</span>
 					</a></li>
 					<li class="tpl-left-nav-item"><a href="e-check.html"
 						class="nav-link tpl-left-nav-link-list"> <i
@@ -108,122 +96,167 @@
 			</div>
 		</div>
 
-        <div class="tpl-content-wrapper">
-            <div class="tpl-content-page-title"></div>
-            <ol class="am-breadcrumb">
-                <li><a href="#" class="am-icon-home">首页</a></li>
-                <li><a href="#">店员</a></li>
-                <li class="am-active">入住登记</li>
-            </ol>
-            <div class="tpl-portlet-components">
-                <div class="portlet-title">
-                    <div class="caption font-green bold">
-                      入住登记
-                    </div>
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                            </div>
-                        </div>
-                    </div>
+		<div class="tpl-content-wrapper">
+			<div class="tpl-content-page-title"></div>
+			<ol class="am-breadcrumb">
+				<li><a href="#" class="am-icon-home">首页</a></li>
+				<li><a href="#">店员</a></li>
+				<li class="am-active">入住登记</li>
+			</ol>
+			<div class="tpl-portlet-components">
+				<div class="portlet-title">
+					<div class="caption font-green bold">入住登记</div>
+					<div class="tpl-portlet-input tpl-fz-ml">
+						<div class="portlet-input input-small input-inline">
+							<div class="input-icon right"></div>
+						</div>
+					</div>
 
 
-                </div>
+				</div>
 
-                <div class="tpl-block">
+				<div class="tpl-block">
+					<div class="am-g">
+						<div class="tpl-form-body tpl-form-line">
 
-                    <div class="am-g">
-                        <div class="tpl-form-body tpl-form-line">
-                        
-                            <form class="am-form tpl-form-line-form" action="employeesAdduserServlet" method="post">
-                                <div class="am-form-group">
-                                    <label for="user-name" class="am-u-sm-3 am-form-label">客户姓名 <span class="tpl-form-line-small-title">Name</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" class="tpl-form-input" id="username" placeholder="请输入客户文名字" name="username" >
-                                        <small>请填写真实姓名。</small>
-                                    </div>
-                                </div>
-                                
-                              <div class="am-form-group">
-                                    <label class="am-u-sm-3 am-form-label">身份证号<span class="tpl-form-line-small-title">IDcard</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="idcard1" placeholder="输入有效身份证" onchange="idcardfun()" name="idcard">
-                                    </div>
-                                </div>
-                                
-                                
-                                
-                              <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">联系电话 <span class="tpl-form-line-small-title">Tel</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="usertel1" name="usertel" placeholder="请输入联系电话" onchange="telfun()">
-                                        <div>
+							<form class="am-form tpl-form-line-form" action="order/createOrder">
+								<div class="am-form-group">
+									<label for="user-name" class="am-u-sm-3 am-form-label">客户姓名
+										<span class="tpl-form-line-small-title">Name</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" class="tpl-form-input" id="username"
+											placeholder="请输入客户文名字" name="userInfo.user_info_name">
+										<small>请填写真实姓名。</small>
+									</div>
+								</div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                              <div class="am-form-group">
-                                    <label for="user-phone" class="am-u-sm-3 am-form-label">房间类型 <span class="tpl-form-line-small-title">Type</span></label>
-                                    <div class="am-u-sm-9">
-                                        <select data-am-selected="{searchBox: 1}" name="searchBox">
-									  <option value="1">标准间</option>
-									  <option value="2">大床房</option>
-									  <option value="3">总统套房</option>
+								<div class="am-form-group">
+									<label class="am-u-sm-3 am-form-label">身份证号<span
+										class="tpl-form-line-small-title">IDcard</span></label>
+									<div class="am-u-sm-9">
+										<input type="text" id="idcard1" placeholder="输入有效身份证"
+											onchange="idcardfun()" name="userInfo.user_info_idcard">
+									</div>
+								</div>
+
+
+
+								<div class="am-form-group">
+									<label for="user-weibo" class="am-u-sm-3 am-form-label">联系电话
+										<span class="tpl-form-line-small-title">Tel</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" id="usertel1" name="userInfo.user_info_tel"
+											placeholder="请输入联系电话" onchange="telfun()">
+										<div></div>
+									</div>
+								</div>
+								
+								<div class="am-form-group">
+									<label for="user-name" class="am-u-sm-3 am-form-label">单人间
+										<span class="tpl-form-line-small-title">Name</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" class="tpl-form-input" id="drj"
+											placeholder="请输入客户文名字" name="userInfo.user_info_name">
+									</div>
+								</div>
+								
+								<div class="am-form-group">
+									<label for="user-name" class="am-u-sm-3 am-form-label">双人间
+										<span class="tpl-form-line-small-title">Name</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" class="tpl-form-input" id="srj"
+											placeholder="请输入客户文名字" name="userInfo.user_info_name">
+									</div>
+								</div>
+
+
+							
+
+
+								<div class="am-form-group">
+									<label for="user-email" class="am-u-sm-3 am-form-label">入住时间
+										<span class="tpl-form-line-small-title">Time</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" class="am-form-field tpl-form-no-bg"
+											placeholder="入住时间" data-am-datepicker="" id="livetime1"
+											name="reserve_checkintime" onchange="livefun()" readonly /> <small>入住时间为必填</small>
+									</div>
+								</div>
+
+
+								<div class="am-form-group">
+									<label for="user-email" class="am-u-sm-3 am-form-label">离开时间
+										<span class="tpl-form-line-small-title">Time</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" class="am-form-field tpl-form-no-bg"
+											id="leavetime1" placeholder="离开时间" data-am-datepicker=""
+											name="reserve_checkouttime" onchange="leavefun()" readonly /> <small>离开时间为必填</small>
+									</div>
+								</div>
+
+								<div class="am-form-group">
+									<label for="user-weibo" class="am-u-sm-3 am-form-label">抵达时间
+										<span class="tpl-form-line-small-title">arrival time</span>
+									</label>
+									<div class="am-u-sm-9">
+										<input type="text" id="checkinTime" placeholder="抵达时间"
+											name="reserve_arrivetime">
+										<div></div>
+									</div>
+								</div>
+
+								<div class="am-form-group">
+									<label for="user-phone" class="am-u-sm-3 am-form-label">是否自动取消
+										<span class="tpl-form-line-small-title">Auto</span>
+									</label>
+									<div class="am-u-sm-9">
+										<select data-am-selected="{searchBox: 1}" name="reserve_isauto" id="reserve_isauto">
+											<option value="1">是</option>
+											<option value="0">否</option>
 										</select>
-                                    </div>
-                                </div>
+									</div>
+								</div>
 
-                                <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">房间号 <span class="tpl-form-line-small-title">room</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="user-weibo" placeholder="请添加合法房间号"  name="roomnum">
-                                        <div>
+								<div class="am-form-group">
+									<label for="user-weibo" class="am-u-sm-3 am-form-label">取消时间<span
+										class="tpl-form-line-small-title">cancel time</span></label>
+									<div class="am-u-sm-9">
+										<input type="text" id="reserve_canceltime" placeholder="取消时间"
+											name="reserve_canceltime">
+										<div></div>
+									</div>
+								</div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                
-
-                                <div class="am-form-group">
-                                    <label for="user-email" class="am-u-sm-3 am-form-label">入住时间 <span class="tpl-form-line-small-title">Time</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" class="am-form-field tpl-form-no-bg" placeholder="入住时间" data-am-datepicker=""  id="livetime1" name="livetime" onmouseup="livefun()" readonly/>
-                                        <small>入住时间为必填</small>
-                                    </div>
-                                </div>
-                                
-                                
-                                     <div class="am-form-group">
-                                    <label for="user-email" class="am-u-sm-3 am-form-label">离开时间 <span class="tpl-form-line-small-title">Time</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" class="am-form-field tpl-form-no-bg" id="leavetime1" placeholder="离开时间" data-am-datepicker=""   name="leavetime" onclick="leavefun()"  readonly/>
-                                        <small>离开时间为必填</small>
-                                    </div>
-                                </div>                      
-                         
-                       		   <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">押金 <span class="tpl-form-line-small-title">money</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="user-weibo" placeholder="请输入押金" name="money">
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                   				 <div class="am-form-group">
-                                    <div class="am-u-sm-9 am-u-sm-push-3">
-                                	  
-                                   		<input type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success "  value="确认登记"/>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								<div class="am-form-group">
+									<label for="user-weibo" class="am-u-sm-3 am-form-label">留言<span
+										class="tpl-form-line-small-title">Message</span></label>
+									<div class="am-u-sm-9">
+										<input type="text" id="reserve_message" placeholder="留言"
+											name="reserve_message">
+										
+									</div>
+								</div>
+								<div class="am-form-group">
+									<div class="am-u-sm-9 am-u-sm-push-3">
+										<input type="submit" value="denji">
+									</div>
+								</div>
+						
+					
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script type="text/javascript">
 	/* 身份证号验证 */
@@ -297,14 +330,15 @@ function leavefun(){	//判断离开时间要大于入住时间
 	
 	console.log(leavetime);
 	if(timestamp2-timestamp1<=0){
-		/*  alert("离开时间不能小于入住时间！！"); */
+		alert("离开时间不能小于入住时间！！"); 
 	}
 }
 </script>
+
 	
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/amazeui.min.js"></script>
-    <script src="assets/js/app.js"></script>
+	<script src="assets/js/amazeui.min.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script type="text/javascript" src="js/form-line.js"></script>
 </body>
 
 </html>

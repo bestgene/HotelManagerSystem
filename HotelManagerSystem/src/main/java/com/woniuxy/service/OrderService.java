@@ -19,10 +19,10 @@ public interface OrderService {
 	public boolean createOrder(Order order);
 	/**
 	 * 支付订单
-	 * @param order
+	 * @param
 	 * @return
 	 */
-	public boolean payOrder(Order order);
+	public boolean payOrder(String order_number,String pay_number);
 
 
 	/**

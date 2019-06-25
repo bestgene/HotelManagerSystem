@@ -11,6 +11,7 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.woniuxy.pojo.*;
 import com.woniuxy.service.ChargingService;
@@ -94,7 +95,7 @@ public class OrderController {
      */
     @RequestMapping("/createKdOrder")
     @ResponseBody
-    public String createKdOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
+    public String createKdOrder(Reserve reserve, HttpServletRequest request, HttpServletResponse response) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
 
         List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
@@ -159,6 +160,7 @@ public class OrderController {
         boolean flag = orderService.createOrder(order);
 
         //默认已付款
+
         return "线下开单";
 
     }
@@ -173,7 +175,7 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/createYdOrder")
-    public String createYdOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
+    public String createYdOrder(Reserve reserve, HttpServletRequest request,HttpServletResponse response) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
 
         List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
@@ -248,15 +250,18 @@ public class OrderController {
 
         //新增order、item
         boolean flag = orderService.createOrder(order);
+
+
+
         //线上支付，跳转支付页面
         if (flag && order.getOrder_state() == 0 && order.getFlag() == 0) {
 
         } else {
+
         }
-        return "预定添加";
+        return null;
 
     }
-
 
     /**
      * 取消预定，这里必须是已支付后可见的订单

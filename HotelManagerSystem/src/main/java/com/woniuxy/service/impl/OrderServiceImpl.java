@@ -57,9 +57,9 @@ public class OrderServiceImpl implements OrderService {
 	 * @return
 	 */
 	@Override
-	public boolean payOrder(Order order) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean payOrder(String order_number,String pay_number) {
+
+		return orderDAO.payOreder(order_number,pay_number);
 	}
 
 	@Override
