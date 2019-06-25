@@ -55,14 +55,14 @@ public class HouseController {
 		return model;
 	}
 
-	@PostMapping("/allSingleType/{startTime}/{endTime}/{house_type_id}")
-	@ResponseBody
+	@GetMapping("/allSingleType/{startTime}/{endTime}/{house_type_id}")
 	/*
 	 * 展示房间类型信息
 	 * startTime 	入住时间
 	 * endTime		离开时间
 	 */
-	public Map<String,Object> allSingleHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("house_type_id") Integer house_type_id) throws ParseException{
+	public ModelAndView allSingleHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("house_type_id") Integer house_type_id) throws ParseException{
+		ModelAndView model = new ModelAndView();
 		Map<String,Object> all = new Hashtable<>();
 		List<House> allAvailableTypeRooms = allAvailableTypeRooms(startTime,endTime,house_type_id);
 		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
@@ -73,7 +73,8 @@ public class HouseController {
 		date.add(endTime);
 		all.put("date",date);
 		all.put("houses",allAvailableTypeRooms);
-		return all;
+		model.setViewName("/face-user/booknews.html");
+		return model;
 	}
 	
 	@PostMapping("/allHouseType/{startTime}/{endTime}")
@@ -98,33 +99,37 @@ public class HouseController {
 	/*
 	 * test:byys更改
 	 */
-	@PostMapping("/alltype/{startTime}/{endTime}/{type}")
-	@ResponseBody
-	public ModelAndView allHouse(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("type") Integer type) throws ParseException{
+	@RequestMapping("/alltype")
+	public ModelAndView allHouse(String startTime,String endTime) throws ParseException{
+		String[] start = startTime.split("/");
+		String startTime1 = start[2]+"-"+start[0]+"-"+start[1];
+		String[] end = endTime.split("/");
+		String endTime1 = end[2]+"-"+end[0]+"-"+end[1];
 		ModelAndView modelAndView= new ModelAndView();
-		Map<String,Object> all = new Hashtable<>();
-		Map<Integer,List<House>> allAvailableRooms = allAvailableRooms(startTime,endTime);
-		List<HouseType> allhouses = houseService.houseType();
-		for (HouseType houseType : allhouses) {
-			Integer key = houseType.getHouse_type_id();
-			int num = allAvailableRooms.get(key).size();
-			houseType.setNum(num);
+		Map<Integer,List<House>> allAvailableRooms = allAvailableRooms(startTime1,endTime1);
+		List<HouseType> houseType = houseService.houseType();
+		for (HouseType singleType : houseType) {
+			singleType.setNum(allAvailableRooms.get(singleType.getHouse_type_id()).size());
 		}
-		modelAndView.addObject("houses",allhouses);
-		List<String> date = new ArrayList<String>();
-		date.add(startTime);
-		date.add(endTime);
+		Map<String,Object> date = new Hashtable<String, Object>();
+		modelAndView.addObject("houseTypes", houseType);
+		date.put("startTime",startTime1);
+		date.put("endTime",endTime1);
 		modelAndView.addObject("date",date);
 		modelAndView.setViewName("face-user/house-info/housedetailinfo.html");
+		System.out.println(allAvailableRooms);
 		return modelAndView;
 	}
 	
-
+	@RequestMapping("/test")
+	public String test(){
+//		return "/face-user/house-info/housedetailinfo.html";
+		return "/face-user/house-info/housedetailinfo.html";
+	}
 	
 	
 	
 	@PostMapping("/addCheckInOperation/{startTime}/{endTime}/{house_type_id}/{number}")
-	@ResponseBody
 	/*
 	 * 添加入住历史信息
 	 */
@@ -137,7 +142,7 @@ public class HouseController {
 		Map<Integer, List<House>> allAvailableRooms = allAvailableRooms(startTime,endTime);
 		//通过房间类型id查询对应类型可入住的所有房间
 		List<House> list = allAvailableRooms.get(house_type_id);
-		//从可入住房间中随机生成两个入住房间
+		//从可入住房间中随机生成若干个入住房间
 		List<House> findDifferObj = findDifferObj(list,number);
 		//添加入住房间
 		//获取所有日期

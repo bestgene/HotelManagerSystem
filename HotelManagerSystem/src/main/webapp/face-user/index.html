@@ -158,23 +158,23 @@
 								</select>
 							</section> -->
 						</div>
-						<div class="a-col alternate">
-							<div class="input-field">
-								<label for="date-start">入住日期</label>
-								<input type="text" class="form-control" id="date-start" />
+						<form action="/HotelManagerSystem/house/alltype">
+							<div class="a-col alternate">
+								<div class="input-field">
+									<label for="date-start">入住日期</label>
+									<input type="text" class="form-control" id="date-start" name="startTime"/>
+								</div>
 							</div>
-						</div>
-						<div class="a-col alternate">
-							<div class="input-field">
-								<label for="date-end">离店日期</label>
-								<input type="text" class="form-control" id="date-end" />
+							<div class="a-col alternate">
+								<div class="input-field">
+									<label for="date-end">离店日期</label>
+									<input type="text" class="form-control" id="date-end" name="endTime"/>
+								</div>
 							</div>
-						</div>
-						<div class="a-col action">
-							<a href="javascript:selectHouse();">
-								<span>预定</span>
-							</a>
-						</div>
+							<div class="a-col action">
+								<input value="预定" type="submit">
+							</div>
+						</form>
 				</div>
 			</div>
 		</div>
@@ -572,7 +572,7 @@
 	<!-- END fh5co-wrapper -->
 	
 	<!-- Javascripts -->
-	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<!-- Dropdown Menu -->
 	<script src="js/hoverIntent.js"></script>
 	<script src="js/superfish.js"></script>
@@ -595,38 +595,9 @@
 	<script src="js/jquery.flexslider-min.js"></script>
 
 	<script src="js/custom.js"></script>
-<script src="js/face-user.js"></script>
-
-
-
-<script type="text/javascript">
-  $(function(){
-	/* alert("先执行"); */
-	debugger;
-	 $.ajax({//异步请求返回给后台
-		 
-		//	var json='{"type1":1,"type2":2,"type3":"3"}';
-			url : '../changeimg',
-			type : 'post',
-		//  data : json, 
-			 data:{
-				"type1":"1",
-				"type2":"2",
-				"type3":"3"
-				},
-			dataType :"json",  //返回的数据类型
-			success : function(data) {
-				 for(var i=0;i<data.length;i++){ 
-						var str='background-image: url(';
-						str+="/pic/"+data[i].url;
-						str+=');'
-						$("#pic"+(i+1)).attr("style",str);		
-				}
-			}
-		});   
-});
- </script>
-
+<!-- <script src="js/face-user.js"></script>
+ -->
+	<script type="text/javascript" src="js/index.js"></script>
 </body>
-<script type="text/javascript" src="js/index.js"></script>
+
 </html>

@@ -1,10 +1,8 @@
 package com.woniuxy.dao;
 
-import com.woniuxy.pojo.Order;
-import com.woniuxy.pojo.User;
-import com.woniuxy.pojo.UserInfo;
 import org.apache.ibatis.jdbc.SQL;
-import org.junit.Test;
+
+import com.woniuxy.pojo.Order;
 
 public class OrderProvider {
 

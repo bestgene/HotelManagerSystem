@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="../housedetailinfo/housedetailinfo.css" rel="styleSheet" type="text/css" />
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/laydate/laydate.js"></script>
+<script src="../js/jquery.min.js"></script>
+</head>
+<body>
+	<div id="house-typeandtime" class="tr-info">
+		<select id="house_type">
+			<option name="houseType">单人间</option>
+			<option name="houseType">双人间</option>
+			<option name="houseType">豪华大床房</option>
+			<option name="houseType">总统套房</option>
+		</select> 
+		 <div>
+			<label th:text="${date.startTime}" id="startTime"></label>
+			到
+			<label th:text="${date.endTime}" id="endTime"></label>
+		</div> 
+		<button onclick="queryTypeAndTime()">查询</button>
+	</div>
+	<div id="house_stead">
+		<div th:each="singleType : ${houseTypes}">
+			<div id="house-show">
+		   		<img th:src="${singleType.house_type_img}">
+			</div> 
+		<div id="house-info">
+			<table id="house-table">
+			    <tr class="tr-info">
+					<td class="td-title">类型：</td>
+					<td th:text="${singleType.house_type_id}" id="houseTypeId"></td>
+					<td th:text="${singleType.house_type_name}"></td>
+				</tr>
+				<tr class="tr-info">
+					<td class="td-title">描述：</td>
+					<td th:text="${singleType.house_type_msg}"></td>
+				</tr>
+				<tr class="tr-info">
+					<td class="td-title">价格：</td>
+					<td th:text="${singleType.house_type_price}"><span class="s-money"></span></td>
+				</tr>
+	
+				<tr class="tr-info">
+					<td class="td-title">数量：</td>
+					<td th:text="${singleType.num}"></td>
+					<td>
+						<button type="button" class="btn btn-danger" onclick="order()">跳转到填写订单的页面，可以选择数量</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	    
+		</div>
+	</div>
+	
+<script type="text/javascript">
+laydate.render({
+	elem : '#startTime', //选择input的id     
+});
+laydate.render({
+	elem : '#endTime',
+});
+</script>
+<script src="../housedetailinfo/housedetailinfo.js"></script>
+</body>
+</html>

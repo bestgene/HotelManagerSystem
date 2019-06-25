@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../assets/js/jquery.min.js"></script>
+<body>
+	<!-- 測試頁面 -->
+	
+</body>
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			type:"post",
+			url:"/HotelManagerSystem/house/allHouseType/2019-06-22/2019-06-23",
+			success:function(data){
+				console.log(data);
+			}
+		})
+	})
+</script>
+</html>

@@ -1,11 +1,13 @@
 package com.woniuxy.service;
 import java.util.List;
-import com.woniuxy.pojo.Role;
+
 import com.woniuxy.pojo.Level;
+import com.woniuxy.pojo.Role;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
-import com.woniuxy.pojo.Telpojo;
+
 
 public interface UserService {
 	public List<User> allUser();
@@ -25,7 +27,7 @@ public interface UserService {
 	public User findUserByUid(User user);
 	
 	public void register(User user);
-	
+
 	public Telpojo findbyuseracc(Telpojo telpojo);
 	
 	public void telregister(Telpojo telpojo);
@@ -35,7 +37,5 @@ public interface UserService {
 	public Vip findLevelIdByuserId(User user);
 	
 	public Level findQuatoBylevelId(Vip vip);
-	
-
 
 }
