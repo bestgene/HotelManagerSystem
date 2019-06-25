@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Role implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer role_id;
 	private String role_name;
@@ -40,5 +37,6 @@ public class Role implements Serializable{
 	@Override
 	public String toString() {
 		return "Role [role_id=" + role_id + ", role_name=" + role_name + ", perms=" + perms + "]";
-	}	
+	}
+
 }

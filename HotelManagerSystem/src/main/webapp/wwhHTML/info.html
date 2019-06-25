@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<tr th:each="user,status:${userInfo}">
+			<td th:text="${user.user_info_name}">姓名</td>
+			<td th:text="${user.user_info_tel}">电话</td>
+			<td th:text="${user.user_info_idcard}">身份证号</td>
+			<td th:text="${user.user_info_cost}">消费额度</td>
+			<td th:text="${user.user_id}">账户id</td>
+		</tr>
+	</table>
+	<a href="../update_info.html">修改个人信息</a>
+</body>
+</html>

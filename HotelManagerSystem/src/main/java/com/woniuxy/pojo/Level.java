@@ -3,9 +3,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Level implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Integer level_id;
 	private Integer level_quota;

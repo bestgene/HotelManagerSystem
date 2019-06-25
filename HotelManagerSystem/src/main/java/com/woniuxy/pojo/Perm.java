@@ -3,12 +3,11 @@ package com.woniuxy.pojo;
 import java.io.Serializable;
 
 public class Perm implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Integer perm_id;
 	private String perm_name;
+	
 	public Integer getPerm_id() {
 		return perm_id;
 	}
