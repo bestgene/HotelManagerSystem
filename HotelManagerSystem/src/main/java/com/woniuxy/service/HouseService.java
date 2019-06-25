@@ -20,7 +20,11 @@ public interface HouseService {
 	
 	public HouseType findHouseTypeByHouseTypeId(Integer house_type_id);
 	
-	public boolean addDateHouseOperation(DateHouse dateHouse);
+	//添加入住信息根据起止时间和房间id
+	public boolean addDateHouseOperation(Integer house_id,Integer house_type_id,String startTime,String endTime) throws ParseException;
+	
+	//删除入住信息根据起止时间和房间id
+	public boolean deleteDateHouseOperation(Integer house_id,String startTime,String endTime) throws ParseException;
 	
 	//根据起止时间和房间类型和数量 查询可入住房间
 	public List<House> addOperation(String startTime,String endTime,

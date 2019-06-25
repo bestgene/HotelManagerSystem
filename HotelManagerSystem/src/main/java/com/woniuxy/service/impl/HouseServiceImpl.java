@@ -65,10 +65,33 @@ public class HouseServiceImpl implements HouseService {
 		return houseDAO.findHouseTypeByHouseTypeId(house_type_id);
 	}
 
-
 	@Override
-	public boolean addDateHouseOperation(DateHouse dateHouse) {
-		return houseDAO.addDateHouseOperation(dateHouse);
+	public boolean addDateHouseOperation(Integer house_id,Integer house_type_id,String startTime, String endTime) throws ParseException {
+		List<String> allDay = HouseUtil.allDay(startTime, endTime);
+		for (String dh_day  : allDay) {
+			DateHouse single = new DateHouse();
+			single.setDh_day(dh_day);
+			single.setHouse_id(house_id);
+			single.setHouse_type_id(house_type_id);
+			boolean addDateHouseOperation = houseDAO.addDateHouseOperation(single);
+			if (addDateHouseOperation==false){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
+	@Override
+	public boolean deleteDateHouseOperation(Integer house_id, String startTime, String endTime) throws ParseException {
+		List<String> allDay = HouseUtil.allDay(startTime, endTime);
+		for (String dh_day  : allDay) {
+			boolean deleteDateHouseOperation = houseDAO.deleteDateHouseOperation(house_id, dh_day);
+			if (deleteDateHouseOperation==false){
+				return false;
+			}
+		}
+		return true;
 	}
 
 
@@ -90,7 +113,6 @@ public class HouseServiceImpl implements HouseService {
 				single.setHouse_id(singleHouse.getHouse_id());
 				single.setHouse_type_id(singleHouse.getHouseType().getHouse_type_id());
 				single.setDh_day(currentDay);
-				addDateHouseOperation(single);
 			}
 		}
 		return findDifferObj;
@@ -142,4 +164,6 @@ public class HouseServiceImpl implements HouseService {
 		return allHouses;
 		
 	}
+
+	
 }

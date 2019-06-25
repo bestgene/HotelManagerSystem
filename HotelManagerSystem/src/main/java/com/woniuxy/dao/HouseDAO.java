@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.woniuxy.pojo.DateHouse;
 import com.woniuxy.pojo.House;
@@ -43,8 +44,11 @@ public interface HouseDAO {
 	@Select("select house_id from t_date_house where house_type_id=#{house_type_id} and dh_day = #{dh_day}")
 	public List<Integer> findHidByHouseTypeIdAndTime(@Param("house_type_id") Integer house_type_id,@Param("dh_day")String dh_day);
 	//插入 入住操作信息
-	@Insert("insert into t_date_house values(#{house_id},#{house_id},#{house_type_id},#{dh_day})")
+	@Insert("insert into t_date_house values(#{house_id},#{house_type_id},#{dh_day})")
 	public boolean addDateHouseOperation(DateHouse dateHouse);
+	//删除入住信息
+	@Update("update t_date_house set flag = 1 where house_id=#{arg0} and dh_day=#{arg1}")
+	public boolean deleteDateHouseOperation(Integer house_id,String dh_day);
 	//根据house_type_id查询HouseType
 	@Select("select * from t_house_type where house_type_id = #{house_type_id}")
 	public HouseType findHouseTypeByHouseTypeId(Integer house_type_id);
