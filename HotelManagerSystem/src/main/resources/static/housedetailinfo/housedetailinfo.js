@@ -46,7 +46,6 @@ function queryTypeAndTime() {
 function order(house_type_id){
 	var startTime=$("#startTime").html();
 	var endTime=$("#endTime").html();
-	alert(house_type_id);
 	if (startTime.length!=0&&endTime.length!=0&&house_type_id.length!=0){
 		location.href="../house/allSingleType/"+startTime+"/"+endTime+"/"+house_type_id;
 	}else{
