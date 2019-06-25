@@ -43,8 +43,19 @@ public class OrderProvider {
         if (order.getOrder_number()!=null&&order.getOrder_number().length()>0){
             sql.WHERE("order_number='"+order.getOrder_number()+"'");
         }
-        sql.WHERE("t_order.flag="+order.getFlag());
-        sql.WHERE("order.state="+order.getOrder_state());
+        if (order.getOrder_state()!=null){
+            sql.WHERE("order.state="+order.getOrder_state());
+        }
+        if (order.getFlag()!=null){
+            if (order.getFlag()==3){
+                sql.WHERE("t_order.flag not in(0)");
+            }else if (order.getFlag()==0||order.getFlag()==1||order.getFlag()==2){
+                sql.WHERE("t_order.flag="+order.getFlag());
+            }
+
+        }
+
+
         return sql.toString();
     }
 
