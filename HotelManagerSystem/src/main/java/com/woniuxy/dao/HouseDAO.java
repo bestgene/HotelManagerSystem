@@ -48,4 +48,5 @@ public interface HouseDAO {
 	//根据house_type_id查询HouseType
 	@Select("select * from t_house_type where house_type_id = #{house_type_id}")
 	public HouseType findHouseTypeByHouseTypeId(Integer house_type_id);
+	
 }

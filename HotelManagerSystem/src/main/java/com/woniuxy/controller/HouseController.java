@@ -120,6 +120,28 @@ public class HouseController {
 		return modelAndView;
 	}
 	
+	/* 修改：byys
+	 * 点击查询返回
+	 */
+	@GetMapping("/queryHouse/{startTime}/{endTime}/{house_type_id}")
+	@ResponseBody
+	public Map<String,Object> queryHouse(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("house_type_id") Integer house_type_id) throws ParseException{
+		Map<Integer,List<House>> allAvailableRooms = allAvailableRooms(startTime,endTime);
+		System.out.println(house_type_id);
+		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
+		Map<String,Object> date = new Hashtable<String, Object>();
+		Map<String,Object> house=new Hashtable<String,Object>();
+		houseType.setNum(allAvailableRooms.get(house_type_id).size());
+		house.put("houseTypes", houseType);
+		date.put("startTime",startTime);
+		date.put("endTime",endTime);
+		house.put("date",date);
+		System.out.println(house);
+		return house;
+	}
+	
+	
+	
 	@RequestMapping("/test")
 	public String test(){
 //		return "/face-user/house-info/housedetailinfo.html";
