@@ -31,7 +31,7 @@
 			<table id="house-table">
 			    <tr class="tr-info">
 					<td class="td-title">类型：</td>
-					<td th:text="${singleType.house_type_id}" id="houseTypeId"></td>
+					<td th:text="${singleType.house_type_id}"></td>
 					<td th:text="${singleType.house_type_name}"></td>
 				</tr>
 				<tr class="tr-info">
@@ -47,7 +47,7 @@
 					<td class="td-title">数量：</td>
 					<td th:text="${singleType.num}"></td>
 					<td>
-						<button type="button" class="btn btn-danger" onclick="order()">跳转到填写订单的页面，可以选择数量</button>
+						<button type="button" class="btn btn-danger" th:onclick="order('[[${singleType.house_type_id}]]');">跳转到填写订单的页面，可以选择数量</button>
 					</td>
 				</tr>
 			</table>

@@ -63,16 +63,15 @@ public class HouseController {
 	 */
 	public ModelAndView allSingleHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("house_type_id") Integer house_type_id) throws ParseException{
 		ModelAndView model = new ModelAndView();
-		Map<String,Object> all = new Hashtable<>();
 		List<House> allAvailableTypeRooms = allAvailableTypeRooms(startTime,endTime,house_type_id);
 		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
 		houseType.setNum(allAvailableTypeRooms.size());
-		all.put("houseType",houseType);
-		List<String> date = new ArrayList<String>();
-		date.add(startTime);
-		date.add(endTime);
-		all.put("date",date);
-		all.put("houses",allAvailableTypeRooms);
+		model.addObject("houseType",houseType);
+		System.out.println(houseType.getHouse_type_name());
+		Map<String,Object> date = new Hashtable<String, Object>();
+		date.put("startTime",startTime);
+		date.put("endTime",endTime);
+		model.addObject("date",date);
 		model.setViewName("/face-user/booknews.html");
 		return model;
 	}

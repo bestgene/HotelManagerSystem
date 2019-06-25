@@ -43,10 +43,9 @@ function queryTypeAndTime() {
 	});
 };
 //跳转订单填写页面
-function order(){
+function order(house_type_id){
 	var startTime=$("#startTime").html();
 	var endTime=$("#endTime").html();
-	var house_type_id=$("#houseTypeId").html();
 	alert(house_type_id);
 	if (startTime.length!=0&&endTime.length!=0&&house_type_id.length!=0){
 		location.href="../house/allSingleType/"+startTime+"/"+endTime+"/"+house_type_id;
