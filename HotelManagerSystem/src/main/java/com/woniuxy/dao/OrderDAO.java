@@ -19,7 +19,7 @@ public interface OrderDAO {
             @Result(id = true, column = "order_id", property = "order_id"),
             @Result(column = "user_id", property = "user",
                     one = @One(
-                            select = "查询用户账户通过账户id"
+                            select = "com.woniuxy.dao.UserDAO.selectUserByUid"
                     )),
             @Result(column = "user_info_id", property = "userInfo.user_info_id"),
             @Result(column = "user_info_name", property = "userInfo.user_info_name"),

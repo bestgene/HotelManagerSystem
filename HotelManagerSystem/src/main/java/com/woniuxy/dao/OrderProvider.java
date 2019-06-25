@@ -44,7 +44,7 @@ public class OrderProvider {
             sql.WHERE("order_number='"+order.getOrder_number()+"'");
         }
         if (order.getOrder_state()!=null){
-            sql.WHERE("order.state="+order.getOrder_state());
+            sql.WHERE("order_state="+order.getOrder_state());
         }
         if (order.getFlag()!=null){
             if (order.getFlag()==3){
@@ -54,7 +54,6 @@ public class OrderProvider {
             }
 
         }
-
 
         return sql.toString();
     }

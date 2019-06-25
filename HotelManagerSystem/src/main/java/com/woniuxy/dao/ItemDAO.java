@@ -33,7 +33,7 @@ public interface ItemDAO {
 	
 	/**
 	 * 根据订单id找到其对应的订单项
-	 * @param OrderId
+	 * @param
 	 * @return
 	 */
 	@Results({
@@ -41,7 +41,7 @@ public interface ItemDAO {
 			@Result(column = "order_id",property = "order_id"),
 			@Result(column = "house_id",property = "house",
 				one = @One(
-						select = "根据房间id查询房间"
+						select = "com.woniuxy.dao.HouseDAO.findHouseByHouseId"
 				)),
 			@Result(column = "item_checkintime",property = "item_checkintime"),
 			@Result(column = "item_checkouttime",property = "item_checkouttime"),
@@ -51,6 +51,6 @@ public interface ItemDAO {
 			@Result(column = "item_isauto",property = "item_isauto"),
 			@Result(column = "flag",property = "flag")
 	})
-	@Select("select * from t_item where order_id=#{order_id}}")
-	public List<Item> findItemsByOrderId(int OrderId);
+	@Select("select * from t_item where order_id=#{order_id}")
+	public List<Item> findItemsByOrderId(Integer order_id);
 }

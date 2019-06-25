@@ -32,6 +32,9 @@ public interface UserDAO {
 	@Select("select * from t_user where user_acc=#{user_acc}")
 	public User findUserByAcc(String user_acc);
 
+	@Select("select * from t_user where user_id=#{user_id}")
+	public User selectUserByUid(Integer user_id);
+
 	@Select("select *from t_user_info where user_id=#{user_id}")
 	public UserInfo getInfoByUid(Integer user_id);
 

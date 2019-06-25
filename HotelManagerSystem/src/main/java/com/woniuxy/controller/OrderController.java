@@ -49,10 +49,13 @@ public class OrderController {
      */
     @RequestMapping("/showAllOrder")
     @ResponseBody
-    public List<Order> showAllOrder(String cxfs, HttpServletRequest request) {
-        Order order = new Order();
+    public List<Order> showAllOrder(Order order,String cxfs, HttpServletRequest request) {
+        System.out.println(order);
         //如果是正常用户操作
         User user = (User) request.getSession().getAttribute("user");
+        user = new User();
+        user.setUser_id(1);
+        user.setRole_id(1);
         if (user.getRole_id() == 1) {
             order.setUser(user);
         }
@@ -82,7 +85,7 @@ public class OrderController {
      * 线下开单
      * 后台人员操作
      * 生成订单
-     * <p>
+     *
      * 状态state2 flag1 支付方式0
      * 不添加额外预定信息
      *
