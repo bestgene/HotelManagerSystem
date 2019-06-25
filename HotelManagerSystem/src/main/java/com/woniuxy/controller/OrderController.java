@@ -97,7 +97,8 @@ public class OrderController {
     public String createKdOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
 
-        List<House> houses = new ArrayList<>();
+        List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
+        ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
         //1.创建 订单表
         Order order = new Order();
         //设置用户信息
@@ -175,7 +176,9 @@ public class OrderController {
     public String createYdOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
 
-        List<House> houses = new ArrayList<>();
+        List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
+                ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
+        System.out.println(houses);
         //1.创建 订单表
         Order order = new Order();
         //设置用户信息
@@ -186,6 +189,7 @@ public class OrderController {
         User user = (User) request.getSession().getAttribute("user");
         user = new User();
         user.setUser_id(1);
+        user.setRole_id(1);
         //设置操作角色
         order.setUser(user);
         //判断操作用户的角色

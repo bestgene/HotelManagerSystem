@@ -12,8 +12,10 @@ public interface ItemDAO {
 	 * @param item
 	 * @return
 	 */
-	@Insert("insert into t_item(house_id,order_id,item_checkintime,item_checkouttime,item_checkinday,item_arrivetime,item_canceltime,item_isauto)"
-			+ "values (#{house.house_id},#{order_id},#{item_checkintime},#{item_checkouttime},#{item_checkinday},#{item_arrivetime},#{item_canceltime},#{item_isauto}")
+	@Insert("insert into t_item(house_id,order_id," +
+			"item_checkintime,item_checkouttime,item_checkinday,item_arrivetime,item_canceltime,item_isauto)"
+			+ "values (#{house.house_id},#{order_id}," +
+			"#{item_checkintime},#{item_checkouttime},#{item_checkinday},#{item_arrivetime},#{item_canceltime},#{item_isauto})")
 	public boolean createItems(Item item);
 	
 

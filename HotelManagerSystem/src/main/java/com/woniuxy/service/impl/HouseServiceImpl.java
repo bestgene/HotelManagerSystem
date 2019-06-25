@@ -90,7 +90,7 @@ public class HouseServiceImpl implements HouseService {
 				single.setHouse_id(singleHouse.getHouse_id());
 				single.setHouse_type_id(singleHouse.getHouseType().getHouse_type_id());
 				single.setDh_day(currentDay);
-				addDateHouseOperation(single);
+				/*addDateHouseOperation(single);*/
 			}
 		}
 		return findDifferObj;

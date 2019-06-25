@@ -8,8 +8,7 @@ import java.util.List;
 public class Order implements Serializable{
 	//订单号
 	private Integer order_id;
-	//订单编号（手动生成唯一）
-	private String reserve_idnumber;
+
 	//操作用户
 	private User user;
 	//该订单的用户具体信息
@@ -36,15 +35,13 @@ public class Order implements Serializable{
 	private Integer order_state;
 	private Integer flag;
 
-
-
 	@Override
 	public String toString() {
 		return "Order{" +
 				"order_id=" + order_id +
-				", reserve_idnumber='" + reserve_idnumber + '\'' +
 				", user=" + user +
 				", userInfo=" + userInfo +
+				", items=" + items +
 				", order_number='" + order_number + '\'' +
 				", order_paynumber='" + order_paynumber + '\'' +
 				", order_createtime='" + order_createtime + '\'' +
@@ -54,7 +51,6 @@ public class Order implements Serializable{
 				", order_deposit=" + order_deposit +
 				", order_message='" + order_message + '\'' +
 				", order_state=" + order_state +
-				", items=" + items +
 				", flag=" + flag +
 				'}';
 	}
@@ -65,14 +61,6 @@ public class Order implements Serializable{
 
 	public void setOrder_id(Integer order_id) {
 		this.order_id = order_id;
-	}
-
-	public String getReserve_idnumber() {
-		return reserve_idnumber;
-	}
-
-	public void setReserve_idnumber(String reserve_idnumber) {
-		this.reserve_idnumber = reserve_idnumber;
 	}
 
 	public User getUser() {
@@ -89,6 +77,14 @@ public class Order implements Serializable{
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 	public String getOrder_number() {
@@ -161,14 +157,6 @@ public class Order implements Serializable{
 
 	public void setOrder_state(Integer order_state) {
 		this.order_state = order_state;
-	}
-
-	public List<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
 	}
 
 	public Integer getFlag() {

@@ -55,7 +55,7 @@ public interface OrderDAO {
     @Insert("insert into t_order(user_id,user_info_id,order_number," +
             "order_createtime,order_payment,order_totalpay,order_deposit," +
             "order_message,order_state,flag) "
-            + "values (#{user_id},#{user_info_id},#{order_number}," +
+            + "values (#{user.user_id},#{userInfo.user_info_id},#{order_number}," +
             "#{order_createtime},#{order_payment},#{order_totalpay},#{order_deposit}," +
             "#{order_message},#{order_state},#{flag})")
     public boolean creatOrder(Order order);
