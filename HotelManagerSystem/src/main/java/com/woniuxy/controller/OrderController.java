@@ -179,6 +179,7 @@ public class OrderController {
     @RequestMapping("/createYdOrder")
     public String createYdOrder(Reserve reserve, HttpServletRequest request,HttpServletResponse response) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
+    	System.out.println(reserve);
     	List<House> rooms = houseService.allAvailableTypeRooms(reserve.getReserve_checkintime(), reserve.getReserve_checkouttime(), reserve.getHouseType().getHouse_type_id());
         System.out.println(rooms.size()+"-----------------");
         
