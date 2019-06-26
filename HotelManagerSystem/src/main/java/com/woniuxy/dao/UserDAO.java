@@ -38,6 +38,8 @@ public interface UserDAO {
 	public Level getLevelByVipId(Integer level_id);
 	@Select("select *from t_user_info where user_info_tel=#{arg0} or user_info_idcard=#{arg1}")
 	public UserInfo selectUserInfoByTelOrIdcard(String arg0,String arg1);
+	@Select("select *from t_user u,t_role r where u.role_id=r.role_id and u.user_id=#{user_id}")
+	public Role selectRoleByUserId(Integer user_id);
 	
 	@Select("select *from t_perm where role_id=#{role_id}")
 	@Results({
