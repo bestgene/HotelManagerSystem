@@ -11,9 +11,7 @@ import com.woniuxy.service.UserService;
 
 
 @SpringBootApplication
-
 @ComponentScan({"com.woniuxy.controller"/*,"com.woniuxy.configuration"*/,"com.woniuxy.service.impl","com.woniuxy.service"})
-
 @MapperScan("com.woniuxy.dao")
 public class HotelManagerSystemApplication {
 
