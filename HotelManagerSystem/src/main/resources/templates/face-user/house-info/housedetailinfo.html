@@ -13,7 +13,7 @@
 		<select id="house_type" class="tr-head">
 			<div th:each="singleHouse:${houseTypes}">
 				<option name="houseType" th:value="${singleHouse.house_type_id}"
-					th:text="${singleHouse.house_type_name}" id="house_type_id">
+					th:text="${singleHouse.house_type_name}">
 				</option>				
             </div>
       </select>      
