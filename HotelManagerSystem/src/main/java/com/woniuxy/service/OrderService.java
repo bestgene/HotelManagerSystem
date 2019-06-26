@@ -2,6 +2,7 @@ package com.woniuxy.service;
 
 import java.util.List;
 
+import com.woniuxy.pojo.Item;
 import com.woniuxy.pojo.Order;
 
 public interface OrderService {
@@ -19,10 +20,10 @@ public interface OrderService {
 	public boolean createOrder(Order order);
 	/**
 	 * 支付订单
-	 * @param order
+	 * @param
 	 * @return
 	 */
-	public boolean payOrder(Order order);
+	public boolean payOrder(String order_number,String pay_number);
 
 
 	/**
@@ -47,4 +48,10 @@ public interface OrderService {
 	 */
 	public boolean updateOrder(Order order);
 
+	public List<Item> queryItemByOid(Order order);
+	
+	/**
+	 * 付押金
+	 */
+	public int payDeposit(String order_number,String pay_number);
 }

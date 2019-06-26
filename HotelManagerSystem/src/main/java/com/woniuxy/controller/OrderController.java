@@ -11,18 +11,21 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.woniuxy.pojo.*;
-import com.woniuxy.service.ChargingService;
-import com.woniuxy.service.HouseService;
-import org.junit.Test;
-import org.mockito.internal.matchers.Or;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.woniuxy.pojo.Charging;
+import com.woniuxy.pojo.House;
+import com.woniuxy.pojo.Item;
+import com.woniuxy.pojo.Order;
+import com.woniuxy.pojo.Reserve;
+import com.woniuxy.pojo.User;
+import com.woniuxy.service.ChargingService;
+import com.woniuxy.service.HouseService;
 import com.woniuxy.service.OrderService;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/order")
@@ -94,10 +97,11 @@ public class OrderController {
      */
     @RequestMapping("/createKdOrder")
     @ResponseBody
-    public String createKdOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
+    public String createKdOrder(Reserve reserve, HttpServletRequest request, HttpServletResponse response) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
 
-        List<House> houses = new ArrayList<>();
+        List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
+        ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
         //1.创建 订单表
         Order order = new Order();
         //设置用户信息
@@ -158,6 +162,7 @@ public class OrderController {
         boolean flag = orderService.createOrder(order);
 
         //默认已付款
+
         return "线下开单";
 
     }
@@ -172,10 +177,18 @@ public class OrderController {
      * @return
      */
     @RequestMapping("/createYdOrder")
-    public String createYdOrder(Reserve reserve, HttpServletRequest request) throws ParseException {
+    public String createYdOrder(Reserve reserve, HttpServletRequest request,HttpServletResponse response) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
-
-        List<House> houses = new ArrayList<>();
+    	List<House> rooms = houseService.allAvailableTypeRooms(reserve.getReserve_checkintime(), reserve.getReserve_checkouttime(), reserve.getHouseType().getHouse_type_id());
+        System.out.println(rooms.size()+"-----------------");
+        
+        
+        List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
+                ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
+        
+        if(houses==null||houses.size()<reserve.getHouse_number()){
+        	return null;
+        }
         //1.创建 订单表
         Order order = new Order();
         //设置用户信息
@@ -186,6 +199,7 @@ public class OrderController {
         User user = (User) request.getSession().getAttribute("user");
         user = new User();
         user.setUser_id(1);
+        user.setRole_id(1);
         //设置操作角色
         order.setUser(user);
         //判断操作用户的角色
@@ -244,15 +258,21 @@ public class OrderController {
 
         //新增order、item
         boolean flag = orderService.createOrder(order);
+        
+        //支付测试
+        PayController pc=new PayController();
+        pc.payMoney(response, order.getOrder_number(), order.getOrder_totalpay()+"", order.getOrder_number()+order.getOrder_totalpay(), "");
+   
+
         //线上支付，跳转支付页面
         if (flag && order.getOrder_state() == 0 && order.getFlag() == 0) {
-
+        	
         } else {
+
         }
-        return "预定添加";
+        return null;
 
     }
-
 
     /**
      * 取消预定，这里必须是已支付后可见的订单
@@ -315,7 +335,7 @@ public class OrderController {
 
         //金额再乘以会员打折比率***********
         //totalpay=XXXXXXX
-        totalpay = totalpay.multiply(totalpay);
+        totalpay = totalpay.multiply(new BigDecimal(1));
         //全场打折 0不打折，1打折
         if (charging.getCharging_isqc() == 1) {
             totalpay = totalpay.multiply(new BigDecimal(charging.getCharging_ratio()));

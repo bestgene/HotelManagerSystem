@@ -3,11 +3,16 @@ package com.woniuxy.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.mapping.FetchType;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import com.woniuxy.pojo.Order;
-import org.mockito.internal.matchers.Or;
 
 public interface OrderDAO {
     /**
@@ -55,7 +60,7 @@ public interface OrderDAO {
     @Insert("insert into t_order(user_id,user_info_id,order_number," +
             "order_createtime,order_payment,order_totalpay,order_deposit," +
             "order_message,order_state,flag) "
-            + "values (#{user_id},#{user_info_id},#{order_number}," +
+            + "values (#{user.user_id},#{userInfo.user_info_id},#{order_number}," +
             "#{order_createtime},#{order_payment},#{order_totalpay},#{order_deposit}," +
             "#{order_message},#{order_state},#{flag})")
     public boolean creatOrder(Order order);
@@ -70,10 +75,20 @@ public interface OrderDAO {
     public Order queryOrderId(Order order);
 
 
-    //当支付完成后，更新订单项中的支付编号
-    @Update("update t_order set order_paynumber=#{1},order_state=1 where order_number=#{0}")
+    /**
+     * 退房结账
+     * @param order_number
+     * @param order_paynumber
+     * @return
+     */
+    @Update("update t_order set order_paynumber=#{arg1},order_state=3,flag=2 where order_number=#{arg0}")
     public boolean payOreder(String order_number, String order_paynumber);
 
+
+
+    //支付押金（只改变状态）
+    @Update("update t_order set order_state=1,flag=1,order_paynumber=#{arg1} where order_number=#{arg0}")
+    public int payDeposit(String order_number, String order_paynumber);
     /**
      * 取消预定
      * @param order

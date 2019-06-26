@@ -10,7 +10,6 @@ import com.woniuxy.dao.ItemDAO;
 import com.woniuxy.dao.OrderDAO;
 import com.woniuxy.pojo.Item;
 import com.woniuxy.pojo.Order;
-import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.service.OrderService;
 
 @Service("OrderService")
@@ -57,9 +56,9 @@ public class OrderServiceImpl implements OrderService {
 	 * @return
 	 */
 	@Override
-	public boolean payOrder(Order order) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean payOrder(String order_number,String pay_number) {
+
+		return orderDAO.payOreder(order_number,pay_number);
 	}
 
 	@Override
@@ -76,6 +75,18 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public boolean updateOrder(Order order) {
 		return orderDAO.updateOrder(order);
+	}
+	
+	@Override
+	public List<Item> queryItemByOid(Order order){
+		return itemDAO.findItemsByOrderId(order.getOrder_id());
+	}
+
+
+	@Override
+	public int payDeposit(String order_number, String pay_number) {
+		// TODO Auto-generated method stub
+		return orderDAO.payDeposit(order_number, pay_number);
 	}
 
 
