@@ -25,20 +25,19 @@ import com.woniuxy.service.HouseService;
 public class HouseController {
 	@Resource
 	private HouseService houseService;
-	
-	
+
 	public HouseService getHouseService() {
 		return houseService;
 	}
 
-
 	public void setHouseService(HouseService houseService) {
 		this.houseService = houseService;
 	}
-	
-	//前端选择时间跳转到房间选择页面
+
+	// 前端选择时间跳转到房间选择页面
 	@PostMapping("/forward/{startTime}/{endTime}")
-	public ModelAndView get(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) throws ParseException{
+	public ModelAndView get(@PathVariable("startTime") String startTime, @PathVariable("endTime") String endTime)
+			throws ParseException {
 		ModelAndView model = new ModelAndView();
 		List<String> date = new ArrayList<String>();
 		date.add(startTime);
@@ -49,92 +48,111 @@ public class HouseController {
 
 	@GetMapping("/allSingleType/{startTime}/{endTime}/{house_type_id}")
 	/*
-	 * 展示房间类型信息
-	 * startTime 	入住时间
-	 * endTime		离开时间
+	 * 展示房间类型信息 startTime 入住时间 endTime 离开时间
 	 */
-	public ModelAndView allSingleHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime,@PathVariable("house_type_id") Integer house_type_id) throws ParseException{
+	public ModelAndView allSingleHouseType(@PathVariable("startTime") String startTime,
+			@PathVariable("endTime") String endTime, @PathVariable("house_type_id") Integer house_type_id)
+			throws ParseException {
 		ModelAndView model = new ModelAndView();
-		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime,endTime,house_type_id);
+		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime, house_type_id);
 		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
 		houseType.setNum(allAvailableTypeRooms.size());
-		model.addObject("houseType",houseType);
+		model.addObject("houseType", houseType);
 		System.out.println(houseType.getHouse_type_name());
-		Map<String,Object> date = new Hashtable<String, Object>();
-		date.put("startTime",startTime);
-		date.put("endTime",endTime);
-		model.addObject("date",date);
+		Map<String, Object> date = new Hashtable<String, Object>();
+		date.put("startTime", startTime);
+		date.put("endTime", endTime);
+		model.addObject("date", date);
 		model.setViewName("/face-user/booknews.html");
 		return model;
 	}
-	
+
 	@PostMapping("/allHouseType/{startTime}/{endTime}")
 	@ResponseBody
 	/*
-	 * 展示房间类型信息
-	 * startTime 	入住时间
-	 * endTime		离开时间
+	 * 展示房间类型信息 startTime 入住时间 endTime 离开时间
 	 */
-	public Map<String,Object> allHouseType(@PathVariable("startTime") String startTime,@PathVariable("endTime") String endTime) throws ParseException{
-		Map<String,Object> all = new Hashtable<>();
+	public Map<String, Object> allHouseType(@PathVariable("startTime") String startTime,
+			@PathVariable("endTime") String endTime) throws ParseException {
+		Map<String, Object> all = new Hashtable<>();
 		Map<Integer, List<House>> allAvailableRooms = houseService.allAvailableRooms(startTime, endTime);
-		all.put("allHouses",allAvailableRooms);
+		all.put("allHouses", allAvailableRooms);
 		List<String> date = new ArrayList<String>();
 		date.add(startTime);
 		date.add(endTime);
-		all.put("date",date);
+		all.put("date", date);
 		return all;
 	}
-	
-	
+
 	/*
 	 * test:byys更改
 	 */
 	@RequestMapping("/alltype")
-	public ModelAndView allHouse(String startTime,String endTime) throws ParseException{
+	public ModelAndView allHouse(String startTime, String endTime) throws ParseException {
 		String[] start = startTime.split("/");
-		String startTime1 = start[2]+"-"+start[0]+"-"+start[1];
+		String startTime1 = start[2] + "-" + start[0] + "-" + start[1];
 		String[] end = endTime.split("/");
-		String endTime1 = end[2]+"-"+end[0]+"-"+end[1];
-		ModelAndView modelAndView= new ModelAndView();
-		Map<Integer,List<House>> allAvailableRooms = houseService.allAvailableRooms(startTime1,endTime1);
+		String endTime1 = end[2] + "-" + end[0] + "-" + end[1];
+		ModelAndView modelAndView = new ModelAndView();
+		Map<Integer, List<House>> allAvailableRooms = houseService.allAvailableRooms(startTime1, endTime1);
 		List<HouseType> houseType = houseService.houseType();
 		for (HouseType singleType : houseType) {
 			singleType.setNum(allAvailableRooms.get(singleType.getHouse_type_id()).size());
 		}
-		Map<String,Object> date = new Hashtable<String, Object>();
+		Map<String, Object> date = new Hashtable<String, Object>();
 		modelAndView.addObject("houseTypes", houseType);
-		date.put("startTime",startTime1);
-		date.put("endTime",endTime1);
-		modelAndView.addObject("date",date);
+		date.put("startTime", startTime1);
+		date.put("endTime", endTime1);
+		modelAndView.addObject("date", date);
 		modelAndView.setViewName("face-user/house-info/housedetailinfo.html");
 		System.out.println(allAvailableRooms);
 		return modelAndView;
 	}
-	
-	
+
+	/*
+	 * 修改：byys 点击查询返回
+	 */
+	@GetMapping("/queryHouse/{startTime}/{endTime}/{house_type_id}")
+	@ResponseBody
+	public Map<String, Object> queryHouse(@PathVariable("startTime") String startTime,
+			@PathVariable("endTime") String endTime, @PathVariable("house_type_id")
+
+			Integer house_type_id) throws ParseException {
+		Map<Integer, List<House>> allAvailableRooms = houseService.allAvailableRooms(startTime, endTime);
+		System.out.println(house_type_id);
+		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
+		Map<String, Object> date = new Hashtable<String, Object>();
+		Map<String, Object> house = new Hashtable<String, Object>();
+		houseType.setNum(allAvailableRooms.get(house_type_id).size());
+		house.put("houseTypes", houseType);
+		date.put("startTime", startTime);
+		date.put("endTime", endTime);
+		house.put("date", date);
+		System.out.println(house);
+		return house;
+	}
+
 	@PostMapping("/addCheckInOperation/{startTime}/{endTime}/{house_type_id}/{number}")
 	/*
 	 * 添加入住历史信息
 	 */
 	public ModelAndView addOperation(@PathVariable("startTime") String startTime,
-			@PathVariable("endTime") String endTime,
-			@PathVariable("house_type_id") Integer house_type_id,
-			@PathVariable("number") Integer number) throws ParseException{
+			@PathVariable("endTime") String endTime, @PathVariable("house_type_id") Integer house_type_id,
+			@PathVariable("number") Integer number) throws ParseException {
 		ModelAndView model = new ModelAndView();
-		//查询所有可入住房间
+		// 查询所有可入住房间
 		List<House> addOperation = houseService.addOperation(startTime, endTime, house_type_id, number);
 		model.addObject("houses", addOperation);
 		model.addObject("start", startTime);
 		model.addObject("end", endTime);
-		//设置跳转页面
+		// 设置跳转页面
 		model.setViewName("");
 		return model;
-		
+
 	}
-	
+
 	@RequestMapping("/test")
-	public String test(String startTime,String endTime,Integer house_type_id) throws ParseException{
+	public String test(String startTime, String endTime, Integer house_type_id) throws ParseException {
 		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime, house_type_id);
 		System.out.println(allAvailableTypeRooms);
 		return null;
