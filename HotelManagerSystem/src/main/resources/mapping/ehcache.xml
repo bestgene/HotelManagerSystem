@@ -1,0 +1,16 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+          
+    <diskStore path="java.io.tmpdir"/> 磁盘存储路径，java.io.tmdir是操作系统缓存的临时目录
+ 
+  <!--defaultCache:echcache的默认缓存策略  -->
+    <cache name="SystemCache"
+            maxElementsInMemory="10000"
+            eternal="true"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+</ehcache>

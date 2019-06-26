@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="assets/css/person.css">
+<script src="assets/js/jquery.min.js"></script>
+</head>
+<body>
+<div class="big">
+			<div class="top">
+				<span id="tit">
+					个人资料信息
+				</span>
+			</div>
+			<div class="bottom">
+				<form method="post">
+					
+				<label for="username" class="">姓名：</label><br>
+				<input maxlength="20" type="text" placeholder="" id="uname">
+				
+				<br/>
+				<br/>
+				
+				<label for="username" class="">身份证号： </label><br>
+				<input maxlength="20" type="text" placeholder="" id="numIDcard" disabled="disabled" >
+				
+				<br />
+				<br />
+				<label for="username" class="">手机号码：</label><br> 
+				<input maxlength="20" type="text" placeholder="" id="phnum" disabled="disabled" >
+				
+				<br />
+				<br />
+				<label for="username" class="">密码： </label><br>
+				<input maxlength="20" type="text" placeholder="" id="pwd">
+				
+				<br />
+				<br />
+				<label for="username" class="">余额：</label><br>
+				<input maxlength="20" type="text" placeholder="" id="money" disabled="disabled" >
+				<br />
+				<br />
+				<br />
+				
+				<div class="btn">
+					<button type="button"  id="btn">修改</button>
+				</div>
+				</form>
+			</div>
+		</div>
+
+</body>
+<script type="text/javascript">
+
+$(function() {
+
+	
+	$.get("person", function(data){
+		/* alert(data); */
+		var arr = JSON.parse(data);
+		//for (var i = 0; i < arr.length; i++) {
+			$("#uname").val(arr[0].name);
+			$("#numIDcard").val(arr[0].idcard);
+			$("#phnum").val(arr[0].tel);
+			$("#pwd").val(arr[0].pwd);
+			$("#money").val(arr[0].money);
+			
+		//}
+		
+		
+	},"text");
+	
+	 $("#btn").click(function(){		 
+	 	var uname=$("#uname").val();
+	 	var money=$("#money").val();
+	 	var pwd=$("#pwd").val();
+	 	var phnum=$("#phnum").val();
+	 	
+	 	
+	 	$.post(
+	 			"updateePerson",
+	 			{"uname":uname,"money":money,"pwd":pwd,"phnum":phnum},
+	 			function(data){
+	 				/* alert(data); */
+	 				if(data=="1"){
+	 		        	alert("修改成功！");
+	 		        	}
+	 		        	else{
+	 		        		alert("密码不能为空，请重新输入！");	
+	 		        	}
+	 				
+	 				
+	 	},"text");
+	 });  
+	
+	
+});
+
+
+</script>
+
+</html>

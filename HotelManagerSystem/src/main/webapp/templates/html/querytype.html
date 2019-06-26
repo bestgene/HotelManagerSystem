@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery.min.js" ></script>
+</head>
+<body>
+   <input type="hidden" value="${param.starttime}" id="starttime"/>
+   <input type="hidden" value="${param.endtime}" id="endtime"/>
+   <select id="type" onchange="typeChange()">
+      <option name="houseType">单人间</option>
+      <option name="houseType">双人间</option>
+      <option name="houseType">豪华套房</option>
+      <option name="houseType">总统套房</option>
+   </select>
+   <script src="../js/querytype.js" ></script>
+</body>
+</html>

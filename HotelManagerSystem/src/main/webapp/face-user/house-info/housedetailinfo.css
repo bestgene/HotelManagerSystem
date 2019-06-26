@@ -1,0 +1,68 @@
+#house{
+	width: 1200px;
+	height: 440px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+#house-show,#house-info{
+	width: 50%;
+	height: 100%;
+	float: left;
+	
+}
+#house-show{
+	width: 40%;
+	text-align: center;
+	line-height: 400px;
+	
+}
+#house-show img{
+	vertical-align: middle;
+	height: 30%;
+	
+	
+}
+
+#house-info{
+	font-size: 14px;
+}
+#house-table{
+	border-spacing: 0px;
+	width: 100%;
+}
+#house-table td{
+	border-bottom: 1px solid #ccc;
+}
+.tr-info{
+	
+	text-align: center;
+	height: 70px;
+	font-size: 16px;
+	
+}
+.td-title{
+	width: 40%;
+	text-align: right;
+	font-size: 20px;
+}
+#total{
+	width: 40px;
+	height: 25px;
+	text-align: center;
+}
+.s-btn button{
+	outline: none;
+	background-color:white;
+	border: 1px solid #ccc;
+	
+}
+#gopay{
+	width: 100px;
+	height: 31px;
+	margin: 0 auto;
+}
+
+
+
+
