@@ -1,5 +1,6 @@
 package com.woniuxy.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -82,5 +83,18 @@ public class UserServieImpl implements UserService {
 	public UserInfo selectUserInfoByTelOrIdcard(String user_info_tel, String user_info_idcard) {
 		return userDAO.selectUserInfoByTelOrIdcard(user_info_tel, user_info_idcard);
 	}
+	
+	@Override
+	public BigDecimal getDiscountByTelOrIdcard(String user_info_tel, String user_info_idcard){   
+		UserInfo info=selectUserInfoByTelOrIdcard(user_info_tel, user_info_idcard);
+		Vip vip=getVipByUid(info.getUser_id());
+		Level level=getLevelByVipId(vip.getLevel_id());
+		BigDecimal discount = level.getLevel_discount();
+		return discount;
+	}
 
+	@Override
+	public Role selectRoleByUserId(Integer user_id) {
+		return userDAO.selectRoleByUserId(user_id);
+	}
 }

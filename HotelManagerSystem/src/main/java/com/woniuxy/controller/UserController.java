@@ -128,6 +128,7 @@ public class UserController {
 		System.out.println("会员等级"+level);
 		BigDecimal discount = level.getLevel_discount();//获取到的折扣
 		System.out.println(discount);
+		System.out.println("Service:"+userService.getDiscountByTelOrIdcard(user_info_tel, user_info_idcard));
 		return "操作成功";
 	}
 }
