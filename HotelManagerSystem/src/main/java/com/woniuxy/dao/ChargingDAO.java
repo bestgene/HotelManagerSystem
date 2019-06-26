@@ -18,7 +18,7 @@ public interface ChargingDAO {
      * @return
      */
     @Update("update t_charging set charging_isqc=#{charging_isqc},charging_ratio=#{charging_ratio},"
-            + "charging_isqz=#{charging_isqz},online_isqc=#{online_isqc},online_ratio=#{online_ratio} " +
+            + "charging_isqzdz=#{charging_isqzdz},online_isqc=#{online_isqc},online_ratio=#{online_ratio} " +
             "where charging_id=1")
     public boolean modifyCharging(Charging charging);
 }
