@@ -104,7 +104,7 @@
 										//alert(data);
 									},
 									error : function(data) {
-										alert(data)
+										//alert(data)
 									}
 								});
 
@@ -179,7 +179,7 @@
 							$("#aaa").append(str);
 						},
 						error : function(data) {
-							alert(data);
+							//alert(data);
 						}
 					});
 		});

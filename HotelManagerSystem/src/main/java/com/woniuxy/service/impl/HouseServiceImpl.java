@@ -10,13 +10,16 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.dao.HouseDAO;
+import com.woniuxy.dao.UserDAO;
 import com.woniuxy.pojo.DateHouse;
 import com.woniuxy.pojo.House;
 import com.woniuxy.pojo.HouseType;
+import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.service.HouseService;
 import com.woniuxy.util.HouseUtil;
 
@@ -25,6 +28,8 @@ public class HouseServiceImpl implements HouseService {
 	@Resource
 	private HouseDAO houseDAO;
 	
+	@Resource
+	private UserDAO userDAO;
 	
 	public HouseDAO getHouseDAO() {
 		return houseDAO;
@@ -68,11 +73,15 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public boolean addDateHouseOperation(Integer house_id,Integer house_type_id,String startTime, String endTime) throws ParseException {
 		List<String> allDay = HouseUtil.allDay(startTime, endTime);
+		Session session = SecurityUtils.getSubject().getSession();
+		Integer user_id = (Integer) session.getAttribute("user_id");
+		UserInfo userInfo = userDAO.getInfoByUid(user_id);
 		for (String dh_day  : allDay) {
 			DateHouse single = new DateHouse();
 			single.setDh_day(dh_day);
 			single.setHouse_id(house_id);
 			single.setHouse_type_id(house_type_id);
+			single.setUserInfo(userInfo);
 			boolean addDateHouseOperation = houseDAO.addDateHouseOperation(single);
 			if (addDateHouseOperation==false){
 				return false;

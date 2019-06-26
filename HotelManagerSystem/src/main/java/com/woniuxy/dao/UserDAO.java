@@ -27,7 +27,7 @@ public interface UserDAO {
 	public void addUser(User user);
 	@Select("select * from t_user where user_acc=#{user_acc}")
 	public User findUserByAcc(String user_acc);
-	@Select("select *from t_user_info where user_id=#{user_id}")
+	@Select("select * from t_user_info where user_id=#{user_id}")
 	public UserInfo getInfoByUid(Integer user_id);
 	@Update("update t_user_info set user_info_name=#{user_info_name},user_info_tel=#{user_info_tel},user_info_idcard=#{user_info_idcard} where user_id=#{user_id}")
 	public void updateInfo(UserInfo userInfo);
@@ -59,6 +59,7 @@ public interface UserDAO {
 	})
 	public Role selectRoleAndPerms(Integer role_id);
 	
+	//根据user_id查询User
 	@Select("select * from t_user where user_id=#{user_id}")
 	public User selectUserByUid(Integer user_id);
 }
