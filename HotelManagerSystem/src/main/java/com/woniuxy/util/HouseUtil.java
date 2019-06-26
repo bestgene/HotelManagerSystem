@@ -14,19 +14,21 @@ public class HouseUtil {
 		public static List<House> findDifferObj(List<House> all,Integer n){
 			List<House> result = new ArrayList<House>();
 			Random random = new Random();
-			boolean flag[] = new boolean[all.size()];
-			int index;
-			for (int i=0;i<n;i++){
-				do{
-					index = random.nextInt(all.size());
-					if (flag[index]==false){
-						result.add(all.get(index));
-						flag[index]=true;
-						break;
-					}
-				}while(flag[index]);
+			if (all!=null&&all.size()>n){
+				boolean flag[] = new boolean[all.size()];
+				int index;
+				for (int i=0;i<n;i++){
+					do{
+						index = random.nextInt(all.size());
+						if (flag[index]==false){
+							result.add(all.get(index));
+							flag[index]=true;
+							break;
+						}
+					}while(flag[index]);
+				}
+				random.nextInt(all.size());
 			}
-			random.nextInt(all.size());
 			return result;
 		}
 		

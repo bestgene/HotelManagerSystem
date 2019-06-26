@@ -1,6 +1,5 @@
 package com.woniuxy.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 
@@ -66,5 +65,16 @@ public class House implements Serializable{
 		return "House [house_id=" + house_id + ", house_name=" + house_name + ", house_state=" + house_state
 				+ ", houseType=" + houseType + ", flag=" + flag + "]";
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof House){
+			House house = (House) obj;
+			if (this.house_id==house.getHouse_id()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 }

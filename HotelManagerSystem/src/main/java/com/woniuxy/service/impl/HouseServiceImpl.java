@@ -144,22 +144,16 @@ public class HouseServiceImpl implements HouseService {
 		for (String currentDay : allDay) {
 			//对于各类型每天所有已入住房间的 house_id
 			List<Integer> temp = findHidByHouseTypeIdAndTime(house_type_id,currentDay);
-			System.out.println("----------------"+temp);
 			for (Integer hid : temp) {
 				House single = findHouseByHouseId(hid);
 				allCheckHouse.add(single);
 			}
 		}
-		
-		for (int m=0;m<allHouses.size();m++){
-			House house = allHouses.get(m);
-			Iterator<House> iterator = allCheckHouse.iterator();
-			while (iterator.hasNext()){
-				House next = iterator.next();
-				if (next.getHouse_id()==house.getHouse_id()){
-					allHouses.remove(m);
-				}
-			}
+		System.out.println(allCheckHouse);
+		Iterator<House> iterator = allCheckHouse.iterator();
+		while (iterator.hasNext()){
+			House next = iterator.next();
+			allHouses.remove(next);
 		}
 		return allHouses;
 		

@@ -112,13 +112,6 @@ public class HouseController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/test")
-	public String test(){
-//		return "/face-user/house-info/housedetailinfo.html";
-		return "/face-user/house-info/housedetailinfo.html";
-	}
-	
-	
 	
 	@PostMapping("/addCheckInOperation/{startTime}/{endTime}/{house_type_id}/{number}")
 	/*
@@ -138,5 +131,12 @@ public class HouseController {
 		model.setViewName("");
 		return model;
 		
+	}
+	
+	@RequestMapping("/test")
+	public String test(String startTime,String endTime,Integer house_type_id) throws ParseException{
+		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime, house_type_id);
+		System.out.println(allAvailableTypeRooms);
+		return null;
 	}
 }
