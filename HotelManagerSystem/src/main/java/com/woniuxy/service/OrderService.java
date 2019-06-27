@@ -48,10 +48,23 @@ public interface OrderService {
 	 */
 	public boolean updateOrder(Order order);
 
+	/**
+	 * 根据
+	 * @param order
+	 * @return
+	 */
 	public List<Item> queryItemByOid(Order order);
 	
 	/**
 	 * 付押金
 	 */
 	public int payDeposit(String order_number,String pay_number);
+
+	/**
+	 * 入住
+	 * @param order
+	 * @return
+	 */
+	public boolean checkIn(Order order);
+
 }

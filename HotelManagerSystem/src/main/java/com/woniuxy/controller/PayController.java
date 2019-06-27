@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradeRefundRequest;
+import com.woniuxy.dao.OrderDAO;
 import com.woniuxy.pojo.Item;
 import com.woniuxy.pojo.Order;
 import com.woniuxy.service.HouseService;
@@ -30,13 +34,12 @@ public class PayController {
 	private OrderService orderService;
 	@Resource
 	private HouseService houseService;
+	@Resource
+	private OrderController orderController;
+	@Resource
+	private OrderDAO orderDAO;
 
-	@RequestMapping("/pay")
-	public void pay(HttpServletRequest request, HttpServletResponse response, String orderNumber, String totalPay) {
-
-		// 向支付宝发起请求
-		payMoney(response, orderNumber, totalPay, orderNumber + totalPay, "");
-	}
+	
 
 	@RequestMapping("/savePayResult")
 	public void savePayResult(HttpServletRequest request, String out_trade_no, String trade_no, String trade_status)
@@ -82,13 +85,31 @@ public class PayController {
 
 				// 创建order对象，为其赋值订单编号
 				Order order = new Order();
-				order.setOrder_number(out_trade_no);
+				
 				// 通过订单编号查询该订单的id、状态、flag
+				//如果该订单中含有A：表示该订单是处于结账状态.删除最后一位即可
+				if(out_trade_no.indexOf("A")!=-1){
+					out_trade_no= out_trade_no.substring(0, out_trade_no.length()-1);
+				}
+				order.setOrder_number(out_trade_no);
 				Order qo = orderService.queryOrderByOrderNumber(order);
 				// 通过订单的状态和flag判断是付押金还是付全款
 				if (qo.getOrder_state() == 0 && qo.getFlag() == 0) {
 					// 付押金
 					orderService.payDeposit(out_trade_no, trade_no);
+					//开启TimeTask线程，在指定时间后执行取消该订单的方法
+					 Timer timer = new Timer();
+				      timer.schedule(new TimerTask() {
+
+				            @Override
+				            public void run() {
+				            	try {
+									orderController.qcOrder(qo);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}				  
+				            }
+				        }, 10000000);
 					// 查询该订单下的所有订单项
 					List<Item> items = orderService.queryItemByOid(qo);
 					// 通过订单项，改变该房间的状态
@@ -101,6 +122,7 @@ public class PayController {
 				}
 				// 付全款
 				else if (qo.getFlag() == 1 && qo.getOrder_state() == 2) {
+					
 					orderService.payOrder(out_trade_no, trade_no);
 				}
 
@@ -149,5 +171,43 @@ public class PayController {
 		}
 
 	}
-
+	
+	@RequestMapping("/refund")
+	public String refund(String out_trade_no,HttpServletResponse response) throws Exception{
+		//获得初始化的AlipayClient
+		AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+		
+		//设置请求参数
+		AlipayTradeRefundRequest alipayRequest = new AlipayTradeRefundRequest();
+		//根据订单编号查询订单信息
+		Order order=new Order();
+		order.setOrder_number(out_trade_no);
+		Order qo = orderDAO.queryOrderId(order);
+		System.out.println(qo);
+		//out_trade_no：订单编号，trade_no：支付编号，refund_amount：退款金额，
+		//refund_reason：退款原因，out_request_no：退款标识码
+		String trade_no=qo.getOrder_paynumber();
+		
+		String refund_amount=qo.getOrder_deposit()+"";
+		String refund_reason="退款";
+		String out_request_no=out_trade_no+refund_amount;
+		
+		
+		
+		alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
+				+ "\"trade_no\":\""+ trade_no +"\"," 
+				+ "\"refund_amount\":\""+ refund_amount +"\"," 
+				+ "\"refund_reason\":\""+ refund_reason +"\"," 
+				+ "\"out_request_no\":\""+ out_request_no +"\"}");
+		
+		//请求
+		String result = alipayClient.execute(alipayRequest).getBody();
+		if (result.contains("\"fund_change\":\"N\"")){
+			return "退款失败";
+		}else if(result.contains("\"fund_change\":\"Y\"")){
+			String qcOrder = orderController.qcOrder(qo);			
+				return qcOrder;			
+		}
+		return "失败";		
+	}
 }
