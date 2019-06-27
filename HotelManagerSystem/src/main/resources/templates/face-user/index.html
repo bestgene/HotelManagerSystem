@@ -31,30 +31,30 @@
 
 	<!-- Stylesheets -->
 	<!-- Dropdown Menu -->
-	<link rel="stylesheet" href="HotelManagerSystem/face-user/css/superfish.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/superfish.css">
 	<!-- Owl Slider -->
 	<!-- <link rel="stylesheet" href="css/owl.carousel.css"> -->
 	<!-- <link rel="stylesheet" href="css/owl.theme.default.min.css"> -->
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/bootstrap-datepicker.min.css">
 	<!-- CS Select -->
-	<link rel="stylesheet" href="css/cs-select.css">
-	<link rel="stylesheet" href="css/cs-skin-border.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/cs-select.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/cs-skin-border.css">
 
 	<!-- Themify Icons -->
-	<link rel="stylesheet" href="css/themify-icons.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/themify-icons.css">
 	<!-- Flat Icon -->
-	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/flaticon.css">
 	<!-- Icomoon -->
-	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/icomoon.css">
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/flexslider.css">
 	
 	<!-- Style -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="/HotelManagerSystem/face-user/css/style.css">
 
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -74,9 +74,9 @@
 						<ul class="sf-menu" id="fh5co-primary-menu">
 							
 							<li class="app1" style="height: 60px">
-								<a href="../HuiYuanZhuCe.html" class="fh5co-sub-ddown">成为会员</a>					
+								<a href="/HotelManagerSystem/html/sign-up.html" class="fh5co-sub-ddown">成为会员</a>					
 							</li>
-							<li class="app2"><a href="login/HyLogin.html">会员登录</a></li>
+							<li class="app2"><a href="/HotelManagerSystem/html/login.html">会员登录</a></li>
 							<li><a href="introuduce.html">酒店详情</a></li>
 							<li><a href="pinglun.jsp">查看评价</a></li>
 						</ul>
@@ -90,7 +90,7 @@
 	<aside id="fh5co-hero" class="js-fullheight">
 		<div class="flexslider js-fullheight">
 			<ul class="slides">
-		   	<li style="background-image: url(images/slider1.jpg);">
+		   	<li style="background-image: url(/HotelManagerSystem/face-user/images/slider1.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="col-md-12 col-md-offset-0 text-center slider-text">
@@ -106,7 +106,7 @@
 		   			</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url(images/slider2.jpg);">
+		   	<li style="background-image: url(/HotelManagerSystem/face-user/images/slider2.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="col-md-12 col-md-offset-0 text-center slider-text">
@@ -122,7 +122,7 @@
 		   			</div>
 		   		</div>
 		   	</li>
-		   	<li style="background-image: url(images/slider3.jpg);">
+		   	<li style="background-image: url(/HotelManagerSystem/face-user/images/slider3.jpg);">
 		   		<div class="overlay-gradient"></div>
 		   		<div class="container">
 		   			<div class="col-md-12 col-md-offset-0 text-center slider-text">
@@ -158,23 +158,23 @@
 								</select>
 							</section> -->
 						</div>
-						<div class="a-col alternate">
-							<div class="input-field">
-								<label for="date-start">入住日期</label>
-								<input type="text" class="form-control" id="date-start" />
+						<form action="/HotelManagerSystem/house/alltype">
+							<div class="a-col alternate">
+								<div class="input-field">
+									<label for="date-start">入住日期</label>
+									<input type="text" class="form-control" id="date-start" name="startTime"/>
+								</div>
 							</div>
-						</div>
-						<div class="a-col alternate">
-							<div class="input-field">
-								<label for="date-end">离店日期</label>
-								<input type="text" class="form-control" id="date-end" />
+							<div class="a-col alternate">
+								<div class="input-field">
+									<label for="date-end">离店日期</label>
+									<input type="text" class="form-control" id="date-end" name="endTime"/>
+								</div>
 							</div>
-						</div>
-						<div class="a-col action">
-							<a href="javascript:selectHouse();">
-								<span>预定</span>
-							</a>
-						</div>
+							<div class="a-col action">
+								<input value="预定" type="submit">
+							</div>
+						</form>
 				</div>
 			</div>
 		</div>
@@ -218,7 +218,7 @@
 
 			<div class="row">
 				<div class="feature-full-1col">
-					<div class="image" style="background-image: url(images/hotel_feture_1.jpg);">
+					<div class="image" style="background-image: url(/HotelManagerSystem/face-user/images/hotel_feture_1.jpg);">
 						<div class="descrip text-center">
 							<p><small>大床房</small><span>￥150/晚</span></p>
 						</div>
@@ -232,7 +232,7 @@
 
 				<div class="feature-full-2col">
 					<div class="f-hotel">
-						<div class="image" style="background-image: url(images/hotel_feture_2.jpg);">
+						<div class="image" style="background-image: url(/HotelManagerSystem/face-user/images/hotel_feture_2.jpg);">
 							<div class="descrip text-center">
 								<p><small>标准间</small><span>￥100/晚</span></p>
 							</div>
@@ -244,7 +244,7 @@
 						</div>
 					</div>
 					<div class="f-hotel">
-						<div class="image" style="background-image: url(images/hotel_feture_3.jpg);">
+						<div class="image" style="background-image: url(/HotelManagerSystem/face-user/images/hotel_feture_3.jpg);">
 							<div class="descrip text-center">
 								<p><small>总统套房</small><span>￥200/晚</span></p>
 							</div>
@@ -307,7 +307,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<img src="images/tab_img_1.jpg" class="img-responsive" alt="Image">
+									<img src="/HotelManagerSystem/face-user/images/tab_img_1.jpg" class="img-responsive" alt="Image">
 								</div>
 								<div class="col-md-6">
 									<span class="super-heading-sm">World Class</span>
@@ -326,7 +326,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<img src="images/tab_img_2.jpg" class="img-responsive" alt="Image">
+									<img src="/HotelManagerSystem/face-user/images/tab_img_2.jpg" class="img-responsive" alt="Image">
 								</div>
 								<div class="col-md-6">
 									<span class="super-heading-sm">World Class</span>
@@ -345,7 +345,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<img src="images/tab_img_3.jpg" class="img-responsive" alt="Image">
+									<img src="/HotelManagerSystem/face-user/images/tab_img_3.jpg" class="img-responsive" alt="Image">
 								</div>
 								<div class="col-md-6">
 									<span class="super-heading-sm">World Class</span>
@@ -364,7 +364,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<img src="images/tab_img_4.jpg" class="img-responsive" alt="Image">
+									<img src="/HotelManagerSystem/face-user/images/tab_img_4.jpg" class="img-responsive" alt="Image">
 								</div>
 								<div class="col-md-6">
 									<span class="super-heading-sm">World Class</span>
@@ -383,7 +383,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<img src="images/tab_img_5.jpg" class="img-responsive" alt="Image">
+									<img src="/HotelManagerSystem/face-user/images/tab_img_5.jpg" class="img-responsive" alt="Image">
 								</div>
 								<div class="col-md-6">
 									<span class="super-heading-sm">World Class</span>
@@ -402,7 +402,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-md-6">
-									<img src="images/tab_img_6.jpg" class="img-responsive" alt="Image">
+									<img src="/HotelManagerSystem/face-user/images/tab_img_6.jpg" class="img-responsive" alt="Image">
 								</div>
 								<div class="col-md-6">
 									<span class="super-heading-sm">World Class</span>
@@ -472,7 +472,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<div  id="pic1" class="blog-grid" style="background-image: url(images/image-1.jpg);">
+					<div  id="pic1" class="blog-grid" style="background-image: url(/HotelManagerSystem/face-user/images/image-1.jpg);">
 						<div class="date text-center">
 							<span>09</span>
 							<small>Aug</small>
@@ -483,7 +483,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div id="pic2" class="blog-grid" style="background-image: url(images/image-2.jpg);">
+					<div id="pic2" class="blog-grid" style="background-image: url(/HotelManagerSystem/face-user/images/image-2.jpg);">
 						<div class="date text-center">
 							<span>09</span>
 							<small>Aug</small>
@@ -494,7 +494,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div id="pic3" class="blog-grid" style="background-image: url(images/image-3.jpg);">
+					<div id="pic3" class="blog-grid" style="background-image: url(/HotelManagerSystem/face-user/images/image-3.jpg);">
 						<div class="date text-center">
 							<span>09</span>
 							<small>Aug</small>
@@ -572,61 +572,31 @@
 	<!-- END fh5co-wrapper -->
 	
 	<!-- Javascripts -->
-	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/jquery.min.js"></script>
 	<!-- Dropdown Menu -->
-	<script src="js/hoverIntent.js"></script>
-	<script src="js/superfish.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/hoverIntent.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/superfish.js"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/jquery.waypoints.min.js"></script>
 	<!-- Counters -->
-	<script src="js/jquery.countTo.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/jquery.countTo.js"></script>
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/jquery.stellar.min.js"></script>
 	<!-- Owl Slider -->
 	<!-- // <script src="js/owl.carousel.min.js"></script> -->
 	<!-- Date Picker -->
-	<script src="js/bootstrap-datepicker.min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/bootstrap-datepicker.min.js"></script>
 	<!-- CS Select -->
-	<script src="js/classie.js"></script>
-	<script src="js/selectFx.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/classie.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/selectFx.js"></script>
 	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
+	<script src="/HotelManagerSystem/face-user/js/jquery.flexslider-min.js"></script>
 
-	<script src="js/custom.js"></script>
-<script src="js/face-user.js"></script>
-
-
-
-<script type="text/javascript">
-  $(function(){
-	/* alert("先执行"); */
-	debugger;
-	 $.ajax({//异步请求返回给后台
-		 
-		//	var json='{"type1":1,"type2":2,"type3":"3"}';
-			url : '../changeimg',
-			type : 'post',
-		//  data : json, 
-			 data:{
-				"type1":"1",
-				"type2":"2",
-				"type3":"3"
-				},
-			dataType :"json",  //返回的数据类型
-			success : function(data) {
-				 for(var i=0;i<data.length;i++){ 
-						var str='background-image: url(';
-						str+="/pic/"+data[i].url;
-						str+=');'
-						$("#pic"+(i+1)).attr("style",str);		
-				}
-			}
-		});   
-});
- </script>
-
+	<script src="/HotelManagerSystem/face-user/js/custom.js"></script>
+<!-- <script src="js/face-user.js"></script>
+ -->
+	<script type="text/javascript" src="/HotelManagerSystem/face-user/js/index.js"></script>
 </body>
-<script type="text/javascript" src="js/index.js"></script>
 </html>

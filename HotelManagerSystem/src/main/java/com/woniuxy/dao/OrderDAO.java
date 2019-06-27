@@ -76,7 +76,7 @@ public interface OrderDAO {
 
 
     /**
-     * 退房结账（历史订单）
+     * 退房结账
      * @param order_number
      * @param order_paynumber
      * @return
@@ -85,12 +85,8 @@ public interface OrderDAO {
     public boolean payOreder(String order_number, String order_paynumber);
 
 
-    /**
-     * 支付押金（预定状态）
-     * @param order_number
-     * @param order_paynumber
-     * @return
-     */
+
+    //支付押金（只改变状态）
     @Update("update t_order set order_state=1,flag=1,order_paynumber=#{arg1} where order_number=#{arg0}")
     public int payDeposit(String order_number, String order_paynumber);
     /**
@@ -101,18 +97,7 @@ public interface OrderDAO {
     @Update("update t_order set flag=0 where order_id=#{order_id} and flag=1 and order_state=1")
     public boolean deleteOrder(Order order);
 
-    /**
-     * 入住
-     * @param order
-     * @return
-     */
-    @Update("update t_order set flag=1,order_state=2 where order_state=1 and flag=1 and order_id=#{order_id}")
-    public boolean checkIn(Order order);
-    /**
-     * 动态更新
-     * @param order
-     * @return
-     */
+
     @UpdateProvider(type = OrderProvider.class,method = "update")
     public boolean updateOrder(Order order);
 

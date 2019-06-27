@@ -48,11 +48,6 @@ public interface OrderService {
 	 */
 	public boolean updateOrder(Order order);
 
-	/**
-	 * 根据
-	 * @param order
-	 * @return
-	 */
 	public List<Item> queryItemByOid(Order order);
 	
 	/**
