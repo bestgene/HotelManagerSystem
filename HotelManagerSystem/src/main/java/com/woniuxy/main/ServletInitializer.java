@@ -12,8 +12,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 //扫描Controller Service
 @ComponentScan({
 	"com.woniuxy.controller",
-	"com.woniuxy.service"
-	/*"com.woniuxy.configuration"*/
+	"com.woniuxy.service",
+	"com.woniuxy.configuration"
 	})
 
 //扫描dao

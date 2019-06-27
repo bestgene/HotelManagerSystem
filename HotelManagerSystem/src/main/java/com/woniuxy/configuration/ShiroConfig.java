@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 	
 	
@@ -43,6 +42,7 @@ public class ShiroConfig {
 		map.put("/check/emailcheck", "anon");//邮件验证
 		map.put("/druid/**", "anon");
 		map.put("/sign.html", "anon"); 
+		map.put("/face-user/index.html", "anon");
 		
 		map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
 		//logout
