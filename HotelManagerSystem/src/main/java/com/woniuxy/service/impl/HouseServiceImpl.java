@@ -73,15 +73,11 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public boolean addDateHouseOperation(Integer house_id,Integer house_type_id,String startTime, String endTime) throws ParseException {
 		List<String> allDay = HouseUtil.allDay(startTime, endTime);
-		Session session = SecurityUtils.getSubject().getSession();
-		Integer user_id = (Integer) session.getAttribute("user_id");
-		UserInfo userInfo = userDAO.getInfoByUid(user_id);
 		for (String dh_day  : allDay) {
 			DateHouse single = new DateHouse();
 			single.setDh_day(dh_day);
 			single.setHouse_id(house_id);
 			single.setHouse_type_id(house_type_id);
-			single.setUserInfo(userInfo);
 			boolean addDateHouseOperation = houseDAO.addDateHouseOperation(single);
 			if (addDateHouseOperation==false){
 				return false;
