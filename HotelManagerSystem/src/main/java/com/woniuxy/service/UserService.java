@@ -20,11 +20,12 @@ public interface UserService {
 	public Role selectRoleAndPerms(Integer role_id); //权限一对多查询
 	public Vip getVipByUid(Integer user_id);         //根据user_id查询Vip表：可用于用户自主查询自己的vip信息
 	public Level getLevelByVipId(Integer level_id);  //通过会员等级ID查询等级信息表
-	public UserInfo selectUserInfoByTelOrIdcard(String user_info_tel,String user_info_idcard);  //根据电话或者身份证查询获取用户信息
-	public Map<String, Object> getDiscountByTelOrIdcard(String user_info_tel, String user_info_idcard);   //根据身份证或者电话获取会员等级
+	public UserInfo selectUserInfoByTelOrIdcard(String arg0, String arg1, String arg2);  //根据电话或者身份证查询获取用户信息
+	public Map<String, Object> getDiscountByTelOrIdcard(String user_info_name, String user_info_tel, String user_info_idcard);   //根据身份证或者电话获取会员等级
 	public Role selectRoleByUserId(Integer user_id);   //根据当前用户user
-	public void addDefualtUser(String arg0,String arg1);  //创建默认用户，以他提供的手机号为acc，123456位默认密码
-	public void addDefualtInfo(String arg0,String arg1,Integer arg2);//创建默认信息表：手机，身份证，user_id
-	public void addDefualtVip(String arg0,Integer arg1);//创建默认用户的vip信息表
+	public void addDefualtUser(String arg0, String arg1);  //创建默认用户，以他提供的手机号为acc，123456位默认密码
+	public void addDefualtInfo(String arg0, String arg1, Integer arg2, String arg3);//创建默认信息表：手机，身份证，user_id
+	public void addDefualtVip(String arg0, Integer arg1);//创建默认用户的vip信息表
+	public Map<String, Object> getVipByUserid(Integer user_id);//用户根据自己的uid查出自己的info_id和discount
 }
 

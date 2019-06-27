@@ -83,13 +83,10 @@ public class UserServieImpl implements UserService {
 		return userDAO.getLevelByVipId(level_id);
 	}
 
-	@Override
-	public UserInfo selectUserInfoByTelOrIdcard(String user_info_tel, String user_info_idcard) {
-		return userDAO.selectUserInfoByTelOrIdcard(user_info_tel, user_info_idcard);
-	}
+	
 	
 	@Override
-	public Map<String, Object> getDiscountByTelOrIdcard(String user_info_tel, String user_info_idcard){ 
+	public Map<String, Object> getDiscountByTelOrIdcard(String user_info_tel, String user_info_idcard,String user_info_name){ 
 		String defaultAcc="";//用户不存在时，用于存储默认账号
 		System.out.println("当前用户："+user_info_tel+","+user_info_idcard);
 		if("".equals(user_info_tel)){
@@ -103,8 +100,8 @@ public class UserServieImpl implements UserService {
 		if(user_info_idcard!=null&&user_info_tel!=null){
 			defaultAcc=user_info_tel.substring(0,3)+user_info_idcard.substring(0,3);
 		}  //手机和身份证都提供时
-		UserInfo info=selectUserInfoByTelOrIdcard(user_info_tel, user_info_idcard);     
-		if(info==null){
+		UserInfo info=selectUserInfoByTelOrIdcard(user_info_tel,user_info_idcard,user_info_name);     
+		if(info==null){           //输入的手机和身份证号不存在时，为其创建默认user，userInfo，Vip三表，
 			System.out.println("用户信息不存在");
 			System.out.println("默认账号："+defaultAcc);
 			String defualtPwd=new SimpleHash("MD5","123456", null,1024).toString();
@@ -112,7 +109,7 @@ public class UserServieImpl implements UserService {
 			System.out.println("默认用户创建成功");
 			Integer user_id=findUserByAcc(defaultAcc).getUser_id();
 			System.out.println(user_info_tel+","+user_info_idcard+","+user_id);
-			addDefualtInfo(user_info_tel,user_info_idcard,user_id);
+			addDefualtInfo(user_info_tel,user_info_idcard,user_id,user_info_name);
 			System.out.println("添加默认信息成功");
 			String vip_number=UUID.randomUUID().toString();//为vipnumber产生随机编号
 			vip_number=vip_number.substring(0,7);
@@ -128,7 +125,21 @@ public class UserServieImpl implements UserService {
 		map.put("discount",discount);
 		return map;
 	}
-
+	
+	@Override
+	public Map<String, Object> getVipByUserid(Integer user_id){  //用户根据自己的uid查出自己的info_id和discount
+		Map<String,Object> map=new HashMap<>();
+		UserInfo info=getInfoByUid(user_id);
+		map.put("info_id", info.getUser_info_id());
+		Vip vip=getVipByUid(user_id);
+		Integer level_id=vip.getLevel_id();
+		Level level=getLevelByVipId(level_id);
+		BigDecimal discount = level.getLevel_discount();
+		map.put("discount", discount);
+		System.out.println(map);
+		return map;
+	}
+	
 	@Override
 	public Role selectRoleByUserId(Integer user_id) {
 		return userDAO.selectRoleByUserId(user_id);
@@ -140,13 +151,18 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
-	public void addDefualtInfo(String arg0, String arg1, Integer arg2) {
-		userDAO.addDefualtInfo(arg0, arg1, arg2);
-	}
-
-	@Override
 	public void addDefualtVip(String arg0,Integer arg1) {
 		userDAO.addDefualtVip(arg0,arg1);
 		
+	}
+
+	@Override
+	public UserInfo selectUserInfoByTelOrIdcard(String arg0, String arg1, String arg2) {
+		return userDAO.selectUserInfoByTelOrIdcard(arg0, arg1, arg2);
+	}
+
+	@Override
+	public void addDefualtInfo(String arg0, String arg1, Integer arg2, String arg3) {
+		userDAO.addDefualtInfo(arg0, arg1, arg2, arg3);
 	}
 }
