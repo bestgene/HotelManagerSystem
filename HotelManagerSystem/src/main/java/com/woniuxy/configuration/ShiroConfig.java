@@ -67,6 +67,9 @@ public class ShiroConfig {
 		map.put("/html/user/login", "anon");
 		//注册页面
 		map.put("/html/sign-up.html", "anon");
+		//酒店介绍
+//		map.put("/introuduce.html", "anon");
+//		map.put("/comment.jsp", "anon");
 		//logout
 		map.put("/logout", "logout");
 //		map.put("/vipinfo.html","anon"); 
