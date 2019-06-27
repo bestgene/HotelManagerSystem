@@ -59,13 +59,13 @@ public class OrderController {
         user = new User();
         user.setUser_id(1);
         user.setRole_id(1);
-        if (user.getRole_id() == 1) {
+        if (user.getRole_id() == 3) {
             order.setUser(user);
         }
         if (cxfs.equals("当前预定")) {
             order.setOrder_state(1);
             order.setFlag(1);
-        } else if (cxfs.equals("历史预定")) {
+        } else if (cxfs.equals("历史订单")) {
             order.setOrder_state(3);
             order.setFlag(2);
         } else if (cxfs.equals("当前入住")) {
@@ -195,6 +195,7 @@ public class OrderController {
         //先查询输入用户信息的id，如果没有则新创建一个对应已手机号为账户的账户，以及新增一条用户信息表
         //并且获取这个新增的用户信息id，最后给order赋值，这里应该进行注释操作，而不是直接赋值
         order.setUserInfo(reserve.getUserInfo());
+        order.getUserInfo().setUser_info_id(1);;
         //获取session中的用户
         User user = (User) request.getSession().getAttribute("user");
         user = new User();

@@ -4,13 +4,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-
-import com.woniuxy.pojo.User;
-import com.woniuxy.service.UserService;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 
 @SpringBootApplication
+@EnableScheduling
 @ComponentScan({"com.woniuxy.controller"/*,"com.woniuxy.configuration"*/,"com.woniuxy.service.impl","com.woniuxy.service"})
 @MapperScan("com.woniuxy.dao")
 public class HotelManagerSystemApplication {

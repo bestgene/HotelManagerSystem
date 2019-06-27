@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/css/amazeui.min.css" />
 <link rel="stylesheet" href="assets/css/admin.css">
 <link rel="stylesheet" href="assets/css/app.css">
-<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+
 </head>
 <body>
 	<header class="am-topbar am-topbar-inverse admin-header">
@@ -100,9 +100,10 @@
 			</ol>
 			<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
 				<div class="layui-btn-group demoTable">
-					<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-					<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-					<button class="layui-btn" data-type="isAll">验证是否全选</button>
+					<button class="layui-btn" data-type="isAll" value="当前预定" onclick="showOrder(this.id)" id="yd">预定订单</button>
+					<button class="layui-btn" data-type="isAll" value="当前入住" onclick="showOrder(this.id)" id="rz">入住订单</button>
+					<button class="layui-btn" data-type="isAll" value="历史订单" onclick="showOrder(this.id)" id="ls">历史订单</button>
+					<button class="layui-btn" data-type="isAll" value="所有订单" onclick="showOrder(this.id)" id="sy">所有订单</button>
 				</div>
 
 				<div id="order_table"></div>
@@ -111,80 +112,17 @@
 		</div>
 	</div>
 
+
 	<script src="layui/layui.js" charset="utf-8"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/amazeui.min.js"></script>
 	<script src="assets/js/app.js"></script>
+	<script type="text/javascript" src="js/order.js"></script>
 
 	<script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">充值</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">退房</a>
 </script>
-	<script type="text/javascript">
-		function showOrder() {
-			$.ajax({
-				url:"order/showAllOrder",
-				type:"POST",
-				data:{
-				
-				},
-				success:function(data){
-					var content=
-				'<table class="layui-table" id="order_table">'
-					+'<thead>'
-					+'<tr>'
-					+'<th>订单编号</th>'
-					+'<th>用户名</th>'
-					+'<th>身份证号码</th>'
-					+'<th>联系方式</th>'
-					+'<th>订单金额</th>'
-
-					+'<th>入住时间</th>'
-					+'<th>离开时间</th>'
-					+'<th>住房类型</th>'
-					+'<th>房间号</th>'
-					+'<th>订单状态</th>'
-					+'<th>操作</th>'
-					+'</tr>'
-					+'</thead>';
-					for(var i=0;i<data.length;i++){
-						var items=data[i].items;
-						var state="";
-						if(data[i].flag==0){
-						state="失效"
-						}else if(data[i].order_state==1 && data[i].flag==1){
-							state="预定"
-						}else if(data[i].order_state==2 && data[i].flag==1){
-							state="入住"
-						}else if(data[i].order_state==3 && data[i].flag==2){
-							state="退房"
-						}
-						content+='<tr>'
-						+'<th>'+data[i].order_number+'</th>'
-						+'<th>'+data[i].userInfo.user_info_name+'</th>'
-						+'<th>'+data[i].userInfo.user_info_idcard+'</th>'
-						+'<th>'+data[i].userInfo.user_info_tel+'</th>'
-						+'<th>'+data[i].order_totalpay+'</th>'
-						+'<th>'+state+'</th>'
-						+'<th>'+data[i].order_message+'</th>'
-						+'</tr>'
-					
-						for(var x=0;x<items.length;x++){
-							'<tr>'
-							+'<th>'+items[x].item_checkintime+'</th>'
-							+'<th>'+items[x].item_checkouttime+'</th>'
-							+'<th>'+items[x].house.houseType.house_type_name+'</th>'
-							+'<th>'+items[x].house.house_name+'</th>'
-							+'<th>'+"<button onclik=deleteOrder("+data[i].order_number+")>取消订单</button>"+'</th>'
-						+'</tr>'
-						}
-					}
-					content=content+"</table>";
-				
-				$("#order_table").html(content);
-			}
-		})
-	};
 	
 	
 			

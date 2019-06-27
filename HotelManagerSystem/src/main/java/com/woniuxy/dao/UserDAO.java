@@ -14,7 +14,6 @@ import org.apache.ibatis.mapping.FetchType;
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Perm;
 import com.woniuxy.pojo.Role;
-import com.woniuxy.pojo.RolePerm;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
@@ -59,4 +58,9 @@ public interface UserDAO {
 				)
 	})
 	public Role selectRoleAndPerms(Integer role_id);
+	
+	//根据user_id查询User
+		@Select("select * from t_user where user_id=#{user_id}")
+		public User selectUserByUid(Integer user_id);
+	
 }
