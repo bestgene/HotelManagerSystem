@@ -27,7 +27,7 @@ public interface UserDAO {
 	public void addUser(User user);
 	@Select("select * from t_user where user_acc=#{user_acc}")
 	public User findUserByAcc(String user_acc);
-	@Select("select * from t_user_info where user_id=#{user_id}")
+	@Select("select *from t_user_info where user_id=#{user_id}")
 	public UserInfo getInfoByUid(Integer user_id);
 	@Update("update t_user_info set user_info_name=#{user_info_name},user_info_tel=#{user_info_tel},user_info_idcard=#{user_info_idcard} where user_id=#{user_id}")
 	public void updateInfo(UserInfo userInfo);
@@ -39,6 +39,12 @@ public interface UserDAO {
 	public UserInfo selectUserInfoByTelOrIdcard(String arg0,String arg1);
 	@Select("select *from t_user u,t_role r where u.role_id=r.role_id and u.user_id=#{user_id}")
 	public Role selectRoleByUserId(Integer user_id);
+	@Insert("insert into t_user(user_acc,user_pwd) values(#{arg0},#{arg1})")
+	public void addDefualtUser(String arg0,String arg1);
+	@Insert("insert into t_user_info(user_info_name,user_info_tel,user_info_idcard,user_id) values('默认用户',#{arg0},#{arg1},#{arg2})")
+	public void addDefualtInfo(String arg0,String arg1,Integer arg2); 
+	@Insert("insert into t_vip (vip_number,user_id,level_id) values(#{arg0},#{arg1},1)")
+	public void addDefualtVip(String arg0,Integer arg1);
 	
 	@Select("select *from t_perm where role_id=#{role_id}")
 	@Results({
@@ -59,7 +65,6 @@ public interface UserDAO {
 	})
 	public Role selectRoleAndPerms(Integer role_id);
 	
-	//根据user_id查询User
 	@Select("select * from t_user where user_id=#{user_id}")
 	public User selectUserByUid(Integer user_id);
 }
