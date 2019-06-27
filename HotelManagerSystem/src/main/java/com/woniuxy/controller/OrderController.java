@@ -65,7 +65,7 @@ public class OrderController {
         if (cxfs.equals("当前预定")) {
             order.setOrder_state(1);
             order.setFlag(1);
-        } else if (cxfs.equals("历史预定")) {
+        } else if (cxfs.equals("历史订单")) {
             order.setOrder_state(3);
             order.setFlag(2);
         } else if (cxfs.equals("当前入住")) {
@@ -75,9 +75,7 @@ public class OrderController {
                 order.setFlag(1);
             }
         } else if (cxfs.equals("所有订单")) {
-            if (user.getRole_id() == 2) {
-                order.setFlag(3);
-            }
+            order.setFlag(3);
         }
 
 
@@ -313,6 +311,22 @@ public class OrderController {
             return null;
         }
         return "结账失败";
+
+    }
+
+    /**
+     * 入住
+     * 将预定的订单修改为入住状态
+     * @param order
+     * @return
+     */
+    public String checkIn(Order order){
+        //根据order_number查询order信息
+        order = orderService.queryOrderByOrderNumber(order);
+        if (order!=null&&order.getOrder_state()==1&order.getFlag()==1){
+
+        }
+        return "";
 
     }
 
