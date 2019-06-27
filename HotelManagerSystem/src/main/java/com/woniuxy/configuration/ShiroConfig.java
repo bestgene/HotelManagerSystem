@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-@Configuration
+//@Configuration
 public class ShiroConfig {
 	
 	
