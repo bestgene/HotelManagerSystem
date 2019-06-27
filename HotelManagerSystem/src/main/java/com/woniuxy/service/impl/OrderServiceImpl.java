@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
 	/**
 	 * 支付订单
-	 * @param order
+	 * @param
 	 * @return
 	 */
 	@Override
@@ -87,6 +87,13 @@ public class OrderServiceImpl implements OrderService {
 	public int payDeposit(String order_number, String pay_number) {
 		// TODO Auto-generated method stub
 		return orderDAO.payDeposit(order_number, pay_number);
+	}
+
+
+	@Override
+	public boolean checkIn(Order order) {
+		// TODO Auto-generated method stub
+		return orderDAO.checkIn(order);
 	}
 
 

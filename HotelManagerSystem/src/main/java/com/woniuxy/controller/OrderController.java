@@ -37,6 +37,8 @@ public class OrderController {
     private HouseService houseService;
     @Resource
     private ChargingService chargingService;
+    @Resource
+    private PayController payController;
 
 
     /**
@@ -58,7 +60,7 @@ public class OrderController {
         User user = (User) request.getSession().getAttribute("user");
         user = new User();
         user.setUser_id(1);
-        user.setRole_id(1);
+        user.setRole_id(2);
         if (user.getRole_id() == 3) {
             order.setUser(user);
         }
@@ -75,9 +77,7 @@ public class OrderController {
                 order.setFlag(1);
             }
         } else if (cxfs.equals("所有订单")) {
-            if (user.getRole_id() == 2) {
-                order.setFlag(3);
-            }
+            order.setFlag(3);
         }
 
 
@@ -108,6 +108,7 @@ public class OrderController {
         //先查询输入用户信息的id，如果没有则新创建一个对应已手机号为账户的账户，以及新增一条用户信息表
         //并且获取这个新增的用户信息id，最后给order赋值，这里应该进行注释操作，而不是直接赋值
         order.setUserInfo(reserve.getUserInfo());
+        
         //获取session中的用户
         User user = (User) request.getSession().getAttribute("user");
         user = new User();
@@ -179,10 +180,6 @@ public class OrderController {
     @RequestMapping("/createYdOrder")
     public String createYdOrder(Reserve reserve, HttpServletRequest request,HttpServletResponse response) throws ParseException {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
-    	List<House> rooms = houseService.allAvailableTypeRooms(reserve.getReserve_checkintime(), reserve.getReserve_checkouttime(), reserve.getHouseType().getHouse_type_id());
-        System.out.println(rooms.size()+"-----------------");
-        
-        
         List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
                 ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
         
@@ -195,12 +192,12 @@ public class OrderController {
         //先查询输入用户信息的id，如果没有则新创建一个对应已手机号为账户的账户，以及新增一条用户信息表
         //并且获取这个新增的用户信息id，最后给order赋值，这里应该进行注释操作，而不是直接赋值
         order.setUserInfo(reserve.getUserInfo());
-        order.getUserInfo().setUser_info_id(1);;
+        order.getUserInfo().setUser_info_id(1);
         //获取session中的用户
         User user = (User) request.getSession().getAttribute("user");
         user = new User();
         user.setUser_id(1);
-        user.setRole_id(1);
+        user.setRole_id(3);
         //设置操作角色
         order.setUser(user);
         //判断操作用户的角色
@@ -208,13 +205,10 @@ public class OrderController {
 
 
         //设置订单状态
-        if (user.getRole_id() == 1) {
-            order.setOrder_state(0);
-            order.setFlag(0);
-        } else if (user.getRole_id() == 2) {
-            order.setOrder_state(1);
-            order.setFlag(1);
-        }
+      
+       order.setOrder_state(0);
+        order.setFlag(0);
+        
 
         //设置订单编号
         order.setOrder_number(System.currentTimeMillis() + "" + new Random().nextInt(9000000) + 1000000);
@@ -260,17 +254,11 @@ public class OrderController {
         //新增order、item
         boolean flag = orderService.createOrder(order);
         
-        //支付测试
-        PayController pc=new PayController();
-        pc.payMoney(response, order.getOrder_number(), order.getOrder_totalpay()+"", order.getOrder_number()+order.getOrder_totalpay(), "");
-   
+        //支付测试(押金)
+        
+        payController.payMoney(response, order.getOrder_number(), order.getOrder_deposit()+"",
+                order.getOrder_number()+"@"+order.getOrder_deposit(), "");
 
-        //线上支付，跳转支付页面
-        if (flag && order.getOrder_state() == 0 && order.getFlag() == 0) {
-        	
-        } else {
-
-        }
         return null;
 
     }
@@ -280,27 +268,71 @@ public class OrderController {
      *
      * @return
      */
-    public String qcOrder(Order order) {
+    @RequestMapping("/qcOrder")
+    @ResponseBody
+    public String qcOrder(Order order) throws ParseException {
         //先查询这个订单是否存在，并且为正常预定状态
         order = orderService.queryOrderByOrderNumber(order);
         //存在
         if (order != null && order.getOrder_state() == 1 && order.getFlag() == 1) {
-            //修改订单状态为取消
-            orderService.deleteOrder(order);
+            List<Order> orders = orderService.showAllOrder(order);
+            if (orders.size()==1){
+                //修改订单状态为取消
+                orderService.deleteOrder(order);
+                //还原房间状态
+                for (Item item:orders.get(0).getItems()
+                ) {
+                    houseService.deleteDateHouseOperation(item.getHouse().getHouse_id(),item.getItem_checkintime()
+                            ,item.getItem_checkouttime());
+                }
 
-            //然后退钱
-
-            //还原房间状态
-
-
-            return "取消预定成功";
-        } else {
-            //提示取消失败
-            return "取消预定失败";
+                //测试代码
+                //然后退钱
+                return "取消预定成功";
+            }
         }
+        //提示取消失败
+        return "取消预定失败";
+    }
+
+    /**
+     * 结账
+     * 传入订单编号
+     * @param order
+     * @return
+     */
+    @RequestMapping("/payAccounts")
+    public String payAccounts(Order order,HttpServletResponse response){
+        //根据order_number查询order信息
+        order = orderService.queryOrderByOrderNumber(order);
+        //满足已入住且支付押金，存在
+        if (order!=null&&order.getOrder_state()==2&&order.getFlag()==1){
+         
+        	payController.payMoney(response, order.getOrder_number()+"A", order.getOrder_totalpay()+"",
+                    order.getOrder_number()+order.getOrder_totalpay(), "");
+            
+        }
+        return null;
 
     }
 
+    /**
+     * 入住
+     * 将预定的订单修改为入住状态
+     * @param order
+     * @return
+     */
+    @RequestMapping("/checkin")
+    @ResponseBody
+    public String checkIn(Order order){
+        //根据order_number查询order信息
+        order = orderService.queryOrderByOrderNumber(order);
+        if (order!=null&&order.getOrder_state()==1&order.getFlag()==1){
+            orderService.checkIn(order);
+        }
+        return "入住成功";
+
+    }
 
     /**
      * 修改预定

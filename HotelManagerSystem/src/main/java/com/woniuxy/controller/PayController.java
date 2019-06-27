@@ -39,12 +39,7 @@ public class PayController {
 	@Resource
 	private OrderDAO orderDAO;
 
-	@RequestMapping("/pay")
-	public void pay(HttpServletRequest request, HttpServletResponse response, String orderNumber, String totalPay) {
-
-		// 向支付宝发起请求
-		payMoney(response, orderNumber, totalPay, orderNumber + totalPay, "");
-	}
+	
 
 	@RequestMapping("/savePayResult")
 	public void savePayResult(HttpServletRequest request, String out_trade_no, String trade_no, String trade_status)
@@ -90,8 +85,13 @@ public class PayController {
 
 				// 创建order对象，为其赋值订单编号
 				Order order = new Order();
-				order.setOrder_number(out_trade_no);
+				
 				// 通过订单编号查询该订单的id、状态、flag
+				//如果该订单中含有A：表示该订单是处于结账状态.删除最后一位即可
+				if(out_trade_no.indexOf("A")!=-1){
+					out_trade_no= out_trade_no.substring(0, out_trade_no.length()-1);
+				}
+				order.setOrder_number(out_trade_no);
 				Order qo = orderService.queryOrderByOrderNumber(order);
 				// 通过订单的状态和flag判断是付押金还是付全款
 				if (qo.getOrder_state() == 0 && qo.getFlag() == 0) {
@@ -103,9 +103,13 @@ public class PayController {
 
 				            @Override
 				            public void run() {
-				            	orderController.qcOrder(qo);				  
+				            	try {
+									orderController.qcOrder(qo);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}				  
 				            }
-				        }, 10000);
+				        }, 10000000);
 					// 查询该订单下的所有订单项
 					List<Item> items = orderService.queryItemByOid(qo);
 					// 通过订单项，改变该房间的状态
@@ -118,6 +122,7 @@ public class PayController {
 				}
 				// 付全款
 				else if (qo.getFlag() == 1 && qo.getOrder_state() == 2) {
+					
 					orderService.payOrder(out_trade_no, trade_no);
 				}
 

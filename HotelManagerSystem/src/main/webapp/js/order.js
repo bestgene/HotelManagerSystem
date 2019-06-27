@@ -24,6 +24,7 @@ function showOrder(id) {
 					+ '<th>其它操作</th>'
 					+ '</tr>' + '</thead>';
 			for (var i = 0; i < data.length; i++) {
+				var order_number=""+data[i].order_number;
 				var items = data[i].items;
 				var state = "";
 				var b1="";
@@ -43,7 +44,7 @@ function showOrder(id) {
 					b2="退款";
 				}
 
-				content += '<tr>' + '<th>' + data[i].order_number + '</th>'
+				content += '<tr>' + '<th>' + order_number + '</th>'
 						+ '<th>' + data[i].userInfo.user_info_name + '</th>'
 						+ '<th>' + data[i].userInfo.user_info_idcard + '</th>'
 						+ '<th>' + data[i].userInfo.user_info_tel + '</th>'
@@ -59,11 +60,11 @@ function showOrder(id) {
 						+ '<th>'+ state + '</th>' 
 						+ '<th>' + data[i].order_message+ '</th>' ;
 						if(state=="预定"){
-							var b1='<button onclick=rz('+data[i].order_number+')>入住</button>';
-							var b2='<button onclick=qx('+data[i].order_number+')>取消</button>';
+							var b1='<button onclick=checkin("'+order_number+'")>入住</button>';
+							var b2='<button onclick=cancelOrder("'+data[i].order_number+'")>取消</button>';
 							content+='<th>'+b1+b2+'</th></tr>';
 						}else if(state=="入住"){
-							var b3='<button onclick=jz('+data[i].order_number+')>结账</button>';
+							var b3='<button onclick=pay("'+data[i].order_number+'")>结账</button>';
 							content+='<th>'+b3+'</th></tr>';
 						}
 								
@@ -75,7 +76,41 @@ function showOrder(id) {
 	})
 };
 
-function cancelOrder() {
-	$
+//入住
+function checkin(orderNumber) {
 	
+	alert(orderNumber);
+	$.ajax({
+		url:"order/checkin",
+		type:"POST",
+		data:{
+			order_number:orderNumber
+		},
+		success:function(data){
+			alert(data);
+			location.reload();
+		}
+	})	
 }
+
+//退款（取消）
+function cancelOrder(orderNumber) {
+	$.ajax({
+		url:"order/qcOrder",
+		type:"POST",
+		data:{
+			order_number:orderNumber
+		},
+		success:function(data){
+			alert(data);
+			location.reload();
+		}
+	})	
+}
+
+//结账
+function pay(orderNumber) {
+
+	location.href="/HotelManagerSystem/order/payAccounts?order_number="+orderNumber;
+}
+	
