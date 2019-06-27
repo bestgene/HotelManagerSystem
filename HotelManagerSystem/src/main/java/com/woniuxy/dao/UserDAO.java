@@ -65,6 +65,10 @@ public interface UserDAO {
 	})
 	public Role selectRoleAndPerms(Integer role_id);
 	
-	@Select("select * from t_user where user_id=#{user_id}")
-	public User selectUserByUid(Integer user_id);
+
+	//根据user_id查询User
+		@Select("select * from t_user where user_id=#{user_id}")
+		public User selectUserByUid(Integer user_id);
+	
+
 }
