@@ -153,29 +153,27 @@
 										<div></div>
 									</div>
 								</div>
-								
 								<div class="am-form-group">
-									<label for="user-name" class="am-u-sm-3 am-form-label">当前房间类型还剩
-										<span class="tpl-form-line-small-title">HouseType</span>
+									<label for="user-weibo" class="am-u-sm-3 am-form-label">房间类型
+										<span class="tpl-form-line-small-title">Tel</span>
 									</label>
 									<div class="am-u-sm-9">
-									
-										<input type="text" class="tpl-form-input" id="house_type_id"
-											placeholder="房间类型" name="houseType.house_type_id" th:value="${reserve.HouseType.num}">
-				
+										<input type="text" id="usertel1" name="userInfo.user_info_tel"
+											placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}">
+										<div></div>
 									</div>
 								</div>
+								
 								
 								<div class="am-form-group">
 									<label for="user-name" class="am-u-sm-3 am-form-label">房间数量
 										<span class="tpl-form-line-small-title">Number</span>
 									</label>
 									<div class="am-u-sm-9">
-										<input type="text" class="tpl-form-input" id="house_number"
-											placeholder="房间数量" name="house_number">
-											
+										<select data-am-selected="{searchBox: 1}" name="house_number"id="housenumber_select">
+										</select>
 										<!-- 隐藏域传房间类型id -->
-										<input type="text" name="houseType.house_type_id" hidden>
+										<input type="hidden" name="houseType.house_type_id" >
 									</div>
 								</div>
 								
@@ -282,7 +280,15 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
+	<script type="text/javascript" >
+	var housenumber = [[${reserve.HouseType.num}]];
+	var number = parseInt(housenumber);
+	for(var i=1;i<=number;i++){
+		var option="<option value='"+i+"'>"+i+"间</option>";
+		$("#housenumber_select").append(option);
+	}
+	
+	
 	/* 身份证号验证 */
 	/* function idcardfun(){	
 		var idcard=$("#idcard1").val();

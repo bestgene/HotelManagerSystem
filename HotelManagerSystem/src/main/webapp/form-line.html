@@ -1,5 +1,6 @@
 <!doctype html>
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -154,12 +155,14 @@
 								</div>
 								
 								<div class="am-form-group">
-									<label for="user-name" class="am-u-sm-3 am-form-label">房间类型
-										<span class="tpl-form-line-small-title">HouseType</span>
+									<label for="user-name" class="am-u-sm-3 am-form-label">当前房间类型还剩
+										<span class="tpl-form-line-small-title">MaxNumber</span>
 									</label>
 									<div class="am-u-sm-9">
-										<input type="text" class="tpl-form-input" id="house_type_id"
-											placeholder="请输入客户文名字" name="houseType.house_type_id">
+									
+										<input type="text" class="tpl-form-input" 
+											 th:value="${reserve.HouseType.num}" disabled="true" >
+				
 									</div>
 								</div>
 								
@@ -169,7 +172,10 @@
 									</label>
 									<div class="am-u-sm-9">
 										<input type="text" class="tpl-form-input" id="house_number"
-											placeholder="请输入客户文名字" name="house_number">
+											placeholder="房间数量" name="house_number">
+											
+										<!-- 隐藏域传房间类型id -->
+										<input type="text" name="houseType.house_type_id" hidden>
 									</div>
 								</div>
 								
