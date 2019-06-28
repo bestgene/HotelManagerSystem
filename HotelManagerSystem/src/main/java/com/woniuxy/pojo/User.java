@@ -2,16 +2,11 @@ package com.woniuxy.pojo;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 public class User implements Serializable{
 	
 	
 	private Integer user_id;  //用户id
-	@NotBlank(message="账号不能为空")
 	private String user_acc;  //账号
-	@Size(min=6,max=10,message="密码必须要在6-10位之间！")
 	private String user_pwd;  //密码
 	private String user_img;  //头像
 	private Integer role_id;  //角色id（外键）

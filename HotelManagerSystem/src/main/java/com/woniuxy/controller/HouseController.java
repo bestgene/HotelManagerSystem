@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.pojo.House;
 import com.woniuxy.pojo.HouseType;
-import com.woniuxy.pojo.Reserve;
 import com.woniuxy.service.HouseService;
 
 @Controller
@@ -73,32 +72,6 @@ public class HouseController {
 		model.setViewName("/face-user/booknews.html");
 		return model;
 	}
-	
-	
-	@GetMapping("/houtaiOrderInfo/{startTime}/{endTime}/{house_type_id}")
-	/*
-	 * 返回到后台订单填写页面
-	 */
-	public ModelAndView houtaiOrderInfo(@PathVariable("startTime") String startTime,
-			@PathVariable("endTime") String endTime, @PathVariable("house_type_id") Integer house_type_id)
-			throws ParseException {
-		ModelAndView model = new ModelAndView();
-		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime, house_type_id);
-		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
-		houseType.setNum(allAvailableTypeRooms.size());
-		//数量
-		houseType.setHouse_type_id(house_type_id);
-		//System.out.println(houseType.getHouse_type_name());
-		Reserve reserve=new Reserve();
-		reserve.setReserve_checkintime(startTime);
-		reserve.setReserve_checkouttime(endTime);
-		reserve.setHouseType(houseType);
-		model.addObject("reserve", reserve);
-		model.setViewName("/form-line.html");
-		return model;
-	}
-	
-	
 
 	/*
 	 * 获取所有可用房间
@@ -128,6 +101,7 @@ public class HouseController {
 		modelAndView.addObject("date", date);
 		//设置页面跳转到房间类型显示界面
 		modelAndView.setViewName("face-user/house-info/housedetailinfo.html");
+		System.out.println(houseType);
 		return modelAndView;
 	}
 

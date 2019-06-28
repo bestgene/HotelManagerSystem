@@ -94,7 +94,7 @@
 									type : 'POST',
 									data : {
 										'date' : now,//日期	
-										'username' :"会员： "+"${sessionScope.TEL_IN_SESSION }",//用户名
+										'username' :"移动用户： "+"${sessionScope.TEL_IN_SESSION }",//用户名
 										'text' : oSize
 									//评论	
 									},
