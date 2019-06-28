@@ -1,0 +1,32 @@
+$(function(){
+	$.ajax({
+		url:"charging/showCharging",
+		type:"POST",
+		data:{
+		},
+		success:function(data){
+			$("#charging_isqc").val(data.charging_isqc),
+			$("#charging_ratio").val(data.charging_ratio),
+			$("#charging_isqzdz").val(data.charging_isqzdz),
+			$("#online_ratio").val(data.online_ratio),
+			$("#online_isqc").val(data.online_isqc)
+		}
+	})
+});
+
+function modifyCharging(){
+	$.ajax({
+		url:"charging/modifyCharging",
+		type:"POST",
+		data:{
+			charging_isqc:$("#charging_isqc").val(),
+			charging_ratio:$("#charging_ratio").val(),
+			charging_isqzdz:$("#charging_isqzdz").val(),
+			online_ratio:$("#online_ratio").val(),
+			online_isqc:$("#online_isqc").val()
+		},
+		success:function(data){
+			alert(data);
+		}
+	})
+}

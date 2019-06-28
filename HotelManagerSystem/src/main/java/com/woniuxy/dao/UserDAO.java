@@ -1,7 +1,5 @@
 package com.woniuxy.dao;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
@@ -10,10 +8,10 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.mapping.FetchType;
-
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Perm;
 import com.woniuxy.pojo.Role;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
@@ -41,8 +39,9 @@ public interface UserDAO {
 	public Role selectRoleByUserId(Integer user_id);
 	@Insert("insert into t_user(user_acc,user_pwd) values(#{arg0},#{arg1})")
 	public void addDefualtUser(String arg0, String arg1);
+	
 	@Insert("insert into t_user_info(user_info_tel,user_info_idcard,user_id,user_info_name) values(#{arg0},#{arg1},#{arg2},#{arg3})")
-	public void addDefualtInfo(String arg0, String arg1, Integer arg2, String arg3);
+	public void addDefualtInfo(String arg0, String arg1, Integer arg2,String arg3);
 	@Insert("insert into t_vip (vip_number,user_id,level_id) values(#{arg0},#{arg1},1)")
 	public void addDefualtVip(String arg0, Integer arg1);
 	
@@ -67,4 +66,14 @@ public interface UserDAO {
 	
 	@Select("select * from t_user where user_id=#{user_id}")
 	public User selectUserByUid(Integer user_id);
+	
+	//短信验证时候的通过user_acc查找账户
+	@Select("select * from t_user where user_acc=#{user_acc}")
+	public User findUserByuserAcc(Telpojo telpojo);
+	//短信验证时候进行的注册 的功能
+	@Insert("insert into t_user(user_acc,user_pwd) values(#{user_acc},#{user_pwd})")
+	public void Telregister(Telpojo telpojo);
+	
+	@Select("select * from t_user where user_acc=#{user_acc} and role_id=2")
+	public User FindAdmin(User user);
 }

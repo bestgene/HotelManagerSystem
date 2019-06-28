@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Role;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
@@ -23,9 +24,13 @@ public interface UserService {
 	public UserInfo selectUserInfoByTelOrIdcard(String arg0, String arg1, String arg2);  //根据电话或者身份证查询获取用户信息
 	public Map<String, Object> getDiscountByTelOrIdcard(String user_info_name, String user_info_tel, String user_info_idcard);   //根据身份证或者电话获取会员等级
 	public Role selectRoleByUserId(Integer user_id);   //根据当前用户user
-	public void addDefualtUser(String arg0, String arg1);  //创建默认用户，以他提供的手机号为acc，123456位默认密码
-	public void addDefualtInfo(String arg0, String arg1, Integer arg2, String arg3);//创建默认信息表：手机，身份证，user_id
-	public void addDefualtVip(String arg0, Integer arg1);//创建默认用户的vip信息表
+	public void addDefualtInfo(String arg0, String arg1,Integer arg2,String arg3);
+	public void addDefualtUser(String arg0,String arg1);  //创建默认用户，以他提供的手机号为acc，123456位默认密码
+	public void addDefualtVip(String arg0,Integer arg1);//创建默认用户的vip信息表
+	public User findUserByuserAcc(Telpojo telpojo);//通过短信验证中user_acc去查找对应的账户
+	public void Telregister(Telpojo telpojo);//通过短信验证进行注册用户
+
 	public Map<String, Object> getVipByUserid(Integer user_id);//用户根据自己的uid查出自己的info_id和discount
+	public User FindAdmin(User user);//查找管理员
 }
 
