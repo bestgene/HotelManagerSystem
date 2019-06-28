@@ -86,6 +86,9 @@ public class OrderController {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
         List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
         ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
+        if(houses==null||houses.size()<reserve.getHouse_number()){
+            return "房间不足";
+        }
         Order order = new Order();
         //获取session中的用户
         User user = (User) request.getSession().getAttribute("user");
@@ -96,6 +99,7 @@ public class OrderController {
                 userService.getDiscountByTelOrIdcard(reserve.getUserInfo().getUser_info_tel(),
                         reserve.getUserInfo().getUser_info_idcard(),
                         reserve.getUserInfo().getUser_info_name());
+        order.setUserInfo((UserInfo) map.get("user_info"));
         //设置订单状态
         order.setOrder_state(2);
         order.setFlag(1);
@@ -137,7 +141,7 @@ public class OrderController {
         //新增order、item
         boolean flag = orderService.createOrder(order);
         //默认已付款
-        return "线下开单";
+        return "线下开单成功";
 
     }
     /**
@@ -154,6 +158,7 @@ public class OrderController {
         //根据房间类型、选择数量、入住时间、退房时间查询数据库，获取房间
         List<House> houses = houseService.addOperation(reserve.getReserve_checkintime(),reserve.getReserve_checkouttime()
                 ,reserve.getHouseType().getHouse_type_id(),reserve.getHouse_number());
+        //应该跳转到房间不足页面
         if(houses==null||houses.size()<reserve.getHouse_number()){
         	return null;
         }
@@ -237,14 +242,16 @@ public class OrderController {
         if (order != null && order.getOrder_state() == 1 && order.getFlag() == 1) {
             List<Order> orders = orderService.showAllOrder(order);
             if (orders.size()==1){
-                //修改订单状态为取消
-                orderService.deleteOrder(order);
+
                 //还原房间状态
                 for (Item item:orders.get(0).getItems()
                 ) {
                     houseService.deleteDateHouseOperation(item.getHouse().getHouse_id(),item.getItem_checkintime()
                             ,item.getItem_checkouttime());
                 }
+
+                //修改订单状态为取消
+                orderService.deleteOrder(order);
                 //然后退钱
                 return "取消预定成功";
             }
