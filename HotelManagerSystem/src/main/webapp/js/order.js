@@ -113,4 +113,8 @@ function pay(orderNumber) {
 
 	location.href="/HotelManagerSystem/order/payAccounts?order_number="+orderNumber;
 }
+
+$(function(){
+	showOrder("sy");
+})
 	
