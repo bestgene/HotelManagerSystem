@@ -174,16 +174,14 @@
 							'</div><div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"><a href="#" class="comment-size-name">'+data[i].name+'</a> <span class="my-pl-con">&nbsp;'+data[i].text+'</span>'+
 							'</div><div class="date-dz"><span class="date-dz-left pull-left comment-time">'+data[i].date+'</span><div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock"></a> <a '+
 							'href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left"></a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">666</i>)</a></div></div><div class="hf-list-con"></div></div></div>'
-							 } 
-							
+							 } 							
 							$("#aaa").append(str);
 						},
 						error : function(data) {
 							alert(data);
 						}
 					});
-		});
-		
+		});	
 	</script>
 </body>
 </html>
