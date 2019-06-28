@@ -55,7 +55,7 @@ public class ShiroConfig {
 		//设置过滤器链
 		Map<String, String>map = new HashMap<>();
 
-		
+
 		//anno 任何人都能登录
 		//			map.put("/index", "anon");
 		//放行 首页静态文件

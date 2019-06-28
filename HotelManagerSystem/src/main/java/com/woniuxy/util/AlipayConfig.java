@@ -1,4 +1,4 @@
-﻿package com.woniuxy.util;
+package com.woniuxy.util;
 import java.io.FileWriter;
 import java.io.IOException;
 

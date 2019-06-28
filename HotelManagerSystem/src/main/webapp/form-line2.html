@@ -34,11 +34,25 @@
 			<div class="tpl-left-nav-title">酒店系统</div>
 			<div class="tpl-left-nav-list">
 				<ul class="tpl-left-nav-menu">
-					<li class="tpl-left-nav-item">
-					<a href="form-line2.html" class="nav-link active"> 
-					<i class="am-icon-home"></i> 
-					<span>入住登记</span>
-					</a></li>
+                    <li class="tpl-left-nav-item"><a href="javascript:;"
+                                                     class="nav-link tpl-left-nav-link-list active"> <i
+                            class="am-icon-home"></i> <span>订单与入住管理</span> <i
+                            class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                    </a>
+                        <ul class="tpl-left-nav-sub-menu">
+                            <li>
+                                <a href="form-line2.html" class="active">
+                                    <i class="am-icon-angle-right"></i> <span>入住登记</span>
+                                </a>
+                                <a href="form-line.html">
+                                    <i class="am-icon-angle-right"></i> <span>预定登记</span>
+                                </a>
+                                <a href="employee-see.html" >
+                                    <i class="am-icon-angle-right"></i> <span>订单查询</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 					<li class="tpl-left-nav-item"><a href="mainboss.html" class="nav-link tpl-left-nav-link-list"> 
 						<i class="am-icon-bar-chart"></i> 
 						<span>剩余房源</span>
@@ -80,17 +94,16 @@
 
         <div class="tpl-content-wrapper">
             <div class="tpl-content-page-title">
-                入住登记
             </div>
             <ol class="am-breadcrumb">
                 <li><a href="#" class="am-icon-home">首页</a></li>
-                <li><a href="#">店员</a></li>
+                <li><a href="#">订单与入住管理</a></li>
                 <li class="am-active">入住登记</li>
             </ol>
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
                     <div class="caption font-green bold">
-                        <span class="am-icon-code"></span> 表单
+                        入住登记
                     </div>
                     <div class="tpl-portlet-input tpl-fz-ml">
                         <div class="portlet-input input-small input-inline">
@@ -148,9 +161,9 @@
                                 </div>
 
                                 <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">房间号 <span class="tpl-form-line-small-title">room</span></label>
+                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">房间数量 <span class="tpl-form-line-small-title">room</span></label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" id="user-weibo" placeholder="请添加合法房间号"  name="roomnum">
+                                        <input type="text" id="user-weibo" placeholder="请添加入住房间数量"  name="roomnum">
                                         <div>
 
                                         </div>
@@ -174,18 +187,6 @@
                                         <small>离开时间为必填</small>
                                     </div>
                                 </div>                      
-                         
-                       		   <div class="am-form-group">
-                                    <label for="user-weibo" class="am-u-sm-3 am-form-label">押金 <span class="tpl-form-line-small-title">money</span></label>
-                                    <div class="am-u-sm-9">
-                                        <input type="text" id="user-weibo" placeholder="请输入押金" name="money">
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
                    				 <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
                                 	  
