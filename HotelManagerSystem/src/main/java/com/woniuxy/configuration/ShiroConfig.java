@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-@Configuration
+//@Configuration
 public class ShiroConfig {
 	
 	
@@ -51,9 +51,10 @@ public class ShiroConfig {
 		//配置登录页面
 		bean.setLoginUrl("/html/login.html");
 		//配置无权限页面
-		bean.setUnauthorizedUrl("error.html");
+		bean.setUnauthorizedUrl("/wwhHTML/error.html");
 		//设置过滤器链
 		Map<String, String>map = new HashMap<>();
+
 
 		//anno 任何人都能登录
 		//			map.put("/index", "anon");
@@ -67,8 +68,7 @@ public class ShiroConfig {
 		map.put("/images/**", "anon");
 		map.put("/Telcheck/**", "anon");//放行发送验证码
 		map.put("/user/**", "anon");//放行登录功能
-		//登录请求
-		map.put("/html/user/login", "anon");
+
 		//注册页面
 		map.put("/html/sign-up.html", "anon");
 		//酒店介绍
@@ -76,17 +76,10 @@ public class ShiroConfig {
 //		map.put("/comment.jsp", "anon");
 		//logout
 		map.put("/logout", "logout");
-//		map.put("/vipinfo.html","anon"); 
-//		map.put("/user/getvipbyadmin", "anon");      //用于vip的测试
-//		map.put("/user/register", "anon");
 		map.put("/druid/**", "anon");
 		map.put("/", "anon");
-		
-		
 		map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
-		
-		// /**
-		/*map.put("/**", "authc");*/
+//		map.put("/**", "authc");
 		bean.setFilterChainDefinitionMap(map);
 		return bean;
 	}
