@@ -12,7 +12,7 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="icon" type="image/png" href="/HotelManagerSystem/assets/i/favicon.png">
 <link rel="apple-touch-icon-precomposed"
-	href="/HotelManagerSystemassets/i/app-icon72x72@2x.png">
+	href="/HotelManagerSystem/assets/i/app-icon72x72@2x.png">
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <link rel="stylesheet" href="/HotelManagerSystem/assets/css/amazeui.min.css" />
 <link rel="stylesheet" href="/HotelManagerSystem/assets/css/admin.css">
@@ -47,14 +47,14 @@
 				<ul class="tpl-left-nav-menu">
 					<li class="tpl-left-nav-item"><a href="javascript:;"
 						class="nav-link tpl-left-nav-link-list active"> <i
-							class="am-icon-home"></i> <span>入住退房</span> <i
+							class="am-icon-home"></i> <span>入住管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
 							<li><a href="form-line.html" class="active"> <i
 									class="am-icon-angle-right"></i> <span>入住登记</span>
 							</a> <a href="employee-see.html"> <i class="am-icon-angle-right"></i>
-									<span>退房充值</span>
+									<span>当前入住信息</span>
 							</a></li>
 						</ul></li>
 					<li class="tpl-left-nav-item"><a href="javascript:;"
@@ -153,16 +153,10 @@
 										<div></div>
 									</div>
 								</div>
-								<div class="am-form-group">
-									<label for="user-weibo" class="am-u-sm-3 am-form-label">房间类型
-										<span class="tpl-form-line-small-title">Tel</span>
-									</label>
-									<div class="am-u-sm-9">
-										<input type="text" id="usertel1" name="userInfo.user_info_tel"
-											placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}">
-										<div></div>
-									</div>
-								</div>
+								
+										<input type="hidden" id="usertel1" name="userInfo.user_info_tel"
+											placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}" disabled="disabled">
+								
 								
 								
 								<div class="am-form-group">
@@ -186,7 +180,7 @@
 									<div class="am-u-sm-9">
 										<input type="text" class="am-form-field tpl-form-no-bg"
 											placeholder="入住时间" data-am-datepicker="" id="livetime1"
-											name="reserve_checkintime" onchange="livefun()" readonly /> <small>入住时间为必填</small>
+											name="reserve_checkintime" onchange="livefun()" readonly  th:value="${reserve.reserve_checkintime}" disabled="disabled"/> <small>入住时间为必填</small>
 									</div>
 								</div>
 
@@ -198,7 +192,7 @@
 									<div class="am-u-sm-9">
 										<input type="text" class="am-form-field tpl-form-no-bg"
 											id="leavetime1" placeholder="离开时间" data-am-datepicker=""
-											name="reserve_checkouttime" onchange="leavefun()" readonly /> <small>离开时间为必填</small>
+											name="reserve_checkouttime" onchange="leavefun()" readonly th:value="${reserve.reserve_checkouttime}" disabled="disabled"/> <small>离开时间为必填</small>
 									</div>
 								</div>
 
