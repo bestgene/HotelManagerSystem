@@ -124,7 +124,7 @@ public class HouseController {
 		//设置该类型下所有房间可用数量
 		houseType.setNum(allAvailableTypeRooms.size());
 		//将入住和离开时间存入map集合中
-		house.put("houseTypes", allAvailableTypeRooms);
+		house.put("houseType", houseType);
 		date.put("startTime", startTime);
 		date.put("endTime", endTime);
 		house.put("date", date);
