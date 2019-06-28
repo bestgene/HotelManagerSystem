@@ -122,10 +122,9 @@ public class PayController {
 				}
 				// 付全款
 				else if (qo.getFlag() == 1 && qo.getOrder_state() == 2) {
-					
 					orderService.payOrder(out_trade_no, trade_no);
-				}
 
+				}
 			}
 		}
 	}

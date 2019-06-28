@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 	
 	
@@ -63,6 +63,10 @@ public class ShiroConfig {
 		map.put("/housedetailinfo/**","anon");
 		map.put("/img/**", "anon");
 		map.put("/js/**", "anon");
+		map.put("/scripts/**", "anon");
+		map.put("/images/**", "anon");
+		map.put("/Telcheck/**", "anon");//放行发送验证码
+		map.put("/user/**", "anon");//放行登录功能
 		//登录请求
 		map.put("/html/user/login", "anon");
 		//注册页面
@@ -82,7 +86,7 @@ public class ShiroConfig {
 		map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
 		
 		// /**
-		map.put("/**", "authc");
+		/*map.put("/**", "authc");*/
 		bean.setFilterChainDefinitionMap(map);
 		return bean;
 	}
