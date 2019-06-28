@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.woniuxy.dao.UserDAO;
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Role;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
@@ -109,7 +110,7 @@ public class UserServieImpl implements UserService {
 			System.out.println("默认用户创建成功");
 			Integer user_id=findUserByAcc(defaultAcc).getUser_id();
 			System.out.println(user_info_tel+","+user_info_idcard+","+user_id);
-			addDefualtInfo(user_info_tel,user_info_idcard,user_id,user_info_name);
+			addDefualtInfo(user_info_tel,user_info_idcard,user_id,user_info_name);//增加默认用户信息
 			System.out.println("添加默认信息成功");
 			String vip_number=UUID.randomUUID().toString();//为vipnumber产生随机编号
 			vip_number=vip_number.substring(0,7);
@@ -157,6 +158,17 @@ public class UserServieImpl implements UserService {
 	}
 
 	@Override
+
+	public User findUserByuserAcc(Telpojo telpojo) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByuserAcc(telpojo);
+	}
+
+	@Override
+	public void Telregister(Telpojo telpojo) {
+		userDAO.Telregister(telpojo);
+	}
+
 	public UserInfo selectUserInfoByTelOrIdcard(String arg0, String arg1, String arg2) {
 		return userDAO.selectUserInfoByTelOrIdcard(arg0, arg1, arg2);
 	}
@@ -164,5 +176,12 @@ public class UserServieImpl implements UserService {
 	@Override
 	public void addDefualtInfo(String arg0, String arg1, Integer arg2, String arg3) {
 		userDAO.addDefualtInfo(arg0, arg1, arg2, arg3);
+		
 	}
+
+	
+
+	
+
+	
 }

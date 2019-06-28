@@ -80,7 +80,7 @@
 							<li><a href="HuiYuanZhuCe.html"> <i
 									class="am-icon-angle-right"></i> <span>会员注册</span>
 							</a> <a href="commentMann.html"> <i class="am-icon-angle-right"></i>
-									<span>会员评论</span>
+									<span>会员展示</span>
 							</a></li>
 						</ul>
 					</li>
@@ -203,7 +203,7 @@
 										<span class="tpl-form-line-small-title">arrival time</span>
 									</label>
 									<div class="am-u-sm-9">
-										<input type="text" id="checkinTime" placeholder="抵达时间"
+										<input type="time" id="checkinTime" placeholder="抵达时间"
 											name="reserve_arrivetime">
 										<div></div>
 									</div>
@@ -240,8 +240,14 @@
 									<label for="user-weibo" class="am-u-sm-3 am-form-label">取消时间<span
 										class="tpl-form-line-small-title">cancel time</span></label>
 									<div class="am-u-sm-9">
-										<input type="text" id="reserve_canceltime" placeholder="取消时间"
-											name="reserve_canceltime">
+									<select data-am-selected="{searchBox: 1}" name="reserve_isauto" id="reserve_canceltime">
+											
+											<option value="3">3小时</option>
+											<option value="4">4小时</option>
+											<option value="5">5小时</option>
+											<option value="6">6小时</option>
+										</select>
+										
 										<div></div>
 									</div>
 								</div>
@@ -257,7 +263,7 @@
 								</div>
 								<div class="am-form-group">
 									<div class="am-u-sm-9 am-u-sm-push-3">
-										<input type="submit" value="denji">
+										<input type="submit" value="登记">
 									</div>
 								</div>
 						

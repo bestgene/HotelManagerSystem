@@ -5,21 +5,7 @@
 <title>Hotel管理系统</title>
 <link href="../style/authority/login_css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="scripts/jquery/jquery-1.7.1.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#login_sub").click(function(){
-			$("#submitForm").attr("action", "index.html").submit();
-		});
-	});
-	
-	/*回车事件*/
-	function EnterPress(e){ //传入 event 
-		var e = e || window.event; 
-		if(e.keyCode == 13){ 
-			$("#submitForm").attr("action", "index.html").submit();
-		} 
-	} 
-</script>
+
 </head>
 <body>
 	<div id="login_center">
@@ -32,7 +18,7 @@
 						</div>
 						
 						<div>
-							 用户名：<input type="text" name="user_acc" class="username" id="name"><span><label th:text="${error}"></label><br></span>
+							 用户名：<input type="text" name="user_acc" class="username" id="name">
 						</div>
 						<div>
 							密&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="user_pwd" class="pwd" id="pwd" onkeypress="EnterPress(event)" onkeydown="EnterPress()">
