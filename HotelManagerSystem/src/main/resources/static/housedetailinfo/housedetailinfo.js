@@ -5,12 +5,17 @@ function queryTypeAndTime() {
 	var house_type_id=$("#house_type option:selected").val(); //获取选中的项
 	//alert(house_type_id);
 	if (startTime.length!=0&&endTime.length!=0&&house_type_id.length!=0){
+		console.info(startTime);
+		console.info(endTime);
+		console.info(house_type_id);
+		
 		$.ajax({
 			url:"/HotelManagerSystem/house/queryHouse/"+startTime+"/"+endTime+"/"+house_type_id,
 			type:"get",
 			contentType:"application/json;charset=utf-8",
 			success:function(data){
-				var singleType=data.houseType;
+				//alert(data);
+				var singleType=data.houseTypes;
 				var content="";
 					content+='<div>'
 					+'<div id="house_stead">'	

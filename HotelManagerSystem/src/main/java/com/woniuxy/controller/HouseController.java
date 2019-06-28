@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.pojo.House;
 import com.woniuxy.pojo.HouseType;
+import com.woniuxy.pojo.Reserve;
 import com.woniuxy.service.HouseService;
 
 @Controller
@@ -115,6 +116,7 @@ public class HouseController {
 			Integer house_type_id) throws ParseException {
 		//查询该类型下所有房间
 		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime,house_type_id);
+		System.out.println(house_type_id);
 		//获取该类型下所有房间
 		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
 		Map<String, Object> date = new Hashtable<String, Object>();
@@ -122,13 +124,38 @@ public class HouseController {
 		//设置该类型下所有房间可用数量
 		houseType.setNum(allAvailableTypeRooms.size());
 		//将入住和离开时间存入map集合中
-		house.put("houseType", houseType);
+		house.put("houseTypes", allAvailableTypeRooms);
 		date.put("startTime", startTime);
 		date.put("endTime", endTime);
 		house.put("date", date);
 		return house;
 	}
 
+	
+	@GetMapping("/houtaiOrderInfo/{startTime}/{endTime}/{house_type_id}")
+	/*
+	 * 返回到后台订单填写页面
+	 */
+	public ModelAndView houtaiOrderInfo(@PathVariable("startTime") String startTime,
+			@PathVariable("endTime") String endTime, @PathVariable("house_type_id") Integer house_type_id)
+			throws ParseException {
+		ModelAndView model = new ModelAndView();
+		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime, house_type_id);
+		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
+		houseType.setNum(allAvailableTypeRooms.size());
+		//数量
+		houseType.setHouse_type_id(house_type_id);
+		//System.out.println(houseType.getHouse_type_name());
+		Reserve reserve=new Reserve();
+		reserve.setReserve_checkintime(startTime);
+		reserve.setReserve_checkouttime(endTime);
+		reserve.setHouseType(houseType);
+		model.addObject("reserve", reserve);
+		model.setViewName("/form-line.html");
+		return model;
+	}
+	
+	
 	@PostMapping("/addCheckInOperation/{startTime}/{endTime}/{house_type_id}/{number}")
 	/*
 	 * 添加入住历史信息
