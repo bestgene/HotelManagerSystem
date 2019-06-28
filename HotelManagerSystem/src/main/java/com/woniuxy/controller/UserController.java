@@ -1,10 +1,6 @@
 package com.woniuxy.controller;
-
-
-
 import java.math.BigDecimal;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,9 +10,15 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.hibernate.validator.cfg.defs.ISBNDef;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.User;
@@ -44,25 +46,61 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login") //登录认证
-	public String login(User user,HttpServletRequest request){
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isAuthenticated()){
-			UsernamePasswordToken token = 
-					new UsernamePasswordToken(user.getUser_acc().toString(), user.getUser_pwd());
-			try {
-				currentUser.login(token);
-				user=userService.findUserByAcc(user.getUser_acc());
-				Session session = currentUser.getSession();
-				session.setAttribute("user_id",user.getUser_id()); //认证成功，将当前用户id存入session
-				System.out.println("认证成功");
-				return "test.html";
-			} catch (Exception e) {
-				System.out.println("认证失败");
-				return "error.html";
-			}
-		}
-		return "test.html";
+	public String login( User user,HttpServletRequest request){
+		 
+					Subject currentUser = SecurityUtils.getSubject();
+					if(!currentUser.isAuthenticated()){
+						UsernamePasswordToken token = 
+								new UsernamePasswordToken(user.getUser_acc().toString(), user.getUser_pwd());
+						try {
+							System.out.println(token+"token的值");
+							currentUser.login(token);
+							System.out.println();
+							user=userService.findUserByAcc(user.getUser_acc());
+							Session session = currentUser.getSession();
+							session.setAttribute("user",user); //将用户存进shiro当中的session中
+							System.out.println("认证成功");
+							return "face-user/index.html";
+						} catch (Exception e) {
+							System.out.println("认证失败");
+				         	return "../error.html";
+						}
+					}
+					
+		return "face-user/index.html";
 	}
+	
+	@RequestMapping("/AdminLogin")
+	@ResponseBody
+	public String AdminLogin(User user,HttpServletRequest request){
+		System.out.println("管理员登录获取到的信息"+user);
+		String results="";
+		//进行查询看是否是管理员，同时判断账号密码是否正确
+		if (userService.findUserByAcc(user.getUser_acc())==null) {
+			results="不存在此账户";
+			
+		}else {
+			      String user_pwd= new SimpleHash("MD5", user.getUser_pwd(), null,1024).toString();
+			if (userService.findUserByAcc(user.getUser_acc()).getUser_pwd().equals(user_pwd)) {
+				if (userService.FindAdmin(user)==null) {
+					results="你不是管理员！或者密码不正确";
+				}
+				else {
+					results="登录成功！";
+				}
+				
+			}else {
+				
+				results="密码不正确";
+			}
+			
+		}
+		
+		
+		
+		return results;
+	}
+	
 	@RequestMapping("/getinfo")   //获取当前用户的个人信息
 	public String getInfo(ModelMap map){
 		Subject currentUser = SecurityUtils.getSubject();
@@ -84,7 +122,7 @@ public class UserController {
 		return "info.html";
 	}
 	
-	@RequiresPermissions(value={"user:delete"})
+//	@RequiresPermissions(value={"user:delete"})
 	@RequestMapping("/delete")    //管理员删除其他人账号：根据user_id
 	public String deleteUser(Integer user_id) throws Exception{
 		userService.deleteUserByUid(user_id);
@@ -95,6 +133,7 @@ public class UserController {
 	@RequestMapping("showall")
 	public String showAllUser(){
 		List<User> users = userService.allUser();
+		System.out.println("llkklkl");
 		return null;
 	}
 	
@@ -131,9 +170,7 @@ public class UserController {
 		return "操作成功";
 	}
 	
-	@RequestMapping("test1")
-	public String test1(String user_info_tel,String user_info_idcard,String user_info_name){
-		System.out.println(userService.getDiscountByTelOrIdcard(user_info_tel, user_info_idcard,user_info_name));
-		return "操作成功";
-	}
+
+	
+
 }
