@@ -1,6 +1,5 @@
 <!doctype html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,14 +18,19 @@
 </head>
 
 <body data-type="generalComponents">
-
-
     <header class="am-topbar am-topbar-inverse admin-header">
 		<div class="am-topbar-brand">
 			<a href="javascript:;" class="tpl-logo">
 			 <img src="assets/img/logo.png" alt="">
 			</a>
 		</div>
+		
+		 <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+             <li><a href="login.html" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+            </ul>
+        </div>
+            
     </header> 
 
 	<div class="tpl-page-container tpl-page-header-fixed">
@@ -35,43 +39,83 @@
 			<div class="tpl-left-nav-list">
 				<ul class="tpl-left-nav-menu">
 					<li class="tpl-left-nav-item">
-					<a href="form-line2.html" class="nav-link active"> 
-					<i class="am-icon-home"></i> 
-					<span>入住登记</span>
-					</a></li>
-					<li class="tpl-left-nav-item"><a href="mainboss.html" class="nav-link tpl-left-nav-link-list"> 
-						<i class="am-icon-bar-chart"></i> 
-						<span>剩余房源</span>
-					</a></li>
+					<a href="javascript:;" class="nav-link tpl-left-nav-link-list active"> 
+						<i class="am-icon-home"></i>
+						 <span>入住退房</span>
+						 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+						<ul class="tpl-left-nav-sub-menu">
+							<li><a href="form-lineboss.html" class="active"> 
+							<i class="am-icon-angle-right"></i> 
+							<span>入住登记</span>
+							</a> 
+							<a href="employee-seeboss.html"> 
+							<i class="am-icon-angle-right"></i>
+							<span>退房充值</span>
+							</a>
+							</li>
+						</ul></li>
+					<li class="tpl-left-nav-item">
+					<a href="javascript:;" class="nav-link tpl-left-nav-link-list"> 
+					<i class="am-icon-bar-chart"></i> 
+					<span>房间管理</span>
+					<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+					<ul class="tpl-left-nav-sub-menu">
+							<li><a href="mainboss.html"> 
+							<i class="am-icon-angle-right"></i> 
+							<span>剩余房源</span>
+							</a> 
+							<a href="tupianboss.html"> 
+							<i class="am-icon-angle-right"></i>
+							<span>轮播管理</span>
+							</a>
+							<a href="uplodaImgboss.html"> 
+							<i class="am-icon-angle-right"></i>
+							<span>更新图片</span>
+							</a></li>
+						</ul></li>
 					<li class="tpl-left-nav-item">
 						<!-- 打开状态 a 标签添加 active 即可   --> 
-						<a href="HuiYuanZhuCe.html" class="nav-link tpl-left-nav-link-list "> 
+						<a href="javascript:;" class="nav-link tpl-left-nav-link-list "> 
 						<i class="am-icon-table"></i> 
 						<span>会员管理</span> 
 						<!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
-					</a></li>
-					<li class="tpl-left-nav-item">
-					<a href="chart2.html" class="nav-link tpl-left-nav-link-list"> 
-					<i class="am-icon-wpforms"></i> 
-					<span>查看账目</span>
-					</a></li>
-					<li class="tpl-left-nav-item">
-					<a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-					<i class="am-icon-bar-chart"></i> 
-					<span>员工管理</span>
-					<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+						<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li>
-							<a href="table-font-list3.html"> 
+					<ul class="tpl-left-nav-sub-menu">
+							<li><a href="HuiYuanZhuCeboss.html"> 
 							<i class="am-icon-angle-right"></i> 
-							<span>信息管理</span> 
-							<i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+							<span>会员注册</span>
+							</a> 
+							<a href="commentMannboss.html"> 
+							<i class="am-icon-angle-right"></i>
+							<span>会员评论</span>
+							</a></li>
+						</ul>
+					</li>
+					<li class="tpl-left-nav-item"><a href="chartboss.html"
+						class="nav-link tpl-left-nav-link-list"> 
+						<i class="am-icon-wpforms"></i> 
+						<span>查看账目</span>
+					</a></li>
+					<li class="tpl-left-nav-item">
+						<!-- 打开状态 a 标签添加 active 即可   --> 
+						<a href="javascript:;" class="nav-link tpl-left-nav-link-list "> 
+						<i class="am-icon-key"></i> 
+						<span>员工管理</span> 
+						<!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
+						<i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+					<ul class="tpl-left-nav-sub-menu">
+							<li><a href="table-font-list3.html"> 
+							<i class="am-icon-angle-right"></i> 
+							<span>员工信息管理</span>
 							</a> 
 							<a href="boss-attendance.html"> 
-							<i class="am-icon-angle-right"></i> <span>员工考勤</span>
-							</a>
-							</li>
+							<i class="am-icon-angle-right"></i>
+							<span>考勤统计</span>
+							</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -79,9 +123,7 @@
 		</div>
 
         <div class="tpl-content-wrapper">
-            <div class="tpl-content-page-title">
-                入住登记
-            </div>
+            <div class="tpl-content-page-title"> 入住登记</div>
             <ol class="am-breadcrumb">
                 <li><a href="#" class="am-icon-home">首页</a></li>
                 <li><a href="#">店员</a></li>
@@ -184,18 +226,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
                    				 <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
                                 	  
                                    		<input type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success " value="确认登记"/>
                                     </div>
                                 </div>
-                                
-                                
                             </form>
-
                         </div>
                     </div>
                 </div>
@@ -204,6 +241,21 @@
     </div>
 
 	<script type="text/javascript">
+	/* 身份证号验证 */
+	/* function idcardfun(){	
+		var idcard=$("#idcard1").val();
+		console.log(idcard);
+		var dataJson={"idcard":idcard};
+		
+	$.ajax({
+		url:"employeesAdduserServlet",
+		data:dataJson,
+        type:"post",
+        success:function(data){  		
+        	 alert(data);	
+        }
+	});
+}; */
 
 function idcardfun(){	
 var idcard=$("#idcard1").val();
@@ -245,17 +297,22 @@ function livefun(){	//判断入住时间大于当前时间
 		 alert("入住时间不能小于当前时间！！");
 	}
 }
+
 function leavefun(){	//判断离开时间要大于入住时间 
 	var livetime=$("#livetime1").val();//2018-10-24(入住时间字符串)
 	var timestamp1 = Date.parse(new Date(livetime));//将入住时间转换成时间戳 
 	var leavetime=$("#leavetime1").val();//离开时间
 	var timestamp2 = Date.parse(new Date(livetime));//将离开时间转换成时间戳 
+	
+	
+	
 	console.log(leavetime);
 	if(timestamp2-timestamp1<=0){
 		 alert("离开时间不能小于入住时间！！");
 	}
 }
 </script>
+	
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/amazeui.min.js"></script>
     <script src="assets/js/app.js"></script>
