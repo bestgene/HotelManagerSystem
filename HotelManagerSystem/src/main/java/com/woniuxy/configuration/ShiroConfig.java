@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-@Configuration
+//@Configuration
 public class ShiroConfig {
 	
 	
@@ -71,6 +71,9 @@ public class ShiroConfig {
 
 		//注册页面
 		map.put("/html/sign-up.html", "anon");
+		//酒店介绍
+//		map.put("/introuduce.html", "anon");
+//		map.put("/comment.jsp", "anon");
 		//logout
 		map.put("/logout", "logout");
 		map.put("/druid/**", "anon");

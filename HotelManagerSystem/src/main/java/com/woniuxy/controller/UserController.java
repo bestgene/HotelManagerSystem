@@ -120,7 +120,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("getvipbyadmin")     //后台查vip相关信息
-	public String getVipLevelByAdmin(String user_info_tel,String user_info_idcard){
+	public String getVipLevelByAdmin(String user_info_tel,String user_info_idcard,String user_info_name){
 		if(user_info_tel==null){
 			user_info_tel="*";
 		}
@@ -128,7 +128,7 @@ public class UserController {
 			user_info_idcard="*";
 		}
 		System.out.println("电话，身份证："+user_info_idcard+user_info_tel);   //管理员查询会员
-		UserInfo userInfo = userService.selectUserInfoByTelOrIdcard(user_info_tel, user_info_idcard);
+		UserInfo userInfo = userService.selectUserInfoByTelOrIdcard(user_info_tel, user_info_idcard, user_info_name);
 		System.out.println("用户信息:"+userInfo);
 		Vip vip=userService.getVipByUid(userInfo.getUser_id());
 		System.out.println("vip信息:"+vip);
@@ -140,5 +140,7 @@ public class UserController {
 		return "操作成功";
 	}
 	
+
 	
+
 }
