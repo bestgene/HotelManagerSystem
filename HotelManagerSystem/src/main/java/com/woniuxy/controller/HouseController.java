@@ -115,7 +115,6 @@ public class HouseController {
 			Integer house_type_id) throws ParseException {
 		//查询该类型下所有房间
 		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime,house_type_id);
-		System.out.println(house_type_id);
 		//获取该类型下所有房间
 		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
 		Map<String, Object> date = new Hashtable<String, Object>();
@@ -123,7 +122,7 @@ public class HouseController {
 		//设置该类型下所有房间可用数量
 		houseType.setNum(allAvailableTypeRooms.size());
 		//将入住和离开时间存入map集合中
-		house.put("houseTypes", allAvailableTypeRooms);
+		house.put("houseType", houseType);
 		date.put("startTime", startTime);
 		date.put("endTime", endTime);
 		house.put("date", date);
