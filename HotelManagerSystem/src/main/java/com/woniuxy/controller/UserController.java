@@ -16,7 +16,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.User;
@@ -44,24 +48,28 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login") //登录认证
-	public String login(User user,HttpServletRequest request){
-		Subject currentUser = SecurityUtils.getSubject();
-		if(!currentUser.isAuthenticated()){
-			UsernamePasswordToken token = 
-					new UsernamePasswordToken(user.getUser_acc().toString(), user.getUser_pwd());
-			try {
-				currentUser.login(token);
-				user=userService.findUserByAcc(user.getUser_acc());
-				Session session = currentUser.getSession();
-				session.setAttribute("user_id",user.getUser_id()); //认证成功，将当前用户id存入session
-				System.out.println("认证成功");
-				return "test.html";
-			} catch (Exception e) {
-				System.out.println("认证失败");
-				return "error.html";
-			}
-		}
-		return "test.html";
+	public String login( User user,HttpServletRequest request){
+		 
+					Subject currentUser = SecurityUtils.getSubject();
+					if(!currentUser.isAuthenticated()){
+						UsernamePasswordToken token = 
+								new UsernamePasswordToken(user.getUser_acc().toString(), user.getUser_pwd());
+						try {
+							System.out.println(token+"token的值");
+							currentUser.login(token);
+							System.out.println();
+							user=userService.findUserByAcc(user.getUser_acc());
+							Session session = currentUser.getSession();
+							session.setAttribute("user_id",user.getUser_id()); //认证成功，将当前用户id存入session
+							System.out.println("认证成功");
+							return "test.html";
+						} catch (Exception e) {
+							System.out.println("认证失败");
+				         	return "error.html";
+						}
+					}
+					
+		return "";
 	}
 	@RequestMapping("/getinfo")   //获取当前用户的个人信息
 	public String getInfo(ModelMap map){
@@ -84,7 +92,7 @@ public class UserController {
 		return "info.html";
 	}
 	
-	@RequiresPermissions(value={"user:delete"})
+//	@RequiresPermissions(value={"user:delete"})
 	@RequestMapping("/delete")    //管理员删除其他人账号：根据user_id
 	public String deleteUser(Integer user_id) throws Exception{
 		userService.deleteUserByUid(user_id);
@@ -95,6 +103,7 @@ public class UserController {
 	@RequestMapping("showall")
 	public String showAllUser(){
 		List<User> users = userService.allUser();
+		System.out.println("llkklkl");
 		return null;
 	}
 	
@@ -131,9 +140,5 @@ public class UserController {
 		return "操作成功";
 	}
 	
-	@RequestMapping("test1")
-	public String test1(String user_info_tel,String user_info_idcard){
-		System.out.println(userService.getDiscountByTelOrIdcard(user_info_tel, user_info_idcard));
-		return "操作成功";
-	}
+	
 }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.woniuxy.dao.UserDAO;
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Role;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
@@ -147,6 +148,18 @@ public class UserServieImpl implements UserService {
 	@Override
 	public void addDefualtVip(String arg0,Integer arg1) {
 		userDAO.addDefualtVip(arg0,arg1);
+		
+	}
+
+	@Override
+	public User findUserByuserAcc(Telpojo telpojo) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByuserAcc(telpojo);
+	}
+
+	@Override
+	public void Telregister(Telpojo telpojo) {
+		userDAO.Telregister(telpojo);
 		
 	}
 }

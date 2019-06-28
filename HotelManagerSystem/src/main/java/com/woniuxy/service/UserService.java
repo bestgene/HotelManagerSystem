@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.Role;
+import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
 import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.pojo.Vip;
@@ -26,5 +27,7 @@ public interface UserService {
 	public void addDefualtUser(String arg0,String arg1);  //创建默认用户，以他提供的手机号为acc，123456位默认密码
 	public void addDefualtInfo(String arg0,String arg1,Integer arg2);//创建默认信息表：手机，身份证，user_id
 	public void addDefualtVip(String arg0,Integer arg1);//创建默认用户的vip信息表
+	public User findUserByuserAcc(Telpojo telpojo);//通过短信验证中user_acc去查找对应的账户
+	public void Telregister(Telpojo telpojo);//通过短信验证进行注册用户
 }
 
