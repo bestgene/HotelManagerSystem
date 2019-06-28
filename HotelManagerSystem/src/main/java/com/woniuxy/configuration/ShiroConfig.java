@@ -1,6 +1,5 @@
 package com.woniuxy.configuration;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,10 +9,11 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 	
 	
@@ -69,7 +69,7 @@ public class ShiroConfig {
 		map.put("/html/sign-up.html", "anon");
 		//酒店介绍
 //		map.put("/introuduce.html", "anon");
-//		map.put("/comment.jsp", "anon");
+		map.put("/comment/**", "anon");
 		//logout
 		map.put("/logout", "logout");
 //		map.put("/vipinfo.html","anon"); 
