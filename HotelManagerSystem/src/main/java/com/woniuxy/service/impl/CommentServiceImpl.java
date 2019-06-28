@@ -26,4 +26,14 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.showAllComment();
 	}
 
+	@Override
+	public boolean removeComment(Integer comment_id) {
+		return commentDAO.removeComment(comment_id);
+	}
+
+	@Override
+	public boolean updateCommentPraise(Integer comment_praise,Integer comment_id) {
+		return commentDAO.updateCommentPraise(comment_praise,comment_id);
+	}
+
 }

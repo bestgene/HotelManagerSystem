@@ -45,4 +45,24 @@ public class CommentController {
 	public List<Comment> showcommentservlet(){
 		return commentService.showAllComment();
 	}
+	
+	@RequestMapping("/removeComment")
+	@ResponseBody
+	public String deleteComment(Integer comment_id){
+		boolean removeComment = commentService.removeComment(comment_id);
+		if (removeComment){
+			return "删除成功";
+		}
+		return "删除失败";
+	}
+	
+	@RequestMapping("/updatePraise")
+	@ResponseBody
+	public String updateCommentPraise(Integer comment_praise,Integer comment_id){
+		boolean updateCommentPraise = commentService.updateCommentPraise(comment_praise,comment_id);
+		if (updateCommentPraise){
+			return "操作成功";
+		}
+		return "操作失败";
+	}
 }
