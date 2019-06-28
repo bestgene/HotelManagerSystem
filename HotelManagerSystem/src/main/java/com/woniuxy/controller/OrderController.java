@@ -257,7 +257,7 @@ public class OrderController {
         //支付测试(押金)
         
         payController.payMoney(response, order.getOrder_number(), order.getOrder_deposit()+"",
-                order.getOrder_number()+"@"+order.getOrder_deposit(), "");
+                order.getOrder_number()+order.getOrder_deposit(), "");
 
         return null;
 
