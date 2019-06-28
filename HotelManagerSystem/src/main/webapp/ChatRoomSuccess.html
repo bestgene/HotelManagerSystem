@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天室</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var urlPrefix = "ws://localhost:8080/HotelManagerSystem/chat-room/";
+            var ws = null;
+            //加入聊天室
+            $('#bt_join').click(function () {
+                var username = $('#username').val();
+                //这一步，会调用服务端的@OnOpen注解标注的方法
+                ws = new WebSocket(urlPrefix + username);
+                ws.onmessage = function (event) {
+                    //接收服务端返回给前端的消息
+                    $('#text_chat_content').append(event.data + "\n");
+                };
+                ws.onclose = function () {
+                    /**
+                     * 问题：为什么这里不是接收服务端的提示信息，而是当前用户自己定义消息？
+                     * 原因：当用户离开聊天室时，在遍历存活用户时，当前用户已经不在存活用户集合中，
+                     *       所以当前用户的提示信息不能由服务端发送，而得由自己去定义！
+                     */
+                    $('#text_chat_content').append("用户【" + username +"】离开聊天室！" + "\n");
+                };
+            });
+            //发送消息
+            $('#bt_send').click(function () {
+                if (ws){
+                    ws.send($('#in_msg').val());
+                }
+            });
+            //离开聊天室
+            $('#bt_left').click(function () {
+                if (ws){
+                    ws.close();
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    聊天消息内容：<br/>
+    <textarea id="text_chat_content" readonly="readonly" cols="60" rows="20"></textarea>
+<br/>
+用户：<input id="username" type="text"/>
+<button id="bt_join">加入聊天室</button>
+<button id="bt_left">离开聊天室</button>
+<br/>
+输入框：<input id="in_msg" type="text"/>
+<button id="bt_send">发送消息</button>
+</body>
+</html>

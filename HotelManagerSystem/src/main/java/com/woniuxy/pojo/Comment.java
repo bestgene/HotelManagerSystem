@@ -3,58 +3,57 @@ package com.woniuxy.pojo;
 import java.io.Serializable;
 
 public class Comment implements Serializable{
-	//评论id
-	private Integer comment_id;
-	//用户
-	private User user;
-	//房间id
-	private House house;
-	//该用户所评论的具体内容
-	private String comment_content;
-	private Integer flag;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private Integer CommentId;
+	private String username;
+	private String comment_date;
+	private String comment_text;
+	public Comment(Integer commentId, String username, String comment_date, String comment_text) {
+		super();
+		CommentId = commentId;
+		this.username = username;
+		this.comment_date = comment_date;
+		this.comment_text = comment_text;
+	}
+	public Comment() {
+		super();
+	}
 	@Override
 	public String toString() {
-		return "Comment{" +
-				"comment_id=" + comment_id +
-				", user=" + user +
-				", house=" + house +
-				", comment_content='" + comment_content + '\'' +
-				", flag=" + flag +
-				'}';
+		return "Comment [CommentId=" + CommentId + ", username=" + username + ", comment_date=" + comment_date
+				+ ", comment_text=" + comment_text + "]";
 	}
-
-	public Integer getComment_id() {
-		return comment_id;
+	public Integer getCommentId() {
+		return CommentId;
 	}
-	public void setComment_id(Integer comment_id) {
-		this.comment_id = comment_id;
+	public void setCommentId(Integer commentId) {
+		CommentId = commentId;
 	}
-	public User getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public House getHouse() {
-		return house;
+	public String getComment_date() {
+		return comment_date;
 	}
-	public void setHouse(House house) {
-		this.house = house;
+	public void setComment_date(String comment_date) {
+		this.comment_date = comment_date;
 	}
-	public String getComment_content() {
-		return comment_content;
+	public String getComment_text() {
+		return comment_text;
 	}
-	public void setComment_content(String comment_content) {
-		this.comment_content = comment_content;
+	public void setComment_text(String comment_text) {
+		this.comment_text = comment_text;
 	}
-	public Integer getFlag() {
-		return flag;
-	}
-	public void setFlag(Integer flag) {
-		this.flag = flag;
-	}
-	
 	
 	
 }
