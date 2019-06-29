@@ -1,9 +1,11 @@
 package com.woniuxy.controller;
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -46,8 +48,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login") //登录认证
-	public String login( User user,HttpServletRequest request){
-		 
+	public String login( User user,HttpServletRequest request,HttpSession session){
+		 System.out.println("登录方法******");
 					Subject currentUser = SecurityUtils.getSubject();
 					if(!currentUser.isAuthenticated()){
 						UsernamePasswordToken token = 
@@ -55,11 +57,14 @@ public class UserController {
 						try {
 							System.out.println(token+"token的值");
 							currentUser.login(token);
-							System.out.println();
-							user=userService.findUserByAcc(user.getUser_acc());
-							Session session = currentUser.getSession();
+						User user1=userService.findUserByAcc(user.getUser_acc());
+							/*Session session = currentUser.getSession();
 							session.setAttribute("user",user); //将用户存进shiro当中的session中
-							System.out.println("认证成功");
+							将用户存在httpsession中*/	
+					        HashMap<String, User> users=new HashMap<>();
+					        users.put("loginuser", user1);
+					        session.setAttribute("user", users);
+						    System.out.println("认证成功");
 							return "face-user/index.html";
 						} catch (Exception e) {
 							System.out.println("认证失败");
@@ -86,6 +91,7 @@ public class UserController {
 					results="你不是管理员！或者密码不正确";
 				}
 				else {
+
 					results="登录成功！";
 				}
 				
@@ -95,7 +101,6 @@ public class UserController {
 			}
 			
 		}
-		
 		
 		
 		return results;
