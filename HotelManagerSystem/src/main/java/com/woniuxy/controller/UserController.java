@@ -1,12 +1,11 @@
 package com.woniuxy.controller;
-
-
-
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,12 +13,14 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.hibernate.validator.cfg.defs.ISBNDef;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.pojo.Level;
@@ -48,7 +49,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login") //登录认证
-	public String login( User user,HttpServletRequest request){
+	public String login( User user,HttpServletRequest request,HttpSession session){
 		 
 					Subject currentUser = SecurityUtils.getSubject();
 					if(!currentUser.isAuthenticated()){
@@ -57,20 +58,58 @@ public class UserController {
 						try {
 							System.out.println(token+"token的值");
 							currentUser.login(token);
-							System.out.println();
-							user=userService.findUserByAcc(user.getUser_acc());
-							Session session = currentUser.getSession();
-							session.setAttribute("user_id",user.getUser_id()); //认证成功，将当前用户id存入session
-							System.out.println("认证成功");
-							return "test.html";
+						User user1=userService.findUserByAcc(user.getUser_acc());
+							/*Session session = currentUser.getSession();
+							session.setAttribute("user",user); //将用户存进shiro当中的session中
+							将用户存在httpsession中*/	
+					        HashMap<String, User> users=new HashMap<>();
+					        users.put("loginuser", user1);
+					        session.setAttribute("user", users);
+						    System.out.println("认证成功");
+							return "face-user/index.html";
 						} catch (Exception e) {
 							System.out.println("认证失败");
-				         	return "error.html";
+				         	return "../error.html";
 						}
 					}
 					
-		return "";
+		return "face-user/index.html";
 	}
+	
+	@RequestMapping("/AdminLogin")
+	@ResponseBody
+	public String AdminLogin(User user,HttpServletRequest request,HttpSession session){
+		System.out.println("管理员登录获取到的信息"+user);
+		String results="";
+		//进行查询看是否是管理员，同时判断账号密码是否正确
+		if (userService.findUserByAcc(user.getUser_acc())==null) {
+			results="不存在此账户";
+			
+		}else {
+			      String user_pwd= new SimpleHash("MD5", user.getUser_pwd(), null,1024).toString();
+			if (userService.findUserByAcc(user.getUser_acc()).getUser_pwd().equals(user_pwd)) {
+				if (userService.FindAdmin(user)==null) {
+					results="你不是管理员！或者密码不正确";
+				}
+				else {
+					HashMap<String, User> map=new HashMap<>();
+					map.put("Admin", userService.FindAdmin(user));
+					session.setAttribute("Admin", map);
+					results="登录成功！";
+				}
+				
+			}else {
+				
+				results="密码不正确";
+			}
+			
+		}
+		
+		
+		
+		return results;
+	}
+	
 	@RequestMapping("/getinfo")   //获取当前用户的个人信息
 	public String getInfo(ModelMap map){
 		Subject currentUser = SecurityUtils.getSubject();

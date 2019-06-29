@@ -73,4 +73,7 @@ public interface UserDAO {
 	//短信验证时候进行的注册 的功能
 	@Insert("insert into t_user(user_acc,user_pwd) values(#{user_acc},#{user_pwd})")
 	public void Telregister(Telpojo telpojo);
+	
+	@Select("select * from t_user where user_acc=#{user_acc} and role_id=2")
+	public User FindAdmin(User user);
 }

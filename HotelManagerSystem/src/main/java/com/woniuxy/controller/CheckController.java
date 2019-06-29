@@ -80,7 +80,7 @@ public class CheckController {
 					result = "注册失败！已经存在此账户！";
 				} else {
 					tel.setUser_pwd(new SimpleHash("MD5", tel.getUser_pwd(), null,1024).toString());
-					userService.Telregister(tel);;
+					userService.Telregister(tel);
 					result = "注册成功！";
 				}
 

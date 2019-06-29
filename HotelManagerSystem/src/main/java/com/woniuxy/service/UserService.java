@@ -31,6 +31,6 @@ public interface UserService {
 	public void Telregister(Telpojo telpojo);//通过短信验证进行注册用户
 
 	public Map<String, Object> getVipByUserid(Integer user_id);//用户根据自己的uid查出自己的info_id和discount
-
+	public User FindAdmin(User user);//查找管理员
 }
 

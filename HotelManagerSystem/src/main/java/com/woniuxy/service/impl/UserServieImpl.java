@@ -179,6 +179,12 @@ public class UserServieImpl implements UserService {
 		
 	}
 
+	@Override
+	public User FindAdmin(User user) {
+		// TODO Auto-generated method stub
+		return userDAO.FindAdmin(user);
+	}
+
 	
 
 	

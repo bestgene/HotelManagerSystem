@@ -1,8 +1,7 @@
 package com.woniuxy.configuration;
-
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -13,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.woniuxy.realm.UserRealm;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 	
 	
@@ -51,11 +50,10 @@ public class ShiroConfig {
 		//配置登录页面
 		bean.setLoginUrl("/html/login.html");
 		//配置无权限页面
-		bean.setUnauthorizedUrl("/wwhHTML/error.html");
+		bean.setUnauthorizedUrl("wwhHTML/error.html");
 		//设置过滤器链
-		Map<String, String>map = new HashMap<>();
+		Map<String, String>map = new LinkedHashMap<>();
 
-		
 		//anno 任何人都能登录
 		//			map.put("/index", "anon");
 		//放行 首页静态文件
@@ -79,7 +77,7 @@ public class ShiroConfig {
 		map.put("/druid/**", "anon");
 		map.put("/", "anon");
 		map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
-//		map.put("/**", "authc");
+//	    map.put("/**", "authc");
 		bean.setFilterChainDefinitionMap(map);
 		return bean;
 	}

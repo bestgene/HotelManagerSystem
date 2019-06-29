@@ -87,41 +87,6 @@
  
 	</script> 
 	
-	<script type="text/javascript">
-
-	
-function login(){
-		
-		var username=$("#num").val();
-		var password=$("#pass").val();
-		var dataJson={"username":username,"password":password};
-		
-		
-		$.ajax({
-			url:"loginboss",
-			data:dataJson,
-	        type:"post",
-	        datetype:"text",
-	        success:function(dataa){
-	        	if(dataa=="-1"){
-	        	alert("登录错误！");
-	        	}
-	        	else{
-	        		location.href = "mainboss.html";
-	        	}
-	        	
-	        }
-			
-		});
-		
-	}
-  
- 
-	
-	
-
-
-	</script> 
 </body>
 
 </html>
