@@ -51,7 +51,7 @@
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="houtai.html" class="active"> <i
+							<li><a href="form-line.html" class="active"> <i
 									class="am-icon-angle-right"></i> <span>线上开单</span>
 							</a> <a href="form-line2.html"> <i class="am-icon-angle-right"></i>
 									<span>线下开单</span>
@@ -156,6 +156,50 @@
 						<div class="tpl-form-body tpl-form-line">
 
 							<form class="am-form tpl-form-line-form" action="/HotelManagerSystem/order/createYdOrder">
+
+								<div class="am-form-group">
+									<label class="am-u-sm-3 am-form-label">入住时间 <span
+											class="tpl-form-line-small-title">Time</span></label>
+									<div class="am-u-sm-9">
+										<input type="text" class="am-form-field tpl-form-no-bg" placeholder="入住时间"
+											   data-am-datepicker="" id="intime" name="reserve_checkintime" onmouseup="livefun()"
+											   readonly/>
+										<small>入住时间为必填</small>
+									</div>
+								</div>
+								<div class="am-form-group">
+									<label class="am-u-sm-3 am-form-label">离开时间 <span
+											class="tpl-form-line-small-title">Time</span></label>
+									<div class="am-u-sm-9">
+										<input type="text" class="am-form-field tpl-form-no-bg" id="leavetime"
+											   placeholder="离开时间" data-am-datepicker="" name="reserve_checkouttime"
+											   onchange="leavefun()" readonly/>
+										<small>离开时间为必填</small>
+									</div>
+								</div>
+								<div class="am-form-group">
+									<label for="user-phone" class="am-u-sm-3 am-form-label">房间类型 <span
+											class="tpl-form-line-small-title">Type</span></label>
+									<div class="am-u-sm-9">
+										<select id="house_type" data-am-selected="{searchBox: 1}" name="houseType.house_type_id">
+											<option value="1">单人间</option>
+											<option value="2">双人间</option>
+											<option value="3">豪华大床房</option>
+											<option value="4">总统套房</option>
+										</select>
+										<input id="room_query" type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " value="查询剩余数量"/>
+									</div>
+								</div>
+								<div class="am-form-group">
+									<label  class="am-u-sm-3 am-form-label">房间数量 <span
+											class="tpl-form-line-small-title">room</span></label>
+									<div class="am-u-sm-9">
+										<select id="room_number" data-am-selected="{searchBox: 1}" name="house_number">
+										</select>
+									</div>
+								</div>
+
+
 								<div class="am-form-group">
 									<label for="user-name" class="am-u-sm-3 am-form-label">客户姓名
 										<span class="tpl-form-line-small-title">Name</span>
@@ -194,21 +238,21 @@
 								
 								
 								
-								<div class="am-form-group">
+								<!--<div class="am-form-group">
 									<label for="user-name" class="am-u-sm-3 am-form-label">房间数量
 										<span class="tpl-form-line-small-title">Number</span>
 									</label>
 									<div class="am-u-sm-9">
 										<select data-am-selected="{searchBox: 1}" name="house_number"id="housenumber_select">
 										</select>
-										<!-- 隐藏域传房间类型id -->
+										&lt;!&ndash; 隐藏域传房间类型id &ndash;&gt;
 										<input type="hidden" name="houseType.house_type_id" >
 									</div>
-								</div>
+								</div>-->
 								
 								
 
-								<div class="am-form-group">
+								<!--<div class="am-form-group">
 									<label for="user-email" class="am-u-sm-3 am-form-label">入住时间
 										<span class="tpl-form-line-small-title">Time</span>
 									</label>
@@ -217,10 +261,10 @@
 											placeholder="入住时间" data-am-datepicker="" id="livetime1"
 											name="reserve_checkintime" onchange="livefun()" readonly  th:value="${reserve.reserve_checkintime}" disabled="disabled"/> <small>入住时间为必填</small>
 									</div>
-								</div>
+								</div>-->
 
 
-								<div class="am-form-group">
+								<!--<div class="am-form-group">
 									<label for="user-email" class="am-u-sm-3 am-form-label">离开时间
 										<span class="tpl-form-line-small-title">Time</span>
 									</label>
@@ -229,7 +273,7 @@
 											id="leavetime1" placeholder="离开时间" data-am-datepicker=""
 											name="reserve_checkouttime" onchange="leavefun()" readonly th:value="${reserve.reserve_checkouttime}" disabled="disabled"/> <small>离开时间为必填</small>
 									</div>
-								</div>
+								</div>-->
 
 								<div class="am-form-group">
 									<label for="user-weibo" class="am-u-sm-3 am-form-label">抵达时间
@@ -310,12 +354,34 @@
 	</div>
 
 	<script type="text/javascript" >
-	var housenumber = [[${reserve.HouseType.num}]];
+		$("#room_query").click(function () {
+			var checkintime = $("#intime").val();
+			var checkouttime = $("#leavetime").val();
+			var house_type_id=$("#house_type").val();
+			$.ajax({
+				url:"house/queryHouseNumber/"+checkintime+"/"+checkouttime+"/"+house_type_id,
+				type:"Get",
+				success:function (data) {
+					$("#room_number").html("");
+					if (data==0){
+						alert("房间不足");
+						return;
+					} else {
+						for (var i=1;i<=data;i++){
+							var option = "<option value='"+i+"'>"+i+"间</option>"
+							$("#room_number").append(option);
+						}
+					}
+				}
+
+			})
+		});
+	/*var housenumber = [[${reserve.HouseType.num}]];
 	var number = parseInt(housenumber);
 	for(var i=1;i<=number;i++){
 		var option="<option value='"+i+"'>"+i+"间</option>";
 		$("#housenumber_select").append(option);
-	}
+	}*/
 	
 	
 	/* 身份证号验证 */
