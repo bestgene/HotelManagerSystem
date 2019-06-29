@@ -15,7 +15,7 @@ function queryTypeAndTime() {
 			contentType:"application/json;charset=utf-8",
 			success:function(data){
 				//alert(data);
-				var singleType=data.houseTypes;
+				var singleType=data.houseType;
 				var content="";
 					content+='<div>'
 					+'<div id="house_stead">'	

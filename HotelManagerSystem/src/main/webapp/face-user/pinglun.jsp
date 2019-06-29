@@ -78,7 +78,7 @@
 									+ oSize
 									+ '</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'
 									+ now
-									+ '</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">66</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
+									+ '</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
 							if (oSize.replace(/(^\s*)|(\s*$)/g, "") != '') {
 								$(this).parents('.reviewArea ').siblings(
 										'.comment-show').prepend(oHtml);
@@ -135,6 +135,7 @@
 	<script type="text/javascript">
 		$('.comment-show').on('click', '.date-dz-z', function() {
 			var zNum = $(this).find('.z-num').html();
+			var id = $(this).find('.comment_ids').val();
 			if ($(this).is('.date-dz-z-click')) {
 				zNum--;
 				$(this).removeClass('date-dz-z-click red');
@@ -146,6 +147,14 @@
 				$(this).find('.z-num').html(zNum);
 				$(this).find('.date-dz-z-click-red').addClass('red');
 			}
+			$.ajax({
+				url:"/HotelManagerSystem/comment/updatePraise",
+				data:{
+					comment_id:id,
+					comment_praise:zNum,
+				},
+			})
+			
 		});
 
 		/*    debugger; */
@@ -175,17 +184,32 @@
 										+ '</span>'
 										+ '</div><div class="date-dz"><span class="date-dz-left pull-left comment-time">'
 										+ single.comment_date
-										+ '</span><div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock"></a> <a '+
-							'href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left"></a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">66</i>)</a></div></div><div class="hf-list-con"></div></div></div>'
+										+ '</span><div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a>'
+										+'<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">'+single.comment_praise+'</i>)<input type="hidden" class="comment_ids" value="'+single.comment_id+'"></a></div></div><div class="hf-list-con"></div></div></div>'
 							}
 
 							$("#aaa").append(str);
 						},
+						
 						error : function(data) {
 							//alert(data);
 						}
 					});
 		});
+		function removeComment(id){
+			$.ajax({
+				url:'/HotelManagerSystem/comment/removeComment',
+				data:{
+					comment_id:id,
+				},
+				success:function(data){
+					alert(data);
+				}
+			})
+		}
+		
+		
 	</script>
+	
 </body>
 </html>

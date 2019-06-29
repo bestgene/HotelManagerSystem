@@ -59,7 +59,9 @@ public class OrderController {
     @ResponseBody
     public List<Order> showAllOrder(Order order,String cxfs, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        
+        user = new User();
+        user.setRole_id(2);
+        System.out.println(order);
         if (user!=null&&user.getRole_id() == 3) {
             order.setUser(user);
         }
