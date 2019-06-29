@@ -52,4 +52,11 @@ public interface HouseDAO {
 	//根据house_type_id查询HouseType
 	@Select("select * from t_house_type where house_type_id = #{house_type_id}")
 	public HouseType findHouseTypeByHouseTypeId(Integer house_type_id);
+	
+	//根据房间类型和数量添加房间，先根据房间类型id查找到相同类型的房间，然后给房间house_name
+	@Insert("insert into t_house(house_name,house_type_id) values(#{arg0},#{arg1})")
+	public boolean addHouse(String house_name,Integer house_type_id);
+	
+	@Select("SELECT MAX(house_name)+1 FROM t_house WHERE house_type_id=#{house_type_id}")
+	public String selectMaxHouse_name(Integer house_type_id);
 }

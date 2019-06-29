@@ -130,7 +130,23 @@ public class HouseController {
 		house.put("date", date);
 		return house;
 	}
-
+    
+	/*
+	 * 
+	 * 添加房间
+	 */
+	@GetMapping("/addHouse/{house_type_id}/{num}")
+	@ResponseBody
+	public String addHouse(@PathVariable("house_type_id") Integer house_type_id,@PathVariable("num") Integer num){
+		boolean state=houseService.addHouse(house_type_id,num);
+		String result="";
+		if(state){
+		    result="添加成功";
+		}else{
+			result="添加失败";
+		}
+		return result;
+	}
 	
 	@GetMapping("/houtaiOrderInfo/{startTime}/{endTime}/{house_type_id}")
 	/*
@@ -153,6 +169,21 @@ public class HouseController {
 		model.addObject("reserve", reserve);
 		model.setViewName("/form-line.html");
 		return model;
+	}
+	
+	/*
+	 * 根据入住时间、退房时间、房间类型，返回房间数量
+	 * 
+	 */
+	@GetMapping("/queryHouseNumber/{startTime}/{endTime}/{house_type_id}")
+	@ResponseBody
+	public int houseNumber(@PathVariable("startTime") String startTime,
+			@PathVariable("endTime") String endTime, @PathVariable("house_type_id") Integer house_type_id)
+			throws ParseException {
+		List<House> allAvailableTypeRooms = houseService.allAvailableTypeRooms(startTime, endTime, house_type_id);
+		HouseType houseType = houseService.findHouseTypeByHouseTypeId(house_type_id);
+		houseType.setNum(allAvailableTypeRooms.size());
+		return houseType.getNum();
 	}
 	
 	

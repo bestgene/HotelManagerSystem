@@ -37,4 +37,6 @@ public interface HouseService {
 //根据入住时间和离开时间和房间类型查询该类型下所有可入住房间
 	public List<House> allAvailableTypeRooms(
 			String startTime,String endTime,Integer house_type_id) throws ParseException;
+//根据房间类型和数量添加房间
+	public boolean addHouse(Integer house_type_id, Integer num);
 }
