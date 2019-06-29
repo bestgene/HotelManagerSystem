@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/HotelManagerSystem/js/laydate/laydate.js"></script>
+<script src="/HotelManagerSystem/js/jquery.min.js"></script>
+</head>
+<body>
+    入住时间：<input type="text" id="startTime"/>
+    退房时间：<input type="text" id="endTime"/>
+    房间类型：<select id="house_type">
+         <option name="houseType" value="1">
+                                      单人间
+         <option/>
+         <option name="houseType" value="2">
+                                      双人间
+         <option/>
+         <option name="houseType" value="3">
+                                      豪华大床房
+         <option/>
+         <option name="houseType" value="4">
+                                      总统套房
+         <option/>
+       </select>
+       <input type="button" value="..." onclick="houtaiOrderInfo()"/>     
+<script type="text/javascript">
+laydate.render({
+	elem : '#startTime', //选择input的id     
+});
+laydate.render({
+	elem : '#endTime',
+});
+function houtaiOrderInfo(){
+	var startTime=$("#startTime").val();
+	var endTime=$("#endTime").val();
+	var house_type_id=$("#house_type option:selected").val(); //获取选中的项的值
+    location.href="/HotelManagerSystem/house/houtaiOrderInfo/"+startTime+"/"+endTime+"/"+house_type_id;
+}
+</script>    
+</body>
+</html> 

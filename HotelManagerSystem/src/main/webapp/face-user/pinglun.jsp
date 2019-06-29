@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,8 +15,8 @@
 	<div class="commentAll">
 		<!--评论区域 begin-->
 		<div class="reviewArea clearfix">
-			<textarea class="content comment-input"
-				placeholder="请输入评论&hellip;" onkeyup="keyUP(this)"></textarea>
+			<textarea class="content comment-input" placeholder="请输入评论&hellip;"
+				onkeyup="keyUP(this)"></textarea>
 			<a href="javascript:;" class="plBtn">评论</a>
 		</div>
 		<!--评论区域 end-->
@@ -42,7 +42,7 @@
 			}
 		}
 	</script>
-	
+
 
 
 	<!--点击评论创建评论条-->
@@ -78,7 +78,7 @@
 									+ oSize
 									+ '</span> </div> <div class="date-dz"> <span class="date-dz-left pull-left comment-time">'
 									+ now
-									+ '</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">666</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
+									+ '</span> <div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock">删除</a> <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"><i class="date-dz-z-click-red"></i>赞 (<i class="z-num">0</i>)</a> </div> </div><div class="hf-list-con"></div></div> </div>';
 							if (oSize.replace(/(^\s*)|(\s*$)/g, "") != '') {
 								$(this).parents('.reviewArea ').siblings(
 										'.comment-show').prepend(oHtml);
@@ -90,18 +90,15 @@
 								//ajax传值
 
 								$.ajax({//异步请求返回给后台
-									url : '../addcommentservlet',//servlet 
+									url : '/HotelManagerSystem/comment/addcommentservlet',//servlet 
 									type : 'POST',
 									data : {
-										'date' : now,//日期	
-										'username' :"移动用户： "+"${sessionScope.TEL_IN_SESSION }",//用户名
-										'text' : oSize
+										'comment_date' : now,//日期	
+										'comment_text' : oSize
 									//评论	
 									},
-									dataType : 'text',
-
 									success : function(data) {
-										//alert(data);
+										alert(data);
 									},
 									error : function(data) {
 										//alert(data)
@@ -136,6 +133,19 @@
 	</script>
 	<!--点赞-->
 	<script type="text/javascript">
+		function updateCommentPraise(id){
+			alert(id);
+			$.ajax({
+				url:"/HotelManagerSystem/comment/updatePraise",
+				data:{
+					comment_id:id,
+					comment_praise:zNum,
+				},
+				success:function(data){
+					alert(data);
+				}
+			})
+		}
 		$('.comment-show').on('click', '.date-dz-z', function() {
 			var zNum = $(this).find('.z-num').html();
 			if ($(this).is('.date-dz-z-click')) {
@@ -149,14 +159,15 @@
 				$(this).find('.z-num').html(zNum);
 				$(this).find('.date-dz-z-click-red').addClass('red');
 			}
+			
 		});
 
 		/*    debugger; */
 
 		$(function() {
 			$.ajax({//异步请求返回给后台
-						url : '../showcommentservlet',//servlet 
-						type : 'POST',
+						url : '/HotelManagerSystem/comment/showcommentservlet',//servlet 
+						type : 'get',
 						data : {
 						/* 'date' :now,//日期	
 						'username':"David Beckham",//用户名
@@ -167,22 +178,41 @@
 							/* alert(JSON.stringify(data)); */
 							var str = "";
 							/* $("#aaa").empty(); */
-							 for(var i=0;i<data.length;i++){ 
-				
-							
-							 str+='<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt="">'+
-							'</div><div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"><a href="#" class="comment-size-name">'+data[i].name+'</a> <span class="my-pl-con">&nbsp;'+data[i].text+'</span>'+
-							'</div><div class="date-dz"><span class="date-dz-left pull-left comment-time">'+data[i].date+'</span><div class="date-dz-right pull-right comment-pl-block"><a href="javascript:;" class="removeBlock"></a> <a '+
-							'href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left"></a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">666</i>)</a></div></div><div class="hf-list-con"></div></div></div>'
-							 } 
-							
+							var allComment = data;
+							for(var i=0;i<allComment.length;i++){ 
+								var single = allComment[i];
+		str += '<div class="comment-show-con clearfix"><div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt="">'
+										+ '</div><div class="comment-show-con-list pull-left clearfix"><div class="pl-text clearfix"><a href="#" class="comment-size-name">'
+										+ single.username
+										+ '</a> <span class="my-pl-con">&nbsp;'
+										+ single.comment_text
+										+ '</span>'
+										+ '</div><div class="date-dz"><span class="date-dz-left pull-left comment-time">'
+										+ single.comment_date
+										+ '</span><div class="date-dz-right pull-right comment-pl-block"><a href="javascript:removeComment(\''+single.comment_id+'\');" class="removeBlock">删除</a>'
+										+'<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:updateCommentPraise(\''+single.comment_id+'\');" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">'+single.comment_praise+'</i>)</a></div></div><div class="hf-list-con"></div></div></div>'
+							}
+
 							$("#aaa").append(str);
 						},
+						
 						error : function(data) {
 							//alert(data);
 						}
 					});
 		});
+		function removeComment(id){
+			$.ajax({
+				url:'/HotelManagerSystem/comment/removeComment',
+				data:{
+					comment_id:id,
+				},
+				success:function(data){
+					alert(data);
+				}
+			})
+		}
+		
 		
 	</script>
 </body>

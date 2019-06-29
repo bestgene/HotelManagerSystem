@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -78,7 +77,7 @@ public class UserController {
 	
 	@RequestMapping("/AdminLogin")
 	@ResponseBody
-	public String AdminLogin(User user,HttpServletRequest request,HttpSession session){
+	public String AdminLogin(User user,HttpServletRequest request){
 		System.out.println("管理员登录获取到的信息"+user);
 		String results="";
 		//进行查询看是否是管理员，同时判断账号密码是否正确
@@ -92,9 +91,7 @@ public class UserController {
 					results="你不是管理员！或者密码不正确";
 				}
 				else {
-					HashMap<String, User> map=new HashMap<>();
-					map.put("Admin", userService.FindAdmin(user));
-					session.setAttribute("Admin", map);
+
 					results="登录成功！";
 				}
 				
@@ -104,7 +101,6 @@ public class UserController {
 			}
 			
 		}
-		
 		
 		
 		return results;

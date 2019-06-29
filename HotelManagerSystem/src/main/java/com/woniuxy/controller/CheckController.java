@@ -1,19 +1,14 @@
 package com.woniuxy.controller;
-
-
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.woniuxy.emailUtil.EmailUtil;
 import com.woniuxy.pojo.Telpojo;
 import com.woniuxy.pojo.User;
@@ -21,7 +16,7 @@ import com.woniuxy.service.UserService;
 import com.woniuxy.testmsg.msg;
 
 @Controller
-@RequestMapping("/Telcheck")
+@RequestMapping("/check")
 @Scope("prototype")
 public class CheckController {
 
@@ -36,6 +31,15 @@ public class CheckController {
 		this.userService = userService;
 	}
 
+	private String randcode = "";
+
+	public String getRandcode() {
+		return randcode;
+	}
+
+	public void setRandcode(String randcode) {
+		this.randcode = randcode;
+	}
 
 	/*
 	 * @RequestMapping("/emailcheck") public void emailCheck(@Validated User
@@ -53,12 +57,16 @@ public class CheckController {
 	 * 
 	 * }
 	 */
-	
-	
-    @RequestMapping("/Register")
-    @ResponseBody
+
+
+		// 对前端的数据进行测试
+		/*
+		 * 1出现的情况：验证码不正确，账号已经存在，账号。密码，验证码都为空
+		 * 
+		 */
+
 	public String telcheck(Telpojo tel, HttpServletRequest request) {// 短信验证
-		System.out.println("进入到注册的界面中来！");
+		System.out.println(randcode + "看看是否有验证码！");
 
 		// 对前端的数据进行测试
 		/*
@@ -79,7 +87,6 @@ public class CheckController {
 				if (userService.findUserByuserAcc(tel) != null) {
 					result = "注册失败！已经存在此账户！";
 				} else {
-					tel.setUser_pwd(new SimpleHash("MD5", tel.getUser_pwd(), null,1024).toString());
 					userService.Telregister(tel);
 					result = "注册成功！";
 				}
@@ -115,6 +122,7 @@ public class CheckController {
 			Map<String, String> map = new HashMap<>();
 			map.put(po.getTel(), reult);
 			session.setAttribute("map", map);
+			randcode = reult;// 将返回的验证码取出来
 			System.out.println(map.get(po.getTel()) + "验证码获取！！！！");
 			re = "验证码发送成功！";
 
@@ -123,7 +131,5 @@ public class CheckController {
 
 		return re;
 	}
-	
-	
 
 }
