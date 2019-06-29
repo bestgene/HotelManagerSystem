@@ -133,19 +133,7 @@
 	</script>
 	<!--点赞-->
 	<script type="text/javascript">
-		function updateCommentPraise(id){
-			alert(id);
-			$.ajax({
-				url:"/HotelManagerSystem/comment/updatePraise",
-				data:{
-					comment_id:id,
-					comment_praise:zNum,
-				},
-				success:function(data){
-					alert(data);
-				}
-			})
-		}
+		
 		$('.comment-show').on('click', '.date-dz-z', function() {
 			var zNum = $(this).find('.z-num').html();
 			if ($(this).is('.date-dz-z-click')) {
@@ -158,6 +146,20 @@
 				$(this).addClass('date-dz-z-click');
 				$(this).find('.z-num').html(zNum);
 				$(this).find('.date-dz-z-click-red').addClass('red');
+			}
+			function updateCommentPraise(id){
+				var zNum = $(this).find('.z-num').html();
+				alert(zNum);
+				$.ajax({
+					url:"/HotelManagerSystem/comment/updatePraise",
+					data:{
+						comment_id:id,
+						comment_praise:zNum,
+					},
+					success:function(data){
+						alert(data);
+					}
+				})
 			}
 			
 		});

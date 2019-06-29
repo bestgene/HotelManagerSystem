@@ -1,10 +1,15 @@
+
 function showOrder(id) {
-	var cxfs=document.getElementById(id).value
+	var cxfs=document.getElementById(id).value;
 	$.ajax({
 		url : "order/showAllOrder",
 		type : "POST",
 		data : {
-			"cxfs":cxfs
+			"cxfs":cxfs,
+			"order_number":$("#info_order_number").val(),
+			"userInfo.user_info_name":$("#info_user_info_name").val(),
+			"userInfo.user_info_tel":$("#info_user_info_tel").val(),
+			"userInfo.user_info_idcard":$("#info_user_info_idcard").val()
 		},
 		success : function(data) {
 			var content = '<table class="layui-table" id="order_table">'
@@ -14,8 +19,7 @@ function showOrder(id) {
 					+ '<th>身份证号码</th>' 
 					+ '<th>联系方式</th>' 
 					+ '<th>订单金额</th>'
-
-					+ '<th>入住时间</th>' 
+					+ '<th>入住时间</th>'
 					+ '<th>离开时间</th>' 
 					+ '<th>住房类型</th>'
 					+ '<th>房间号</th>' 
