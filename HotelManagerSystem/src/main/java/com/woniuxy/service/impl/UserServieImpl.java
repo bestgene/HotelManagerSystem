@@ -122,7 +122,7 @@ public class UserServieImpl implements UserService {
 		Level level=getLevelByVipId(vip.getLevel_id());
 		BigDecimal discount = level.getLevel_discount();
 		Map<String,Object> map=new HashMap<>();
-		map.put("info_id",info.getUser_info_id());  //info_id和discount放入了map，该函数返回map
+		map.put("user_info",info);  //info_id和discount放入了map，该函数返回map
 		map.put("discount",discount);
 		return map;
 	}

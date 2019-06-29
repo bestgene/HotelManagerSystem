@@ -182,6 +182,7 @@ public class OrderController {
         Order order = new Order();
         //获取session中的用户
         User user = (User) request.getSession().getAttribute("user");
+        System.out.println(user);
         //设置操作角色
         order.setUser(user);
         //根据输入用户信息查询用户信息id以及对应会员打折

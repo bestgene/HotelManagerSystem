@@ -1,7 +1,7 @@
 package com.woniuxy.configuration;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -80,6 +80,7 @@ public class ShiroConfig {
 		//map.put("/druid/**", "anon");
 		map.put("/", "anon");
 		map.put("/login.html", "anon");
+		map.put("/payOrder/savePayResult","anon");
 		
 		//map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
 		// /**

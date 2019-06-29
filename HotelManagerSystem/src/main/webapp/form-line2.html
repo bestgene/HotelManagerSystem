@@ -146,7 +146,7 @@
                                         class="tpl-form-line-small-title">Time</span></label>
                                 <div class="am-u-sm-9">
                                     <input type="text" class="am-form-field tpl-form-no-bg" placeholder="入住时间"
-                                           data-am-datepicker="" id="livetime1" name="reserve_checkintime" onmouseup="livefun()"
+                                           data-am-datepicker="" id="intime" name="reserve_checkintime" onchange="livefun()"
                                            readonly/>
                                     <small>入住时间为必填</small>
                                 </div>
@@ -155,7 +155,7 @@
                                 <label class="am-u-sm-3 am-form-label">离开时间 <span
                                         class="tpl-form-line-small-title">Time</span></label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" class="am-form-field tpl-form-no-bg" id="leavetime1"
+                                    <input type="text" class="am-form-field tpl-form-no-bg" id="leavetime"
                                            placeholder="离开时间" data-am-datepicker="" name="reserve_checkouttime"
                                            onchange="leavefun()" readonly/>
                                     <small>离开时间为必填</small>
@@ -165,7 +165,7 @@
                                 <label for="user-phone" class="am-u-sm-3 am-form-label">房间类型 <span
                                         class="tpl-form-line-small-title">Type</span></label>
                                 <div class="am-u-sm-9">
-                                    <select data-am-selected="{searchBox: 1}" name="houseType.house_type_id">
+                                    <select id="house_type" data-am-selected="{searchBox: 1}" name="houseType.house_type_id">
                                         <option value="1">单人间</option>
                                         <option value="2">双人间</option>
                                         <option value="3">豪华大床房</option>
@@ -249,7 +249,7 @@
         }
     }
     function livefun(){	//判断入住时间大于当前时间
-        var livetime=$("#livetime1").val();//2018-10-24(入住时间字符串)
+        var livetime=$("#intime").val();//2018-10-24(入住时间字符串)
         var timestamp1 =Date.parse(new Date());//获取当前时间的时间戳
         var timestamp2 = Date.parse(new Date(livetime));//将入住时间转换成时间戳
 
@@ -262,10 +262,10 @@
         }
     }
     function leavefun(){	//判断离开时间要大于入住时间
-        var livetime=$("#livetime1").val();//2018-10-24(入住时间字符串)
+        var livetime=$("#intime").val();//2018-10-24(入住时间字符串)
         var timestamp1 = Date.parse(new Date(livetime));//将入住时间转换成时间戳
-        var leavetime=$("#leavetime1").val();//离开时间
-        var timestamp2 = Date.parse(new Date(livetime));//将离开时间转换成时间戳
+        var leavetime=$("#leavetime").val();//离开时间
+        var timestamp2 = Date.parse(new Date(leavetime));//将离开时间转换成时间戳
         console.log(leavetime);
         if(timestamp2-timestamp1<=0){
             alert("离开时间不能小于入住时间！！");
@@ -279,11 +279,26 @@
 
 <script>
     $("#room_query").click(function () {
-       /* $.ajax({
-            url:"",
-            type:"post",
+        var checkintime = $("#intime").val();
+        var checkouttime = $("#leavetime").val();
+        var house_type_id=$("#house_type").val();
+        $.ajax({
+            url:"house/queryHouseNumber/"+checkintime+"/"+checkouttime+"/"+house_type_id,
+            type:"Get",
+            success:function (data) {
+                $("#room_number").html("");
+                if (data==0){
+                    alert("房间不足");
+                    return;
+                } else {
+                    for (var i=1;i<=data;i++){
+                        var option = "<option value='"+i+"'>"+i+"间</option>"
+                        $("#room_number").append(option);
+                    }
+                }
+            }
 
-        })*/
+        })
     });
     $("#kd_btn").click(function () {
         var myform = new FormData(document.getElementById("kd_form"));
