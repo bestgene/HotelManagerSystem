@@ -51,20 +51,23 @@ public class ShiroConfig {
 		bean.setLoginUrl("/html/login.html");
 		//配置无权限页面
 		bean.setUnauthorizedUrl("error.html");
+	
 
 		//设置过滤器链
 		Map<String, String>map = new LinkedHashMap<>();
-
-		//anno 任何人都能登录
-		//			map.put("/index", "anon");
-		//放行 首页静态文件
+		//放行首页静态文件
 		map.put("/css/**","anon");
 		map.put("/face-user/**","anon");
 		map.put("/housedetailinfo/**","anon");
 		map.put("/img/**", "anon");
 		map.put("/js/**", "anon");
+		map.put("/images/**", "anon");
+		map.put("/scripts/**", "anon");
+		map.put("/style/**", "anon");
+		map.put("/fonts/**", "anon");
+	
 		//登录请求
-		map.put("/html/user/login", "anon");
+		map.put("/user/login", "anon");
 		//注册页面
 		map.put("/html/sign-up.html", "anon");
 		//酒店介绍
@@ -75,13 +78,13 @@ public class ShiroConfig {
 //		map.put("/vipinfo.html","anon"); 
 //		map.put("/user/getvipbyadmin", "anon");      //用于vip的测试
 //		map.put("/user/register", "anon");
-		map.put("/druid/**", "anon");
+		//map.put("/druid/**", "anon");
 		map.put("/", "anon");
+		map.put("/login.html", "anon");
 		
-		
-		map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
+		//map.put("/user/delete","authc,perms[user:delete]"); //管理员删除账号
 		// /**
-//		map.put("/**", "authc");
+		map.put("/**", "authc");
 		bean.setFilterChainDefinitionMap(map);
 		return bean;
 	}

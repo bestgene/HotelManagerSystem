@@ -49,7 +49,7 @@ public class UserController {
 	
 	@RequestMapping("/login") //登录认证
 	public String login( User user,HttpServletRequest request,HttpSession session){
-		 
+		 System.out.println("登录方法******");
 					Subject currentUser = SecurityUtils.getSubject();
 					if(!currentUser.isAuthenticated()){
 						UsernamePasswordToken token = 
