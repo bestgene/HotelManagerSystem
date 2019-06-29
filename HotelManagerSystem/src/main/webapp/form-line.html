@@ -2,468 +2,471 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Amaze UI Admin index Examples</title>
-<meta name="description" content="这是一个 index 页面">
-<meta name="keywords" content="index">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="renderer" content="webkit">
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="icon" type="image/png" href="/HotelManagerSystem/assets/i/favicon.png">
-<link rel="apple-touch-icon-precomposed"
-	href="/HotelManagerSystem/assets/i/app-icon72x72@2x.png">
-<meta name="apple-mobile-web-app-title" content="Amaze UI" />
-<link rel="stylesheet" href="/HotelManagerSystem/assets/css/amazeui.min.css" />
-<link rel="stylesheet" href="/HotelManagerSystem/assets/css/admin.css">
-<link rel="stylesheet" href="/HotelManagerSystem/assets/css/app.css">
-<script src="/HotelManagerSystem/assets/js/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin index Examples</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/HotelManagerSystem/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="/HotelManagerSystem/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="/HotelManagerSystem/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/HotelManagerSystem/assets/css/admin.css">
+    <link rel="stylesheet" href="/HotelManagerSystem/assets/css/app.css">
+    <script src="/HotelManagerSystem/assets/js/jquery.min.js"></script>
 
 </head>
 
 <body data-type="generalComponents">
-	<header class="am-topbar am-topbar-inverse admin-header">
-		<div class="am-topbar-brand">
-			<a href="javascript:;" class="tpl-logo"> <img
-				src="/HotelManagerSystem/assets/img/logo.png" alt="">
-			</a>
-		</div>
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <a href="javascript:;" class="tpl-logo"> <img
+                src="/HotelManagerSystem/assets/img/logo.png" alt="">
+        </a>
+    </div>
 
 
-		<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
-			<ul
-				class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
-				<li><a href="login.html" class="tpl-header-list-link"><span
-						class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
-			</ul>
-		</div>
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+        <ul
+                class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+            <li><a href="login.html" class="tpl-header-list-link"><span
+                    class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+        </ul>
+    </div>
 
-	</header>
+</header>
 
-	<div class="tpl-page-container tpl-page-header-fixed">
-		<div class="tpl-left-nav tpl-left-nav-hover">
-			<div class="tpl-left-nav-title">酒店系统</div>
-			<div class="tpl-left-nav-list">
-				<ul class="tpl-left-nav-menu">
-					<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list active"> <i
-							class="am-icon-home"></i> <span>房间登记</span> <i
-							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="form-line.html" class="active"> <i
-									class="am-icon-angle-right"></i> <span>线上开单</span>
-							</a> <a href="form-line2.html"> <i class="am-icon-angle-right"></i>
-									<span>线下开单</span>
-							</a></li>
-						</ul></li>
-						<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
-							class="am-icon-bar-chart"></i> <span>预定管理</span> <i
-							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="ydOrder.html"> <i class="am-icon-angle-right"></i> <span>当前预定信息</span>
-							</a> </li>
-						</ul></li>
-						
-						<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
-							class="am-icon-bar-chart"></i> <span>订单管理</span> <i
-							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="syOrder.html"> <i class="am-icon-angle-right"></i>
-									<span>订单查询</span>
-							</a> 
-							<!-- <a href="tupian.html"> <i class="am-icon-angle-right">
-							</i> <span>当前预定信息</span>
-							</a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
-									<span>取消预定</span>
-							</a> --></li>
-						</ul></li>
-						<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
-							class="am-icon-bar-chart"></i> <span>计费管理</span> <i
-							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="charging.html"> <i class="am-icon-angle-right"></i>
-									<span>计费管理</span>
-							</a> 
-							</li>
-						</ul></li>
-					<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
-							class="am-icon-bar-chart"></i> <span>房间管理</span> <i
-							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="addHouse.html"> <i class="am-icon-angle-right"></i>
-									<span>新增房间</span>
-							</a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
-									<span>更新图片</span>
-							</a></li>
-							<li>
-							<a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
-									<span>新增房间</span>
-							</a>
-							<a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
-									<span>更新房间信息</span>
-							</a>
-							</li>
-						</ul>
-					<li class="tpl-left-nav-item">
-						<!-- 打开状态 a 标签添加 active 即可   --> <a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list "> <i
-							class="am-icon-table"></i> <span>会员管理</span> <!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
-							<i
-							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-					</a>
-						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="HuiYuanZhuCe.html"> <i
-									class="am-icon-angle-right"></i> <span>会员注册</span>
-							</a> <a href="commentMann.html"> <i class="am-icon-angle-right"></i>
-									<span>会员评论</span>
-							</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
+<div class="tpl-page-container tpl-page-header-fixed">
+    <div class="tpl-left-nav tpl-left-nav-hover">
+        <div class="tpl-left-nav-title">酒店系统</div>
+        <div class="tpl-left-nav-list">
+            <ul class="tpl-left-nav-menu">
+                <li class="tpl-left-nav-item"><a href="javascript:;"
+                                                 class="nav-link tpl-left-nav-link-list active"> <i
+                        class="am-icon-home"></i> <span>房间登记</span> <i
+                        class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                </a>
+                    <ul class="tpl-left-nav-sub-menu">
+                        <li><a href="form-line.html" class="active"> <i
+                                class="am-icon-angle-right"></i> <span>线上开单</span>
+                        </a> <a href="form-line2.html"> <i class="am-icon-angle-right"></i>
+                            <span>线下开单</span>
+                        </a></li>
+                    </ul>
+                </li>
+                <li class="tpl-left-nav-item"><a href="javascript:;"
+                                                 class="nav-link tpl-left-nav-link-list"> <i
+                        class="am-icon-bar-chart"></i> <span>预定管理</span> <i
+                        class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                </a>
+                    <ul class="tpl-left-nav-sub-menu">
+                        <li><a href="ydOrder.html"> <i class="am-icon-angle-right"></i> <span>当前预定信息</span>
+                        </a></li>
+                    </ul>
+                </li>
 
-		<div class="tpl-content-wrapper">
-			<div class="tpl-content-page-title"></div>
-			<ol class="am-breadcrumb">
-				<li><a href="#" class="am-icon-home">首页</a></li>
-				<li><a href="#">店员</a></li>
-				<li class="am-active">入住登记</li>
-			</ol>
-			<div class="tpl-portlet-components">
-				<div class="portlet-title">
-					<div class="caption font-green bold">入住登记</div>
-					<div class="tpl-portlet-input tpl-fz-ml">
-						<div class="portlet-input input-small input-inline">
-							<div class="input-icon right"></div>
-						</div>
-					</div>
+                <li class="tpl-left-nav-item"><a href="javascript:;"
+                                                 class="nav-link tpl-left-nav-link-list"> <i
+                        class="am-icon-bar-chart"></i> <span>订单管理</span> <i
+                        class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                </a>
+                    <ul class="tpl-left-nav-sub-menu">
+                        <li><a href="syOrder.html"> <i class="am-icon-angle-right"></i>
+                            <span>订单查询</span>
+                        </a>
+                            <!-- <a href="tupian.html"> <i class="am-icon-angle-right">
+                            </i> <span>当前预定信息</span>
+                            </a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+                                    <span>取消预定</span>
+                            </a> --></li>
+                    </ul>
+                </li>
+                <li class="tpl-left-nav-item"><a href="javascript:;"
+                                                 class="nav-link tpl-left-nav-link-list"> <i
+                        class="am-icon-bar-chart"></i> <span>计费管理</span> <i
+                        class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                </a>
+                    <ul class="tpl-left-nav-sub-menu">
+                        <li><a href="charging.html"> <i class="am-icon-angle-right"></i>
+                            <span>计费管理</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="tpl-left-nav-item"><a href="javascript:;"
+                                                 class="nav-link tpl-left-nav-link-list"> <i
+                        class="am-icon-bar-chart"></i> <span>房间管理</span> <i
+                        class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                </a>
+                    <ul class="tpl-left-nav-sub-menu">
+                        <li><a href="addHouse.html"> <i class="am-icon-angle-right"></i>
+                            <span>新增房间</span>
+                        </a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+                            <span>更新图片</span>
+                        </a></li>
+                        <li>
+                            <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+                                <span>新增房间</span>
+                            </a>
+                            <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+                                <span>更新房间信息</span>
+                            </a>
+                        </li>
+                    </ul>
+                <li class="tpl-left-nav-item">
+                    <!-- 打开状态 a 标签添加 active 即可   --> <a href="javascript:;"
+                                                        class="nav-link tpl-left-nav-link-list "> <i
+                        class="am-icon-table"></i> <span>会员管理</span>
+                    <!-- 列表打开状态的i标签添加 tpl-left-nav-more-ico-rotate 图表即90°旋转  -->
+                    <i
+                            class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                </a>
+                    <ul class="tpl-left-nav-sub-menu">
+                        <li><a href="HuiYuanZhuCe.html"> <i
+                                class="am-icon-angle-right"></i> <span>会员注册</span>
+                        </a> <a href="commentMann.html"> <i class="am-icon-angle-right"></i>
+                            <span>会员评论</span>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-
-				</div>
-
-				<div class="tpl-block">
-					<div class="am-g">
-						<div class="tpl-form-body tpl-form-line">
-
-							<form class="am-form tpl-form-line-form" action="/HotelManagerSystem/order/createYdOrder">
-
-								<div class="am-form-group">
-									<label class="am-u-sm-3 am-form-label">入住时间 <span
-											class="tpl-form-line-small-title">Time</span></label>
-									<div class="am-u-sm-9">
-										<input type="text" class="am-form-field tpl-form-no-bg" placeholder="入住时间"
-											   data-am-datepicker="" id="intime" name="reserve_checkintime" onmouseup="livefun()"
-											   readonly/>
-										<small>入住时间为必填</small>
-									</div>
-								</div>
-								<div class="am-form-group">
-									<label class="am-u-sm-3 am-form-label">离开时间 <span
-											class="tpl-form-line-small-title">Time</span></label>
-									<div class="am-u-sm-9">
-										<input type="text" class="am-form-field tpl-form-no-bg" id="leavetime"
-											   placeholder="离开时间" data-am-datepicker="" name="reserve_checkouttime"
-											   onchange="leavefun()" readonly/>
-										<small>离开时间为必填</small>
-									</div>
-								</div>
-								<div class="am-form-group">
-									<label for="user-phone" class="am-u-sm-3 am-form-label">房间类型 <span
-											class="tpl-form-line-small-title">Type</span></label>
-									<div class="am-u-sm-9">
-										<select id="house_type" data-am-selected="{searchBox: 1}" name="houseType.house_type_id">
-											<option value="1">单人间</option>
-											<option value="2">双人间</option>
-											<option value="3">豪华大床房</option>
-											<option value="4">总统套房</option>
-										</select>
-										<input id="room_query" type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success " value="查询剩余数量"/>
-									</div>
-								</div>
-								<div class="am-form-group">
-									<label  class="am-u-sm-3 am-form-label">房间数量 <span
-											class="tpl-form-line-small-title">room</span></label>
-									<div class="am-u-sm-9">
-										<select id="room_number" data-am-selected="{searchBox: 1}" name="house_number">
-										</select>
-									</div>
-								</div>
+    <div class="tpl-content-wrapper">
+        <div class="tpl-content-page-title"></div>
+        <ol class="am-breadcrumb">
+            <li><a href="#" class="am-icon-home">首页</a></li>
+            <li><a href="#">店员</a></li>
+            <li class="am-active">入住登记</li>
+        </ol>
+        <div class="tpl-portlet-components">
+            <div class="portlet-title">
+                <div class="caption font-green bold">入住登记</div>
+                <div class="tpl-portlet-input tpl-fz-ml">
+                    <div class="portlet-input input-small input-inline">
+                        <div class="input-icon right"></div>
+                    </div>
+                </div>
 
 
-								<div class="am-form-group">
-									<label for="user-name" class="am-u-sm-3 am-form-label">客户姓名
-										<span class="tpl-form-line-small-title">Name</span>
-									</label>
-									<div class="am-u-sm-9">
-										<input type="text" class="tpl-form-input" id="username"
-											placeholder="请输入客户文名字" name="userInfo.user_info_name">
-										<small>请填写真实姓名。</small>
-									</div>
-								</div>
+            </div>
 
-								<div class="am-form-group">
-									<label class="am-u-sm-3 am-form-label">身份证号<span
-										class="tpl-form-line-small-title">IDcard</span></label>
-									<div class="am-u-sm-9">
-										<input type="text" id="idcard1" placeholder="输入有效身份证"
-											onchange="idcardfun()" name="userInfo.user_info_idcard">
-									</div>
-								</div>
+            <div class="tpl-block">
+                <div class="am-g">
+                    <div class="tpl-form-body tpl-form-line">
 
+                        <form class="am-form tpl-form-line-form" action="/HotelManagerSystem/order/createYdOrder">
 
-
-								<div class="am-form-group">
-									<label for="user-weibo" class="am-u-sm-3 am-form-label">联系电话
-										<span class="tpl-form-line-small-title">Tel</span>
-									</label>
-									<div class="am-u-sm-9">
-										<input type="text" id="usertel1" name="userInfo.user_info_tel"
-											placeholder="请输入联系电话" onchange="telfun()">
-										<div></div>
-									</div>
-								</div>
-								
-										<input type="hidden" id="usertel1" name="userInfo.user_info_tel"
-											placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}" disabled="disabled">
-								
-								
-								
-								<!--<div class="am-form-group">
-									<label for="user-name" class="am-u-sm-3 am-form-label">房间数量
-										<span class="tpl-form-line-small-title">Number</span>
-									</label>
-									<div class="am-u-sm-9">
-										<select data-am-selected="{searchBox: 1}" name="house_number"id="housenumber_select">
-										</select>
-										&lt;!&ndash; 隐藏域传房间类型id &ndash;&gt;
-										<input type="hidden" name="houseType.house_type_id" >
-									</div>
-								</div>-->
-								
-								
-
-								<!--<div class="am-form-group">
-									<label for="user-email" class="am-u-sm-3 am-form-label">入住时间
-										<span class="tpl-form-line-small-title">Time</span>
-									</label>
-									<div class="am-u-sm-9">
-										<input type="text" class="am-form-field tpl-form-no-bg"
-											placeholder="入住时间" data-am-datepicker="" id="livetime1"
-											name="reserve_checkintime" onchange="livefun()" readonly  th:value="${reserve.reserve_checkintime}" disabled="disabled"/> <small>入住时间为必填</small>
-									</div>
-								</div>-->
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">入住时间 <span
+                                        class="tpl-form-line-small-title">Time</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="am-form-field tpl-form-no-bg" placeholder="入住时间"
+                                           data-am-datepicker="" id="intime" name="reserve_checkintime"
+                                           onmouseup="livefun()"
+                                           readonly/>
+                                    <small>入住时间为必填</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">离开时间 <span
+                                        class="tpl-form-line-small-title">Time</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="am-form-field tpl-form-no-bg" id="leavetime"
+                                           placeholder="离开时间" data-am-datepicker="" name="reserve_checkouttime"
+                                           onchange="leavefun()" readonly/>
+                                    <small>离开时间为必填</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-phone" class="am-u-sm-3 am-form-label">房间类型 <span
+                                        class="tpl-form-line-small-title">Type</span></label>
+                                <div class="am-u-sm-9">
+                                    <select id="house_type" data-am-selected="{searchBox: 1}"
+                                            name="houseType.house_type_id">
+                                        <option value="1">单人间</option>
+                                        <option value="2">双人间</option>
+                                        <option value="3">豪华大床房</option>
+                                        <option value="4">总统套房</option>
+                                    </select>
+                                    <input id="room_query" type="button"
+                                           class="am-btn am-btn-primary tpl-btn-bg-color-success " value="查询剩余数量"/>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">房间数量 <span
+                                        class="tpl-form-line-small-title">room</span></label>
+                                <div class="am-u-sm-9">
+                                    <select id="room_number" data-am-selected="{searchBox: 1}" name="house_number">
+                                    </select>
+                                </div>
+                            </div>
 
 
-								<!--<div class="am-form-group">
-									<label for="user-email" class="am-u-sm-3 am-form-label">离开时间
-										<span class="tpl-form-line-small-title">Time</span>
-									</label>
-									<div class="am-u-sm-9">
-										<input type="text" class="am-form-field tpl-form-no-bg"
-											id="leavetime1" placeholder="离开时间" data-am-datepicker=""
-											name="reserve_checkouttime" onchange="leavefun()" readonly th:value="${reserve.reserve_checkouttime}" disabled="disabled"/> <small>离开时间为必填</small>
-									</div>
-								</div>-->
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">客户姓名
+                                    <span class="tpl-form-line-small-title">Name</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="username"
+                                           placeholder="请输入客户文名字" name="userInfo.user_info_name">
+                                    <small>请填写真实姓名。</small>
+                                </div>
+                            </div>
 
-								<div class="am-form-group">
-									<label for="user-weibo" class="am-u-sm-3 am-form-label">抵达时间
-										<span class="tpl-form-line-small-title">arrival time</span>
-									</label>
-									<div class="am-u-sm-9">
-										<input type="time" id="checkinTime" placeholder="抵达时间"
-											name="reserve_arrivetime">
-										<div></div>
-									</div>
-								</div>
-								
-								<div class="am-form-group">
-									<label for="user-phone" class="am-u-sm-3 am-form-label">支付方式
-										<span class="tpl-form-line-small-title">Auto</span>
-									</label>
-									<div class="am-u-sm-9">
-										<select data-am-selected="{searchBox: 1}" name="reserve_payment" id="reserve_payment">
-											
-											<option value="0">线下</option>
-											<option value="1">线上</option>
-										</select>
-									</div>
-								</div>
-								
-				
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">身份证号<span
+                                        class="tpl-form-line-small-title">IDcard</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="idcard1" placeholder="输入有效身份证"
+                                           onchange="idcardfun()" name="userInfo.user_info_idcard">
+                                </div>
+                            </div>
 
-								<div class="am-form-group">
-									<label for="user-phone" class="am-u-sm-3 am-form-label">是否自动取消
-										<span class="tpl-form-line-small-title">Auto</span>
-									</label>
-									<div class="am-u-sm-9">
-										<select data-am-selected="{searchBox: 1}" name="reserve_isauto" id="reserve_isauto">
-											<option value="1">是</option>
-											<option value="0">否</option>
-										</select>
-									</div>
-								</div>
 
-								<div class="am-form-group">
-									<label for="user-weibo" class="am-u-sm-3 am-form-label">取消时间<span
-										class="tpl-form-line-small-title">cancel time</span></label>
-									<div class="am-u-sm-9">
-										
-										<select data-am-selected="{searchBox: 1}" name="reserve_isauto" id="reserve_canceltime">
-											<option value="3">3小时</option>
-											<option value="4">4小时</option>
-											<option value="5">5小时</option>
-										</select>
-										
-										<div></div>
-									</div>
-								</div>
+                            <div class="am-form-group">
+                                <label for="user-weibo" class="am-u-sm-3 am-form-label">联系电话
+                                    <span class="tpl-form-line-small-title">Tel</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="usertel1" name="userInfo.user_info_tel"
+                                           placeholder="请输入联系电话" onchange="telfun()">
+                                    <div></div>
+                                </div>
+                            </div>
 
-								<div class="am-form-group">
-									<label for="user-weibo" class="am-u-sm-3 am-form-label">留言<span
-										class="tpl-form-line-small-title">Message</span></label>
-									<div class="am-u-sm-9">
-										<input type="text" id="reserve_message" placeholder="留言"
-											name="reserve_message">
-										
-									</div>
-								</div>
-								<div class="am-form-group">
-									<div class="am-u-sm-9 am-u-sm-push-3">
-										<input type="submit" value="登记">
-									</div>
-								</div>
-						
-					
-							</form>
-							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <input type="hidden" id="usertel1" name="userInfo.user_info_tel"
+                                   placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}"
+                                   disabled="disabled">
 
-	<script type="text/javascript" >
-		$("#room_query").click(function () {
-			var checkintime = $("#intime").val();
-			var checkouttime = $("#leavetime").val();
-			var house_type_id=$("#house_type").val();
-			$.ajax({
-				url:"house/queryHouseNumber/"+checkintime+"/"+checkouttime+"/"+house_type_id,
-				type:"Get",
-				success:function (data) {
-					$("#room_number").html("");
-					if (data==0){
-						alert("房间不足");
-						return;
-					} else {
-						for (var i=1;i<=data;i++){
-							var option = "<option value='"+i+"'>"+i+"间</option>"
-							$("#room_number").append(option);
-						}
-					}
-				}
 
-			})
-		});
-	/*var housenumber = [[${reserve.HouseType.num}]];
-	var number = parseInt(housenumber);
-	for(var i=1;i<=number;i++){
-		var option="<option value='"+i+"'>"+i+"间</option>";
-		$("#housenumber_select").append(option);
-	}*/
-	
-	
-	/* 身份证号验证 */
-	/* function idcardfun(){	
-		var idcard=$("#idcard1").val();
-		console.log(idcard);
-		var dataJson={"idcard":idcard};
-		
-	$.ajax({
-		url:"employeesAdduserServlet",
-		data:dataJson,
+                            <!--<div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">房间数量
+                                    <span class="tpl-form-line-small-title">Number</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <select data-am-selected="{searchBox: 1}" name="house_number"id="housenumber_select">
+                                    </select>
+                                    &lt;!&ndash; 隐藏域传房间类型id &ndash;&gt;
+                                    <input type="hidden" name="houseType.house_type_id" >
+                                </div>
+                            </div>-->
+
+
+                            <!--<div class="am-form-group">
+                                <label for="user-email" class="am-u-sm-3 am-form-label">入住时间
+                                    <span class="tpl-form-line-small-title">Time</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="am-form-field tpl-form-no-bg"
+                                        placeholder="入住时间" data-am-datepicker="" id="livetime1"
+                                        name="reserve_checkintime" onchange="livefun()" readonly  th:value="${reserve.reserve_checkintime}" disabled="disabled"/> <small>入住时间为必填</small>
+                                </div>
+                            </div>-->
+
+
+                            <!--<div class="am-form-group">
+                                <label for="user-email" class="am-u-sm-3 am-form-label">离开时间
+                                    <span class="tpl-form-line-small-title">Time</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="am-form-field tpl-form-no-bg"
+                                        id="leavetime1" placeholder="离开时间" data-am-datepicker=""
+                                        name="reserve_checkouttime" onchange="leavefun()" readonly th:value="${reserve.reserve_checkouttime}" disabled="disabled"/> <small>离开时间为必填</small>
+                                </div>
+                            </div>-->
+
+                            <div class="am-form-group">
+                                <label for="user-weibo" class="am-u-sm-3 am-form-label">抵达时间
+                                    <span class="tpl-form-line-small-title">arrival time</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <input type="time" id="checkinTime" placeholder="抵达时间"
+                                           name="reserve_arrivetime">
+                                    <div></div>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-phone" class="am-u-sm-3 am-form-label">支付方式
+                                    <span class="tpl-form-line-small-title">Auto</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <select data-am-selected="{searchBox: 1}" name="reserve_payment"
+                                            id="reserve_payment">
+
+                                        <option value="0">线下</option>
+                                        <option value="1">线上</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <label for="user-phone" class="am-u-sm-3 am-form-label">是否自动取消
+                                    <span class="tpl-form-line-small-title">Auto</span>
+                                </label>
+                                <div class="am-u-sm-9">
+                                    <select data-am-selected="{searchBox: 1}" name="reserve_isauto" id="reserve_isauto">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-weibo" class="am-u-sm-3 am-form-label">取消时间<span
+                                        class="tpl-form-line-small-title">cancel time</span></label>
+                                <div class="am-u-sm-9">
+
+                                    <select data-am-selected="{searchBox: 1}" name="reserve_isauto"
+                                            id="reserve_canceltime">
+                                        <option value="3">3小时</option>
+                                        <option value="4">4小时</option>
+                                        <option value="5">5小时</option>
+                                    </select>
+
+                                    <div></div>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-weibo" class="am-u-sm-3 am-form-label">留言<span
+                                        class="tpl-form-line-small-title">Message</span></label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="reserve_message" placeholder="留言"
+                                           name="reserve_message">
+
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <input type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success "
+                                           value="预定登记">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#room_query").click(function () {
+        var checkintime = $("#intime").val();
+        var checkouttime = $("#leavetime").val();
+        var house_type_id = $("#house_type").val();
+        $.ajax({
+            url: "house/queryHouseNumber/" + checkintime + "/" + checkouttime + "/" + house_type_id,
+            type: "Get",
+            success: function (data) {
+                $("#room_number").html("");
+                if (data == 0) {
+                    alert("房间不足");
+                    return;
+                } else {
+                    for (var i = 1; i <= data; i++) {
+                        var option = "<option value='" + i + "'>" + i + "间</option>"
+                        $("#room_number").append(option);
+                    }
+                }
+            }
+
+        })
+    });
+    /*var housenumber = [[${reserve.HouseType.num}]];
+    var number = parseInt(housenumber);
+    for(var i=1;i<=number;i++){
+        var option="<option value='"+i+"'>"+i+"间</option>";
+        $("#housenumber_select").append(option);
+    }*/
+
+
+    /* 身份证号验证 */
+    /* function idcardfun(){
+        var idcard=$("#idcard1").val();
+        console.log(idcard);
+        var dataJson={"idcard":idcard};
+
+    $.ajax({
+        url:"employeesAdduserServlet",
+        data:dataJson,
         type:"post",
-        success:function(data){  		
-        	 alert(data);	
+        success:function(data){
+             alert(data);
         }
-	});
+    });
 }; */
 
-/* function leavefun(){	//判断用户名
-	var uname=$("username").val;
-	if(uname!=null){
-		if(uname.len)
-	
-} */
+    /* function leavefun(){	//判断用户名
+        var uname=$("username").val;
+        if(uname!=null){
+            if(uname.len)
+
+    } */
 
 
+    function idcardfun() {
+        var idcard = $("#idcard1").val();
+        console.log(idcard);
+        if (idcard != null) {
+            if (idcard.length != 18) {
+                alert("身份证号格式不正确,18位有效数字！！");
+            }
+        } else {
+            alert("身份证号不能为空");
+        }
+    };
 
-function idcardfun(){	
-var idcard=$("#idcard1").val();
-console.log(idcard);
-if(idcard!=null){
-	if(idcard.length!=18){
-		alert("身份证号格式不正确,18位有效数字！！");
-	}
-}else{
-	alert("身份证号不能为空");
-}
-}; 
-
-function telfun(){	
-	var usertel=$("#usertel1").val();
-	console.log(usertel);
-	if(usertel!=null){
-		if(usertel.length!=11){
-			alert("手机格式不正确！！");
-		}
-	}else{
-		alert("手机格式不能为空");
-	}
-}
+    function telfun() {
+        var usertel = $("#usertel1").val();
+        console.log(usertel);
+        if (usertel != null) {
+            if (usertel.length != 11) {
+                alert("手机格式不正确！！");
+            }
+        } else {
+            alert("手机格式不能为空");
+        }
+    }
 
 
-function livefun(){	//判断入住时间大于当前时间 
-	var livetime=$("#livetime1").val();//2018-10-24(入住时间字符串)
-	var timestamp1 =Date.parse(new Date());//获取当前时间的时间戳
-	var timestamp2 = Date.parse(new Date(livetime));//将入住时间转换成时间戳 
-		
+    function livefun() {	//判断入住时间大于当前时间
+        var livetime = $("#livetime1").val();//2018-10-24(入住时间字符串)
+        var timestamp1 = Date.parse(new Date());//获取当前时间的时间戳
+        var timestamp2 = Date.parse(new Date(livetime));//将入住时间转换成时间戳
 
-	 if(timestamp2-timestamp1<=0){
-		 alert("入住时间不能小于当前时间！！");
-	}
-}
 
-function leavefun(){	//判断离开时间要大于入住时间 
-	var livetime=$("#livetime1").val();//2018-10-24(入住时间字符串)
-	var timestamp1 = Date.parse(new Date(livetime));//将入住时间转换成时间戳 
-	var leavetime=$("#leavetime1").val();//离开时间
-	var timestamp2 = Date.parse(new Date(livetime));//将离开时间转换成时间戳 
-	
-	
-	
-	console.log(leavetime);
-	if(timestamp2-timestamp1<=0){
-		alert("离开时间不能小于入住时间！！"); 
-	}
-}
+        if (timestamp2 - timestamp1 <= 0) {
+            alert("入住时间不能小于当前时间！！");
+        }
+    }
+
+    function leavefun() {	//判断离开时间要大于入住时间
+        var livetime = $("#livetime1").val();//2018-10-24(入住时间字符串)
+        var timestamp1 = Date.parse(new Date(livetime));//将入住时间转换成时间戳
+        var leavetime = $("#leavetime1").val();//离开时间
+        var timestamp2 = Date.parse(new Date(livetime));//将离开时间转换成时间戳
+
+
+        console.log(leavetime);
+        if (timestamp2 - timestamp1 <= 0) {
+            alert("离开时间不能小于入住时间！！");
+        }
+    }
 </script>
 
-	
-	<script src="/HotelManagerSystem/assets/js/amazeui.min.js"></script>
-	<script src="/HotelManagerSystem/assets/js/app.js"></script>
-	<script type="text/javascript" src="/HotelManagerSystem/js/form-line.js"></script>
+
+<script src="/HotelManagerSystem/assets/js/amazeui.min.js"></script>
+<script src="/HotelManagerSystem/assets/js/app.js"></script>
+<script type="text/javascript" src="/HotelManagerSystem/js/form-line.js"></script>
 </body>
 
 </html>
