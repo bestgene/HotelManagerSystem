@@ -154,7 +154,10 @@ public class OrderController {
         //新增order、item
         boolean flag = orderService.createOrder(order);
         //默认已付款
-        return "线下开单成功";
+        if (flag){
+            return "开单成功";
+        }
+       return "开单失败";
 
     }
     /**

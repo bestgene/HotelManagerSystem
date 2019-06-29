@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.dao.HouseDAO;
 import com.woniuxy.dao.UserDAO;
@@ -162,6 +163,20 @@ public class HouseServiceImpl implements HouseService {
 		}
 		return allHouses;
 		
+	}
+    
+	//根据房间类型和数量添加房间
+	@Transactional
+	@Override
+	public boolean addHouse(Integer house_type_id, Integer num) {
+		boolean state=false;
+		//先查询有哪些类型的房间
+		while(num>0){
+			String house_name=houseDAO.selectMaxHouse_name(house_type_id);
+			state=houseDAO.addHouse(house_name,house_type_id);	
+			num--;
+		}
+		return state;
 	}
 
 	
