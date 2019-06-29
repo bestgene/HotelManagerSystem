@@ -148,6 +148,28 @@ public class HouseController {
 		return result;
 	}
 	
+	/*
+	 * 查询要修改的房间信息
+	 * 
+	 */
+	@GetMapping("/queryHouseInfo/{house_type_id}")
+	@ResponseBody
+	public HouseType queryHouseInfo(@PathVariable("house_type_id") Integer house_type_id){
+		HouseType houseType=new HouseType();
+		houseType=houseService.findHouseInfoByType(house_type_id);
+		return houseType;
+	}
+	
+	/*
+	 * 修改房间新信息
+	 */
+	@GetMapping("/updateHouseInfo/{house_type_price}/{house_type_msg}/{house_type_id}")
+	@ResponseBody
+	public String updateHouseInfo(@PathVariable("house_type_price") Integer house_type_price,@PathVariable("house_type_msg") String house_type_msg,@PathVariable("house_type_id") Integer house_type_id){
+		String result=houseService.updateHouseInfo(house_type_id,house_type_price,house_type_msg);
+		return result;
+	}
+	
 	@GetMapping("/houtaiOrderInfo/{startTime}/{endTime}/{house_type_id}")
 	/*
 	 * 返回到后台订单填写页面

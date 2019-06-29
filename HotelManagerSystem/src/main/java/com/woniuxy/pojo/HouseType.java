@@ -21,6 +21,7 @@ public class HouseType implements Serializable{
 	private Integer num;
 	//相同类型的房间数量
 	private String house_type_msg;
+	//房间描述
 	public Integer getHouse_type_id() {
 		return house_type_id;
 	}

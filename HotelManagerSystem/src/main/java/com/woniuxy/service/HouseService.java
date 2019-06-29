@@ -39,4 +39,8 @@ public interface HouseService {
 			String startTime,String endTime,Integer house_type_id) throws ParseException;
 //根据房间类型和数量添加房间
 	public boolean addHouse(Integer house_type_id, Integer num);
+//根据房间类型查找房间信息
+	public HouseType findHouseInfoByType(Integer house_type_id);
+//根据房间类型更新房间信息
+	public String updateHouseInfo(Integer house_type_id, Integer house_type_price, String house_type_msg);
 }

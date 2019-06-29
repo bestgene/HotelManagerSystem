@@ -179,5 +179,26 @@ public class HouseServiceImpl implements HouseService {
 		return state;
 	}
 
+    //根据房间类型查找房间信息
+	@Override
+	public HouseType findHouseInfoByType(Integer house_type_id) {
+		HouseType houseType=new HouseType();
+		houseType=houseDAO.findHouseInfoByType(house_type_id);
+		return houseType;
+	}
+
+	//根据房间类型更新房间信息
+	@Override
+	public String updateHouseInfo(Integer house_type_id, Integer house_type_price, String house_type_msg) {
+		boolean state=houseDAO.updateHouseInfo(house_type_id,house_type_price,house_type_msg);
+		String result="";
+		if(state){
+			result="修改成功";
+		}else{
+			result="修改失败";
+		}
+		return result;
+	}
+
 	
 }

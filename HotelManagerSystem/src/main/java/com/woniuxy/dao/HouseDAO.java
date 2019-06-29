@@ -59,4 +59,12 @@ public interface HouseDAO {
 	
 	@Select("SELECT MAX(house_name)+1 FROM t_house WHERE house_type_id=#{house_type_id}")
 	public String selectMaxHouse_name(Integer house_type_id);
+	
+	//根据房间类型查找房间信息
+	@Select("select * from t_house_type where house_type_id=#{house_type_id}")
+	public HouseType findHouseInfoByType(Integer house_type_id);
+	//根据房间类型更新房间信息
+	@Update("update t_house_type set house_type_price=#{arg1},house_type_msg=#{arg2} where house_type_id=#{arg0}")
+	public boolean updateHouseInfo(Integer house_type_id, Integer house_type_price, String house_type_msg);
+	
 }
