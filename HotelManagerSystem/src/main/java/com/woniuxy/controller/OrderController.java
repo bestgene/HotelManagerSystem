@@ -4,21 +4,31 @@ package com.woniuxy.controller;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.woniuxy.pojo.*;
-import com.woniuxy.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.woniuxy.pojo.Charging;
+import com.woniuxy.pojo.House;
+import com.woniuxy.pojo.Item;
+import com.woniuxy.pojo.Order;
+import com.woniuxy.pojo.Reserve;
+import com.woniuxy.pojo.User;
+import com.woniuxy.pojo.UserInfo;
 import com.woniuxy.service.ChargingService;
 import com.woniuxy.service.HouseService;
 import com.woniuxy.service.OrderService;
+import com.woniuxy.service.UserService;
 
 @Controller
 @RequestMapping("/order")
@@ -49,7 +59,10 @@ public class OrderController {
     @ResponseBody
     public List<Order> showAllOrder(Order order,String cxfs, HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        if (user.getRole_id() == 3) {
+        user = new User();
+        user.setRole_id(2);
+        System.out.println(order);
+        if (user!=null&&user.getRole_id() == 3) {
             order.setUser(user);
         }
         if (cxfs.equals("当前预定")) {
@@ -141,7 +154,10 @@ public class OrderController {
         //新增order、item
         boolean flag = orderService.createOrder(order);
         //默认已付款
-        return "线下开单成功";
+        if (flag){
+            return "开单成功";
+        }
+       return "开单失败";
 
     }
     /**
