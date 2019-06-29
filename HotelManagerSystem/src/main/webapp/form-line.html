@@ -184,8 +184,9 @@
 									</div>
 								</div>
 								
-										<input type="hidden" id="usertel1" name="userInfo.user_info_tel"
-											placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}" disabled="disabled">
+								<!-- 隐藏域传房间类型id -->
+										<input type="hidden" id="houseType" name="houseType.house_type_id"
+											placeholder=""  readonly="readonly" th:value="${reserve.houseType.house_type_id}">
 								
 								
 								
@@ -196,8 +197,8 @@
 									<div class="am-u-sm-9">
 										<select data-am-selected="{searchBox: 1}" name="house_number"id="housenumber_select">
 										</select>
-										<!-- 隐藏域传房间类型id -->
-										<input type="hidden" name="houseType.house_type_id" >
+										
+										
 									</div>
 								</div>
 								
@@ -210,7 +211,7 @@
 									<div class="am-u-sm-9">
 										<input type="text" class="am-form-field tpl-form-no-bg"
 											placeholder="入住时间" data-am-datepicker="" id="livetime1"
-											name="reserve_checkintime" onchange="livefun()" readonly  th:value="${reserve.reserve_checkintime}" disabled="disabled"/> <small>入住时间为必填</small>
+											name="reserve_checkintime" onchange="livefun()" readonly="readonly" th:value="${reserve.reserve_checkintime}"   /> <small>入住时间为必填</small>
 									</div>
 								</div>
 
@@ -222,7 +223,7 @@
 									<div class="am-u-sm-9">
 										<input type="text" class="am-form-field tpl-form-no-bg"
 											id="leavetime1" placeholder="离开时间" data-am-datepicker=""
-											name="reserve_checkouttime" onchange="leavefun()" readonly th:value="${reserve.reserve_checkouttime}" disabled="disabled"/> <small>离开时间为必填</small>
+											name="reserve_checkouttime" onchange="leavefun()" readonly="readonly" th:value="${reserve.reserve_checkouttime}"  /> <small>离开时间为必填</small>
 									</div>
 								</div>
 
@@ -307,6 +308,7 @@
 	<script type="text/javascript" >
 	var housenumber = [[${reserve.HouseType.num}]];
 	var number = parseInt(housenumber);
+
 	for(var i=1;i<=number;i++){
 		var option="<option value='"+i+"'>"+i+"间</option>";
 		$("#housenumber_select").append(option);

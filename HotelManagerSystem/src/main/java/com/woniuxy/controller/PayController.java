@@ -96,11 +96,11 @@ public class PayController {
 				// 通过订单的状态和flag判断是付押金还是付全款
 				if (qo.getOrder_state() == 0 && qo.getFlag() == 0) {
 					// 付押金
+					System.out.println(out_trade_no+trade_no);
 					orderService.payDeposit(out_trade_no, trade_no);
 					//开启TimeTask线程，在指定时间后执行取消该订单的方法
 					 Timer timer = new Timer();
 				      timer.schedule(new TimerTask() {
-
 				            @Override
 				            public void run() {
 				            	try {

@@ -1,26 +1,22 @@
 package com.woniuxy.controller;
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.hibernate.validator.cfg.defs.ISBNDef;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.woniuxy.pojo.Level;
 import com.woniuxy.pojo.User;
@@ -75,6 +71,7 @@ public class UserController {
 		return "face-user/index.html";
 	}
 	
+	
 	@RequestMapping("/AdminLogin")
 	@ResponseBody
 	public String AdminLogin(User user,HttpServletRequest request){
@@ -87,11 +84,16 @@ public class UserController {
 		}else {
 			      String user_pwd= new SimpleHash("MD5", user.getUser_pwd(), null,1024).toString();
 			if (userService.findUserByAcc(user.getUser_acc()).getUser_pwd().equals(user_pwd)) {
-				if (userService.FindAdmin(user)==null) {
+				if (userService.findUserByAcc(user.getUser_acc()).getRole_id()==3||userService.findUserByAcc(user.getUser_acc()).getRole_id()==4) {
 					results="你不是管理员！或者密码不正确";
 				}
 				else {
-
+					
+                     //将用户存入session中
+				   User user2=userService.findUserByAcc(user.getUser_acc());
+				 
+				   HttpSession session=request.getSession();  
+				   session.setAttribute("user", user2);
 					results="登录成功！";
 				}
 				
@@ -105,6 +107,7 @@ public class UserController {
 		
 		return results;
 	}
+	
 	
 	@RequestMapping("/getinfo")   //获取当前用户的个人信息
 	public String getInfo(ModelMap map){

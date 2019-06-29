@@ -47,15 +47,51 @@
 				<ul class="tpl-left-nav-menu">
 					<li class="tpl-left-nav-item"><a href="javascript:;"
 						class="nav-link tpl-left-nav-link-list active"> <i
-							class="am-icon-home"></i> <span>入住管理</span> <i
+							class="am-icon-home"></i> <span>房间登记</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="form-line.html" class="active"> <i
-									class="am-icon-angle-right"></i> <span>入住登记</span>
-							</a> <a href="employee-see.html"> <i class="am-icon-angle-right"></i>
-									<span>当前入住信息</span>
+							<li><a href="houtai.html" class="active"> <i
+									class="am-icon-angle-right"></i> <span>线上开单</span>
+							</a> <a href="form-line2.html"> <i class="am-icon-angle-right"></i>
+									<span>线下开单</span>
 							</a></li>
+						</ul></li>
+						<li class="tpl-left-nav-item"><a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list"> <i
+							class="am-icon-bar-chart"></i> <span>预定管理</span> <i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+						<ul class="tpl-left-nav-sub-menu">
+							<li><a href="ydOrder.html"> <i class="am-icon-angle-right"></i> <span>当前预定信息</span>
+							</a> </li>
+						</ul></li>
+						
+						<li class="tpl-left-nav-item"><a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list"> <i
+							class="am-icon-bar-chart"></i> <span>订单管理</span> <i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+						<ul class="tpl-left-nav-sub-menu">
+							<li><a href="syOrder.html"> <i class="am-icon-angle-right"></i>
+									<span>订单查询</span>
+							</a> 
+							<!-- <a href="tupian.html"> <i class="am-icon-angle-right">
+							</i> <span>当前预定信息</span>
+							</a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+									<span>取消预定</span>
+							</a> --></li>
+						</ul></li>
+						<li class="tpl-left-nav-item"><a href="javascript:;"
+						class="nav-link tpl-left-nav-link-list"> <i
+							class="am-icon-bar-chart"></i> <span>计费管理</span> <i
+							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+					</a>
+						<ul class="tpl-left-nav-sub-menu">
+							<li><a href="charging.html"> <i class="am-icon-angle-right"></i>
+									<span>计费管理</span>
+							</a> 
+							</li>
 						</ul></li>
 					<li class="tpl-left-nav-item"><a href="javascript:;"
 						class="nav-link tpl-left-nav-link-list"> <i
@@ -63,12 +99,14 @@
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="main.html"> <i class="am-icon-angle-right"></i>
-									<span>剩余房源</span>
-							</a> <a href="tupian.html"> <i class="am-icon-angle-right"></i> <span>轮播管理</span>
-							</a> <a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
-									<span>更新图片</span>
-							</a></li>
+							<li>
+							<a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+									<span>新增房间</span>
+							</a>
+							<a href="uplodaImg.html"> <i class="am-icon-angle-right"></i>
+									<span>更新房间信息</span>
+							</a>
+							</li>
 						</ul></li>
 					<li class="tpl-left-nav-item">
 						<!-- 打开状态 a 标签添加 active 即可   --> <a href="javascript:;"
@@ -85,14 +123,6 @@
 							</a></li>
 						</ul>
 					</li>
-					<li class="tpl-left-nav-item"><a href="chart.html"
-						class="nav-link tpl-left-nav-link-list"> <i
-							class="am-icon-wpforms"></i> <span>查看账目</span>
-					</a></li>
-					<li class="tpl-left-nav-item"><a href="e-check.html"
-						class="nav-link tpl-left-nav-link-list"> <i
-							class="am-icon-key"></i> <span>签到打卡</span>
-					</a></li>
 				</ul>
 			</div>
 		</div>
@@ -154,8 +184,9 @@
 									</div>
 								</div>
 								
-										<input type="hidden" id="usertel1" name="userInfo.user_info_tel"
-											placeholder="" onchange="telfun()" th:value="${reserve.houseType.house_type_id}" disabled="disabled">
+								<!-- 隐藏域传房间类型id -->
+										<input type="hidden" id="houseType" name="houseType.house_type_id"
+											placeholder=""  readonly="readonly" th:value="${reserve.houseType.house_type_id}">
 								
 								
 								
@@ -166,8 +197,8 @@
 									<div class="am-u-sm-9">
 										<select data-am-selected="{searchBox: 1}" name="house_number"id="housenumber_select">
 										</select>
-										<!-- 隐藏域传房间类型id -->
-										<input type="hidden" name="houseType.house_type_id" >
+										
+										
 									</div>
 								</div>
 								
@@ -180,7 +211,7 @@
 									<div class="am-u-sm-9">
 										<input type="text" class="am-form-field tpl-form-no-bg"
 											placeholder="入住时间" data-am-datepicker="" id="livetime1"
-											name="reserve_checkintime" onchange="livefun()" readonly  th:value="${reserve.reserve_checkintime}" disabled="disabled"/> <small>入住时间为必填</small>
+											name="reserve_checkintime" onchange="livefun()" readonly="readonly" th:value="${reserve.reserve_checkintime}"   /> <small>入住时间为必填</small>
 									</div>
 								</div>
 
@@ -192,7 +223,7 @@
 									<div class="am-u-sm-9">
 										<input type="text" class="am-form-field tpl-form-no-bg"
 											id="leavetime1" placeholder="离开时间" data-am-datepicker=""
-											name="reserve_checkouttime" onchange="leavefun()" readonly th:value="${reserve.reserve_checkouttime}" disabled="disabled"/> <small>离开时间为必填</small>
+											name="reserve_checkouttime" onchange="leavefun()" readonly="readonly" th:value="${reserve.reserve_checkouttime}"  /> <small>离开时间为必填</small>
 									</div>
 								</div>
 
@@ -277,6 +308,7 @@
 	<script type="text/javascript" >
 	var housenumber = [[${reserve.HouseType.num}]];
 	var number = parseInt(housenumber);
+
 	for(var i=1;i<=number;i++){
 		var option="<option value='"+i+"'>"+i+"间</option>";
 		$("#housenumber_select").append(option);
