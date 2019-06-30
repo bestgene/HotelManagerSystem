@@ -44,30 +44,31 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login") //登录认证
-	public String login( User user,HttpServletRequest request,HttpSession session){
-		 System.out.println("登录方法******");
-					Subject currentUser = SecurityUtils.getSubject();
-					if(!currentUser.isAuthenticated()){
-						UsernamePasswordToken token = 
-								new UsernamePasswordToken(user.getUser_acc().toString(), user.getUser_pwd());
-						try {
-							System.out.println(token+"token的值");
-							currentUser.login(token);
-						User user1=userService.findUserByAcc(user.getUser_acc());
-							/*Session session = currentUser.getSession();
-							session.setAttribute("user",user); //将用户存进shiro当中的session中
-							将用户存在httpsession中*/	
-					        HashMap<String, User> users=new HashMap<>();
-					        users.put("loginuser", user1);
-					        session.setAttribute("user", users);
-						    System.out.println("认证成功");
-							return "face-user/index.html";
-						} catch (Exception e) {
-							System.out.println("认证失败");
-				         	return "../error.html";
-						}
-					}
-					
+	public String login(User user, HttpServletRequest request, HttpSession session) {
+		System.out.println("登录方法******");
+		Subject currentUser = SecurityUtils.getSubject();
+		if (!currentUser.isAuthenticated()) {
+			UsernamePasswordToken token = new UsernamePasswordToken(user.getUser_acc().toString(), user.getUser_pwd());
+			try {
+				System.out.println(token + "token的值");
+				currentUser.login(token);
+				User user1 = userService.findUserByAcc(user.getUser_acc());
+				/*
+				 * Session session = currentUser.getSession();
+				 * session.setAttribute("user",user); //将用户存进shiro当中的session中
+				 * 将用户存在httpsession中
+				 */
+				HashMap<String, User> users = new HashMap<>();
+				users.put("loginuser", user1);
+				session.setAttribute("user", users);
+				System.out.println("认证成功");
+				return "/face-user/index.html";
+			} catch (Exception e) {
+				System.out.println("认证失败");
+				return "/error.html";
+			}
+		}
+
 		return "face-user/index.html";
 	}
 	

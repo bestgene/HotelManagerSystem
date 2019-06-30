@@ -1,8 +1,10 @@
 package com.woniuxy.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.woniuxy.pojo.Comment;
+import com.woniuxy.pojo.User;
 import com.woniuxy.service.CommentService;
 
 @Controller
@@ -24,13 +27,14 @@ public class CommentController {
 	
 	@PostMapping("/addcommentservlet")
 	@ResponseBody
-	public String addcommentservlet(Comment comment){
-		Session session = SecurityUtils.getSubject().getSession();
-		Integer userid = (Integer) session.getAttribute("user_id");
-		if(userid==null){
-			comment.setUsername("游客");
+	public String addcommentservlet(Comment comment,HttpSession session){
+		Object obj = session.getAttribute("user");
+		if (obj!=null){
+			HashMap<String, User> users = (HashMap<String, User>)obj ;
+			User user = users.get("loginuser");
+			comment.setUsername("移动用户:"+user.getUser_id());
 		}else{
-			comment.setUsername("移动用户:"+userid);
+			comment.setUsername("游客");
 		}
 		String result = "添加评论失败";
 		boolean addcomment = commentService.addcomment(comment);
