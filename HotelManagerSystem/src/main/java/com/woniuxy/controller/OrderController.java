@@ -59,10 +59,13 @@ public class OrderController {
     @RequestMapping("/showAllOrder")
     @ResponseBody
     public List<Order> showAllOrder(Order order,String cxfs, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        user = new User();
-        user.setRole_id(2);
-        System.out.println(order);
+        Object obj = request.getSession().getAttribute("user");
+        if(obj==null){
+            return null;
+        }
+        HashMap<String, User> users = (HashMap<String, User>) obj;
+        User user = users.get("loginuser");
+        System.out.println(user);
         if (user!=null&&user.getRole_id() == 3) {
             order.setUser(user);
         }
@@ -105,7 +108,13 @@ public class OrderController {
         }
         Order order = new Order();
         //获取session中的用户
-        User user = (User) request.getSession().getAttribute("user");
+        Object obj = request.getSession().getAttribute("user");
+        if(obj==null){
+            return "error.html";
+        }
+        HashMap<String, User> users = (HashMap<String, User>) obj;
+        User user = users.get("loginuser");
+        System.out.println(user);
         //设置操作角色
         order.setUser(user);
         //根据用户信息获得用户信息id以及对应会员等级折扣
