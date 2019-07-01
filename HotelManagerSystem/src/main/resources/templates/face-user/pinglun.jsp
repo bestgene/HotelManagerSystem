@@ -136,6 +136,7 @@
 		
 		$('.comment-show').on('click', '.date-dz-z', function() {
 			var zNum = $(this).find('.z-num').html();
+			var id = $(this).find('.commentId').val();
 			if ($(this).is('.date-dz-z-click')) {
 				zNum--;
 				$(this).removeClass('date-dz-z-click red');
@@ -147,20 +148,16 @@
 				$(this).find('.z-num').html(zNum);
 				$(this).find('.date-dz-z-click-red').addClass('red');
 			}
-			function updateCommentPraise(id){
-				var zNum = $(this).find('.z-num').html();
-				alert(zNum);
-				$.ajax({
-					url:"/HotelManagerSystem/comment/updatePraise",
-					data:{
-						comment_id:id,
-						comment_praise:zNum,
-					},
-					success:function(data){
-						alert(data);
-					}
-				})
-			}
+			$.ajax({
+				url:"/HotelManagerSystem/comment/updatePraise",
+				data:{
+					comment_id:id,
+					comment_praise:zNum,
+				},
+				success:function(data){
+					alert(data);
+				}
+			})
 			
 		});
 
@@ -192,7 +189,7 @@
 										+ '</div><div class="date-dz"><span class="date-dz-left pull-left comment-time">'
 										+ single.comment_date
 										+ '</span><div class="date-dz-right pull-right comment-pl-block"><a href="javascript:removeComment(\''+single.comment_id+'\');" class="removeBlock">删除</a>'
-										+'<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:updateCommentPraise(\''+single.comment_id+'\');" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">'+single.comment_praise+'</i>)</a></div></div><div class="hf-list-con"></div></div></div>'
+										+'<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a> <span class="pull-left date-dz-line">|</span> <a href="javascript:;" class="date-dz-z pull-left"> <i class="date-dz-z-click-red"></i>赞(<i class="z-num">'+single.comment_praise+'</i>)<input type="hidden" class="commentId" value="'+single.comment_id+'"></a></div></div><div class="hf-list-con"></div></div></div>'
 							}
 
 							$("#aaa").append(str);
