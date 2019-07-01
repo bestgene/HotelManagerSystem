@@ -64,6 +64,7 @@ public class ShiroConfig {
 		map.put("/scripts/**", "anon");
 		map.put("/style/**", "anon");
 		map.put("/fonts/**", "anon");
+		
 	
 		//登录请求
 		map.put("/user/login", "anon");
