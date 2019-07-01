@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -181,7 +182,12 @@ public class OrderController {
         //1.创建 订单表
         Order order = new Order();
         //获取session中的用户
-        User user = (User) request.getSession().getAttribute("user");
+        Object obj = request.getSession().getAttribute("user");
+        if(obj==null){
+        	return "error.html";
+        }
+        HashMap<String, User> users = (HashMap<String, User>) obj;
+        User user = users.get("loginuser");
         System.out.println(user);
         //设置操作角色
         order.setUser(user);
@@ -239,7 +245,7 @@ public class OrderController {
         //计算金额
         order = chargingpay(order, charging);
         //新增order、item
-        boolean flag = orderService.createOrder(order);
+        orderService.createOrder(order);
         //支付测试(押金)
         payController.payMoney(response, order.getOrder_number(), order.getOrder_deposit()+"",
                 order.getOrder_number()+order.getOrder_deposit(), "");
