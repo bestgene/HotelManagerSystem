@@ -57,6 +57,34 @@
         	});
         	
         }); 
+    
+    $("#signup").click(function(){
+		$.ajax({
+			
+			url:'../check/telcheck',
+			type:'post',
+			data:{
+				'user_acc':$("#user_acc").val(),
+				'user_pwd':$("#user_pwd").val(),
+				'code':$("#mycode").val(),
+			},
+		success:function(result){
+			
+			alert(result);
+			if(result=="注册成功！"){
+				window.location.href="HotelManagerSystem/html/login.html";
+				
+				
+			}
+			
+		},
+			
+		});
+		
+	});
+	
+});
+    
      
      </script>
 	</head>
@@ -107,7 +135,7 @@
 						</div> 
 						<!-- 提交按钮 -->
 						<div class="form-group">
-							<input type="submit" value="Sign Up" class="btn btn-primary" >
+							<input type="button" value="Sign Up" id="signup" class="btn btn-primary" >
 						</div>
 					</form>
 					<!-- END Sign In Form -->

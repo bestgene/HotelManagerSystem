@@ -65,39 +65,42 @@ public class CheckController {
 		 * 
 		 */
 
-	public String telcheck(Telpojo tel, HttpServletRequest request) {// 短信验证
-		System.out.println(randcode + "看看是否有验证码！");
-
-		// 对前端的数据进行测试
-		/*
-		 * 1出现的情况：验证码不正确，账号已经存在，账号。密码，验证码都为空
-		 * 
-		 */
-		String result = "";
-		HttpSession session = request.getSession();
-		Map<String, String> map = (Map<String, String>) session.getAttribute("map");// 获取存取的手机号以及验证码
-
-		if (tel.getUser_acc() == "" || tel.getUser_pwd() == "" || tel.getCode() == "") {
-			// 非空的判定
-			result = "请检查你有空的输入项目！";
-		} else {
-
-			// 判断验证码正确不
-			if (tel.getCode().equals(map.get(tel.getTel()))) {// 验证码正确的时候
-				if (userService.findUserByuserAcc(tel) != null) {
-					result = "注册失败！已经存在此账户！";
-				} else {
-					userService.Telregister(tel);
-					result = "注册成功！";
+	@RequestMapping("/telcheck")
+	@ResponseBody
+	public String telcheck(Telpojo tel,HttpServletRequest request){//短信验证
+		//对前端的数据进行测试
+		/*1出现的情况：验证码不正确，账号已经存在，账号。密码，验证码都为空
+		
+		*/
+		String result="";
+		HttpSession session=request.getSession();
+		Map<String, String> map=(Map<String, String>) session.getAttribute("map");//获取存取的手机号以及验证码
+		
+		if (tel.getUser_acc()==""||tel.getUser_pwd()==""||tel.getCode()=="") {
+			//非空的判定
+			result="请检查你有空的输入项目！";
+		}else {
+			
+			
+			//判断验证码正确不
+			if (tel.getCode().equals(map.get(tel.getTel()))) {//验证码正确的时候
+				if (userService.findUserByuserAcc(tel)!=null) {
+					result="注册失败！已经存在此账户！";
 				}
-
-			} else {
-				result = "验证码不正确！";
+				else {
+					tel.setUser_pwd(new SimpleHash("MD5",tel.getUser_pwd(), null, 1024).toString());
+					userService.Telregister(tel);
+					result="注册成功！";
+				}
+				
+			}
+			else {
+				result="验证码不正确！";
 			}
 		}
-
-		System.out.println(tel + "得到注册信息");
-
+		
+		System.out.println(tel+"得到注册信息");
+		
 		return result;
 	}
 	
