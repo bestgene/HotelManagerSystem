@@ -59,10 +59,13 @@ public class OrderController {
     @RequestMapping("/showAllOrder")
     @ResponseBody
     public List<Order> showAllOrder(Order order,String cxfs, HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        user = new User();
-        user.setRole_id(2);
-        System.out.println(order);
+        Object obj = request.getSession().getAttribute("user");
+        if(obj==null){
+            return null;
+        }
+        HashMap<String, User> users = (HashMap<String, User>) obj;
+        User user = users.get("loginuser");
+        System.out.println(user);
         if (user!=null&&user.getRole_id() == 3) {
             order.setUser(user);
         }
