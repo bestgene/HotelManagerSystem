@@ -52,24 +52,24 @@
 			<div class="tpl-left-nav-list">
 				<ul class="tpl-left-nav-menu">
 					<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list active"> <i
+						class="nav-link tpl-left-nav-link-list "> <i
 							class="am-icon-home"></i> <span>房间登记</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="form-line.html" class="active"> <i
-									class="am-icon-angle-right"></i> <span>线上开单</span>
+							<li><a href="form-line.html" > <i
+									class="am-icon-angle-right"></i> <span>预定登记</span>
 							</a> <a href="form-line2.html"> <i class="am-icon-angle-right"></i>
-									<span>线下开单</span>
+									<span>入住登记</span>
 							</a></li>
 						</ul></li>
 						<li class="tpl-left-nav-item"><a href="javascript:;"
-						class="nav-link tpl-left-nav-link-list"> <i
+						class="nav-link tpl-left-nav-link-list active"> <i
 							class="am-icon-bar-chart"></i> <span>预定管理</span> <i
 							class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
 					</a>
 						<ul class="tpl-left-nav-sub-menu">
-							<li><a href="ydOrder.html"> <i class="am-icon-angle-right"></i> <span>当前预定信息</span>
+							<li><a href="ydOrder.html" class="active"> <i class="am-icon-angle-right"></i> <span>预定信息</span>
 							</a> </li>
 						</ul></li>
 						
@@ -135,8 +135,8 @@
 	 <div class="tpl-content-wrapper">
         <ol class="am-breadcrumb">
             <li><a href="index.html" class="am-icon-home">首页</a></li>
-            <li><a href="#">订单与入住管理</a></li>
-            <li class="am-active">订单查询</li>
+            <li><a href="#">预定管理</a></li>
+            <li class="am-active">预定信息</li>
         </ol>
         <div class="layui-container ">
             <div class=" layui-col-md2">
@@ -171,7 +171,7 @@
             height: 81px;
             line-height: 115px;
              ">
-                <button class="layui-btn" data-type="isAll" value="当前预定" onclick="showOrder(this.id)" id="yd">预定订单
+                <button class="layui-btn" data-type="isAll" value="当前预定" onclick="showOrder(this.id)" id="yd">查询
                 </button>
                 <!--<button class="layui-btn" data-type="isAll" value="当前入住" onclick="showOrder(this.id)" id="rz">入住订单
                 </button>
